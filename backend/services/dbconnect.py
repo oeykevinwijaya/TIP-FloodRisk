@@ -1,3 +1,5 @@
+# sample code to insert data into a MariaDB database table
+
 import mysql.connector
 
 # Establish database connection
