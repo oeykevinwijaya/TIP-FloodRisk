@@ -1,27 +1,28 @@
-Place,Temperature (°C)
-King's Park,24
-Hong Kong Observatory,24
-Wong Chuk Hang,24
-Ta Kwu Ling,23
-Lau Fau Shan,23
-Tai Po,23
-Tuen Mun,23
-Tseung Kwan O,23
-Sai Kung,24
-Cheung Chau,23
-Chek Lap Kok,24
-Tsing Yi,23
-Shek Kong,23
-Tsuen Wan Ho Koon,22
-Tsuen Wan Shing Mun Valley,23
-Hong Kong Park,23
-Shau Kei Wan,23
-Kowloon City,23
-Happy Valley,25
-Wong Tai Sin,24
-Stanley,23
-Kwun Tong,23
-Sham Shui Po,24
-Kai Tak Runway Park,24
-Yuen Long Park,24
-Tai Mei Tuk,23
+Date,Place,Temperature (°C)
+02/05/2024,King's Park,24
+02/05/2024,Hong Kong Observatory,25
+02/05/2024,Wong Chuk Hang,25
+02/05/2024,Ta Kwu Ling,24
+02/05/2024,Lau Fau Shan,24
+02/05/2024,Tai Po,24
+02/05/2024,Sha Tin,25
+02/05/2024,Tuen Mun,24
+02/05/2024,Tseung Kwan O,24
+02/05/2024,Sai Kung,24
+02/05/2024,Cheung Chau,24
+02/05/2024,Chek Lap Kok,25
+02/05/2024,Tsing Yi,25
+02/05/2024,Shek Kong,25
+02/05/2024,Tsuen Wan Ho Koon,23
+02/05/2024,Tsuen Wan Shing Mun Valley,25
+02/05/2024,Hong Kong Park,25
+02/05/2024,Shau Kei Wan,24
+02/05/2024,Kowloon City,24
+02/05/2024,Happy Valley,25
+02/05/2024,Wong Tai Sin,25
+02/05/2024,Stanley,25
+02/05/2024,Kwun Tong,24
+02/05/2024,Sham Shui Po,25
+02/05/2024,Kai Tak Runway Park,25
+02/05/2024,Yuen Long Park,24
+02/05/2024,Tai Mei Tuk,24

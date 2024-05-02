@@ -1,6 +1,7 @@
 import requests
 import json
 import csv
+from datetime import datetime
 
 # Fetch JSON data from the API
 url = "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en"
@@ -16,6 +17,14 @@ temperature_data = data["temperature"]["data"]
 # Define CSV file paths
 rainfall_csv_file = "backend/data/currentrain.csv"
 temperature_csv_file = "backend/data/currenttemp.csv"
+
+# Function to format date
+def format_date(date_str):
+    # Convert date string to datetime object
+    date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+    # Format the date as "day month year" (e.g., "30 April 2024")
+    formatted_date = date_obj.strftime("%d %B %Y")
+    return formatted_date
 
 # Write rainfall data to CSV
 with open(rainfall_csv_file, mode='w', newline='') as file:
