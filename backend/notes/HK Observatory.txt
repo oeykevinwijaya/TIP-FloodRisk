@@ -1,0 +1,33 @@
+Gridded rainfall nowcast in Hong Kong (50 Areas)
+    Link
+    https://data.gov.hk/en-data/dataset/hk-hko-rss-gridded-rainfall-nowcast-in-hong-kong/resource/2d9ef665-54d6-4745-9e65-29095e26ce0b
+
+
+
+Daily Total Rainfall (50 Areas)
+    API
+    https://data.gov.hk/en-data/dataset/hk-hko-rss-daily-total-rainfall
+
+
+
+Rainfall in the past hour (38 Areas)
+    Link
+    https://data.gov.hk/en-data/dataset/hk-hko-rss-rainfall-in-the-past-hour/resource/6d95b999-a1f0-40bd-8af9-9ef72fa9c7e9
+    
+    API
+    https://data.weather.gov.hk/weatherAPI/opendata/hourlyRainfall.php?lang=en
+
+
+Lightning Count
+    Link
+    https://data.gov.hk/en-data/dataset/hk-hko-rss-cloud-ground-lightning-count-past-hour/resource/127469d0-aedb-4fd3-96c3-2fb7b8cc6f22
+    API
+    https://data.weather.gov.hk/weatherAPI/opendata/opendata.php?dataType=LHL&lang=en&rformat=csv
+
+
+Daily Mean Wind Speed
+    https://data.gov.hk/en-data/dataset/hk-hko-rss-daily-mean-wind-speed
+
+Daily Mean Relative Humidity
+    https://data.gov.hk/en-data/dataset/hk-hko-rss-daily-mean-relative-humidity
+
