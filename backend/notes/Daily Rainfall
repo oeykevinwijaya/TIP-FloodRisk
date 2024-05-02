@@ -1,0 +1,51 @@
+HK IA
+Cheung Chau
+Lau Fau Shan
+HK Observatory
+Peng Chau
+
+Daily Total Rainfall
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/HKA/ALL/daily_HKA_RF_ALL.csv
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/CCH/ALL/daily_CCH_RF_ALL.csv
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/LFS/ALL/daily_LFS_RF_ALL.csv
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/HKO/ALL/daily_HKO_RF_ALL.csv
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/PEN/ALL/daily_PEN_RF_ALL.csv
+
+Daily Mean Pressure
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/HKA/ALL/daily_HKA_MSLP_ALL.csv
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/CCH/ALL/daily_CCH_MSLP_ALL.csv
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/HKO/ALL/daily_HKO_MSLP_ALL.csv
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/LFS/ALL/daily_LFS_MSLP_ALL.csv
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/PEN/ALL/daily_PEN_MSLP_ALL.csv
+
+Daily Mean Wind Speed
+https://data.weather.gov.hk/cis/csvfile/HKA/2024/daily_HKA_WSPD_2024.csv
+https://data.weather.gov.hk/cis/csvfile/CCH/ALL/daily_CCH_WSPD_ALL.csv
+https://data.weather.gov.hk/cis/csvfile/LFS/2024/daily_LFS_WSPD_2024.csv
+https://data.weather.gov.hk/cis/csvfile/PEN/ALL/daily_PEN_WSPD_ALL.csv
+
+Daily Mean Relative Humidity
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/HKA/ALL/daily_HKA_RH_ALL.csv
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/CCH/ALL/daily_CCH_RH_ALL.csv
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/HKO/ALL/daily_HKO_RH_ALL.csv
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/LFS/ALL/daily_LFS_RH_ALL.csv
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/PEN/ALL/daily_PEN_RH_ALL.csv
+
+
+
+
+
+Kau Sai Chau
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/KSC/ALL/daily_KSC_RF_ALL.csv
+
+Lau Fau Shan
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/LFS/ALL/daily_LFS_RF_ALL.csv
+
+Tsuen Wan Ho Koon
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/TWN/ALL/daily_TWN_RF_ALL.csv
+
+Sha Tin
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/SHA/ALL/daily_SHA_RF_ALL.csv
+
+Sham Shui Po
+https://data.weather.gov.hk/weatherAPI/cis/csvfile/SSP/ALL/daily_SSP_RF_ALL.csv

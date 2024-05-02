@@ -1,0 +1,2 @@
+﻿DailyTotalEvaporation_AllYear_url,DailyTotalEvaporation_CurrentYear_url,WeatherStationName_en,WeatherStationName_sc,WeatherStationName_uc,GeometryLongitude,GeometryLatitude
+https://data.weather.gov.hk/weatherAPI/hko_data/csdi/dataset/daily_KP_EVAP_ALL.csv,https://data.weather.gov.hk/weatherAPI/hko_data/csdi/dataset/daily_KP_EVAP_2024.csv,King's Park,京士柏,京士柏,114.17277778000005,22.311944400000073
