@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FAQ</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+        <!-- Menu Button -->
+        <button
+            id="sidebar-toggle"
+            class="text-white focus:outline-none bg-gray-700 p-2.5 fixed top-2.5 left-2.5 z-30"
+        >
+            <svg class="fill-current h-6 w-6" viewBox="0 0 24 24">
+                <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"></path>
+            </svg>
+        </button>
+
+        <!-- Sidebar -->
+        <div
+            id="sidebar"
+            class="transform -translate-x-full fixed inset-y-0 left-0 w-64 space-y-6 py-7 px-2 z-20 bg-white shadow-md transition-transform duration-500 ease-in-out"
+            style="will-change: transform"
+        >
+            <a href="#" class="text-gray-800 flex items-center space-x-2 px-4">
+                <span class="text-2xl font-medium mt-10">Menu</span>
+            </a>
+            <!-- Sidebar content -->
+            <nav class="text-black text-base">
+                <a
+                    href="warning.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    Warning
+                </a>
+                <a
+                    href="weather_forecast.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    Weather Forecast
+                </a>
+                <a
+                    href="history.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    Historical data
+                </a>
+                <a
+                    href="faq.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    FAQ
+                </a>
+                <a
+                    href="contact.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    Contact
+                </a>
+                <a
+                    href="noti.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    Notification Setting
+                </a>
+                <a
+                    href="admin_access.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm mt-20"
+                >
+                    Admin Page
+                </a>
+            </nav>
+        </div>
+
+        <!-- Header -->
+        <nav class="bg-gray-700 p-4 fixed w-full z-10">
+            <div class="flex items-center justify-between flex-wrap">
+                <div class="flex items-center flex-shrink-0 text-white mr-6">
+                    <span class="font-semibold text-xl tracking-tight mx-14"
+                        >Hong Kong Flood</span
+                    >
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main
+            class="pt-16 p-8 transition-padding duration-500 ease-in-out"
+            id="main-content"
+            style="will-change: padding"
+        >
+            <div class="max-w-4xl mx-auto px-8">
+                <!-- FAQ Section -->
+                <h2 class="text-4xl font-bold text-center my-10">
+                    Ask Us Anything
+                </h2>
+                <p class="text-center mb-10">
+                    Have any questions? We are here to assist you.
+                </p>
+
+                <!-- Search Bar -->
+                <div
+                    class="bg-white flex items-center rounded-full shadow-xl mb-12"
+                >
+                    <input
+                        class="rounded-l-full w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none"
+                        id="search"
+                        type="text"
+                        placeholder="Search Here"
+                    />
+                    <div class="p-2">
+                        <button
+                            class="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-10 h-10 flex items-center justify-center"
+                        >
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Accordion -->
+                <div id="accordion" class="space-y-4">
+                    <!-- Accordion Item -->
+                    <div class="accordion-item bg-white rounded-lg">
+                        <h3
+                            class="accordion-header px-4 py-3 rounded-lg flex justify-between items-center cursor-pointer"
+                        >
+                            <span class="font-semibold"
+                                >Q: How accurate are the weather forecasts
+                                provided on this website?</span
+                            >
+                            <button class="text-navy-500">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </h3>
+                        <div class="accordion-panel p-4 hidden">
+                            <p>
+                                A: Our weather forecasts are sourced from
+                                reputable meteorological agencies and updated
+                                regularly to provide accurate predictions for
+                                Hong Kong. While we strive for accuracy, weather
+                                conditions can change rapidly, so it's essential
+                                to stay vigilant and monitor updates from
+                                official sources during severe weather events.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-white rounded-lg">
+                        <h3
+                            class="accordion-header px-4 py-3 rounded-lg flex justify-between items-center cursor-pointer"
+                        >
+                            <span class="font-semibold"
+                                >Q: Can I turn off notifications?</span
+                            >
+                            <button class="text-navy-500">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </h3>
+                        <div class="accordion-panel p-4 hidden">
+                            <p>
+                                A: Absolutely! If you ever wish to stop
+                                receiving notifications, you can easily do so by
+                                clicking on the provided link within the email.
+                                We understand that preferences can change, so
+                                we've made it simple for you to manage your
+                                notification settings at any time.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- more FAQs -->
+                </div>
+
+                <div class="mt-12 text-left bg-gray-200 p-4 rounded-lg">
+                    <!-- Contact Section -->
+                    <div class="flex items-center">
+                        <div class="flex-grow">
+                            <p class="mb-4 font-semibold text-base">
+                                Still have questions?
+                            </p>
+                            <p class="mb-4">Please email us here.</p>
+                        </div>
+                        <div>
+                            <button
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            >
+                                Contact Us
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Function to toggle the accordion
+                function toggleAccordion(event) {
+                    const itemToggle =
+                        event.target.closest(".accordion-header");
+
+                    if (itemToggle) {
+                        event.preventDefault();
+                        const item = itemToggle.parentElement;
+                        const itemPanel = itemToggle.nextElementSibling;
+
+                        itemPanel.style.display =
+                            itemPanel.style.display === "block"
+                                ? "none"
+                                : "block";
+                        itemToggle.classList.toggle("active");
+                    }
+                }
+
+                document
+                    .getElementById("accordion")
+                    .addEventListener("click", toggleAccordion);
+            });
+        </script>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Email Page</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+
+    <body class="bg-white font-sans leading-normal tracking-normal">
+        <div class="flex w-screen h-screen">
+            <!-- Menu Button -->
+            <button
+                id="sidebar-toggle"
+                class="text-white focus:outline-none bg-gray-700 p-2.5 fixed top-2.5 left-2.5 z-30"
+            >
+                <svg class="fill-current h-6 w-6" viewBox="0 0 24 24">
+                    <path
+                        d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"
+                    ></path>
+                </svg>
+            </button>
+
+            <!-- Sidebar -->
+            <div
+                id="sidebar"
+                class="transform -translate-x-full fixed inset-y-0 left-0 w-64 space-y-6 py-7 px-2 z-20 bg-white shadow-md transition-transform duration-500 ease-in-out"
+                style="will-change: transform"
+            >
+                <a
+                    href="#"
+                    class="text-gray-800 flex items-center space-x-2 px-4"
+                >
+                    <span class="text-2xl font-medium mt-10">Menu</span>
+                </a>
+                <!-- Sidebar content -->
+                <nav class="text-black text-base">
+                    <a
+                        href="admin_page_alert.html"
+                        class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    >
+                        User Alter Management
+                    </a>
+                    <a
+                        href="data_management.html"
+                        class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    >
+                        Data Management
+                    </a>
+                    <a
+                        href="admin_access.html"
+                        class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    >
+                        Admin Management
+                    </a>
+                    <a
+                        href="email.html"
+                        class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    >
+                        Email
+                    </a>
+                    <a
+                        href="#"
+                        class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm mt-20"
+                    >
+                        Home Page
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Header -->
+            <nav class="bg-gray-700 p-4 fixed w-full z-10">
+                <div class="flex items-center justify-between flex-wrap">
+                    <div
+                        class="flex items-center flex-shrink-0 text-white mr-6"
+                    >
+                        <span class="font-semibold text-xl tracking-tight mx-14"
+                            >Hong Kong Flood</span
+                        >
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main
+                class="pt-16 p-8 transition-padding duration-500 ease-in-out"
+                id="main-content"
+            >
+                <!-- Email Content -->
+                <div class="flex h-full">
+                    <!-- Email sidebar -->
+                    <div
+                        class="w-[250px] duration-300 overflow-hidden bg-gray-100 shadow-lg"
+                    >
+                        <div class="flex flex-col justify-between">
+                            <a
+                                href="admin_page_alert.html"
+                                class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-b border-gray-300 text-sm"
+                                >New Message</a
+                            >
+                            <a
+                                href="data_management.html"
+                                class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-b border-gray-300 text-sm"
+                                >Send
+                            </a>
+                            <a
+                                href="admin_access.html"
+                                class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-b border-gray-300 text-sm"
+                                >Trash
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Email info -->
+                    <div
+                        class="w-[350px] duration-300 overflow-hidden bg-white border-r border-gray-300"
+                    >
+                        <div class="mx-5">
+                            <div
+                                class="overflow-hidden border-b border-gray-300 pb-2"
+                            >
+                                <div class="font-bold text-xl py-5">
+                                    My inbox
+                                </div>
+                                <div class="relative w-full">
+                                    <input
+                                        type="text"
+                                        placeholder="Search"
+                                        class="border border-gray-300 pl-4 pr-10 py-1 rounded text-sm w-full"
+                                    />
+                                    <ion-icon
+                                        name="search-outline"
+                                        class="absolute right-2 top-1/2 transform -translate-y-1/2 text-lg text-gray-500"
+                                    ></ion-icon>
+                                </div>
+                            </div>
+                            <!-- user message list -->
+                            <div class="bg-white overflow-hidden">
+                                <div class="px-4 py-2 flex items-center">
+                                    <img
+                                        src="{{ url_for('static', filename='path-to-avatar.jpg') }}"
+                                        alt="Jenny Boyer"
+                                        class="h-12 w-12 rounded-full mr-4"
+                                    />
+                                    <div class="flex-grow">
+                                        <p
+                                            class="text-sm font-medium text-gray-900"
+                                        >
+                                            Jenny Boyer
+                                        </p>
+                                        <p class="text-sm text-gray-500">
+                                            Helena
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <p class="text-sm text-gray-400 mr-2">
+                                            40m ago
+                                        </p>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-5 w-5 text-yellow-400"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                d="M9.049 2.927c.3-.919 1.602-.919 1.902 0l1.286 3.953c.203.623.778 1.05 1.437 1.05h4.17c.97 0 1.366 1.234.658 1.84l-3.377 2.89c-.495.423-.71 1.09-.548 1.709l1.267 3.897c.31.949-.776 1.726-1.587 1.13l-3.475-2.559a1.75 1.75 0 00-2.048 0l-3.475 2.559c-.811.596-1.897-.181-1.587-1.13l1.267-3.897c.162-.619-.053-1.286-.548-1.709l-3.377-2.89c-.708-.606-.312-1.84.658-1.84h4.17c.659 0 1.234-.427 1.437-1.05l1.286-3.953z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="border-b border-gray-200">
+                                    <p class="text-gray-700 py-2 text-sm">
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna
+                                        aliqua. Sit amet consectetur adipiscing
+                                        elit duis tristique...
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- user message list -->
+                            <div class="bg-white overflow-hidden">
+                                <div class="px-4 py-2 flex items-center">
+                                    <img
+                                        src="{{ url_for('static', filename='path-to-avatar.jpg') }}"
+                                        alt="Jenny Boyer"
+                                        class="h-12 w-12 rounded-full mr-4"
+                                    />
+                                    <div class="flex-grow">
+                                        <p
+                                            class="text-sm font-medium text-gray-900"
+                                        >
+                                            Jenny Boyer
+                                        </p>
+                                        <p class="text-sm text-gray-500">
+                                            Helena
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <p class="text-sm text-gray-400 mr-2">
+                                            40m ago
+                                        </p>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-5 w-5 text-yellow-400"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                d="M9.049 2.927c.3-.919 1.602-.919 1.902 0l1.286 3.953c.203.623.778 1.05 1.437 1.05h4.17c.97 0 1.366 1.234.658 1.84l-3.377 2.89c-.495.423-.71 1.09-.548 1.709l1.267 3.897c.31.949-.776 1.726-1.587 1.13l-3.475-2.559a1.75 1.75 0 00-2.048 0l-3.475 2.559c-.811.596-1.897-.181-1.587-1.13l1.267-3.897c.162-.619-.053-1.286-.548-1.709l-3.377-2.89c-.708-.606-.312-1.84.658-1.84h4.17c.659 0 1.234-.427 1.437-1.05l1.286-3.953z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="border-b border-gray-200">
+                                    <p class="text-gray-700 py-2 text-sm">
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna
+                                        aliqua. Sit amet consectetur adipiscing
+                                        elit duis tristique...
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- user message list -->
+                            <div class="bg-white overflow-hidden">
+                                <div class="px-4 py-2 flex items-center">
+                                    <img
+                                        src="{{ url_for('static', filename='path-to-avatar.jpg') }}"
+                                        alt="Jenny Boyer"
+                                        class="h-12 w-12 rounded-full mr-4"
+                                    />
+                                    <div class="flex-grow">
+                                        <p
+                                            class="text-sm font-medium text-gray-900"
+                                        >
+                                            Jenny Boyer
+                                        </p>
+                                        <p class="text-sm text-gray-500">
+                                            Helena
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <p class="text-sm text-gray-400 mr-2">
+                                            40m ago
+                                        </p>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-5 w-5 text-yellow-400"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                d="M9.049 2.927c.3-.919 1.602-.919 1.902 0l1.286 3.953c.203.623.778 1.05 1.437 1.05h4.17c.97 0 1.366 1.234.658 1.84l-3.377 2.89c-.495.423-.71 1.09-.548 1.709l1.267 3.897c.31.949-.776 1.726-1.587 1.13l-3.475-2.559a1.75 1.75 0 00-2.048 0l-3.475 2.559c-.811.596-1.897-.181-1.587-1.13l1.267-3.897c.162-.619-.053-1.286-.548-1.709l-3.377-2.89c-.708-.606-.312-1.84.658-1.84h4.17c.659 0 1.234-.427 1.437-1.05l1.286-3.953z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="border-b border-gray-200">
+                                    <p class="text-gray-700 py-2 text-sm">
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna
+                                        aliqua. Sit amet consectetur adipiscing
+                                        elit duis tristique...
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- user message list -->
+                            <div class="bg-white overflow-hidden">
+                                <div class="px-4 py-2 flex items-center">
+                                    <img
+                                        src="{{ url_for('static', filename='path-to-avatar.jpg') }}"
+                                        alt="Jenny Boyer"
+                                        class="h-12 w-12 rounded-full mr-4"
+                                    />
+                                    <div class="flex-grow">
+                                        <p
+                                            class="text-sm font-medium text-gray-900"
+                                        >
+                                            Jenny Boyer
+                                        </p>
+                                        <p class="text-sm text-gray-500">
+                                            Helena
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <p class="text-sm text-gray-400 mr-2">
+                                            40m ago
+                                        </p>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-5 w-5 text-yellow-400"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                d="M9.049 2.927c.3-.919 1.602-.919 1.902 0l1.286 3.953c.203.623.778 1.05 1.437 1.05h4.17c.97 0 1.366 1.234.658 1.84l-3.377 2.89c-.495.423-.71 1.09-.548 1.709l1.267 3.897c.31.949-.776 1.726-1.587 1.13l-3.475-2.559a1.75 1.75 0 00-2.048 0l-3.475 2.559c-.811.596-1.897-.181-1.587-1.13l1.267-3.897c.162-.619-.053-1.286-.548-1.709l-3.377-2.89c-.708-.606-.312-1.84.658-1.84h4.17c.659 0 1.234-.427 1.437-1.05l1.286-3.953z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="border-b border-gray-200">
+                                    <p class="text-gray-700 py-2 text-sm">
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna
+                                        aliqua. Sit amet consectetur adipiscing
+                                        elit duis tristique...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- Email detail -->
+            <!-- <div class="duration-300 overflow-hidden w-full bg-white shadow-lg rounded-lg">
+                    <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">Email Subject</div>
+                        <p class="text-gray-700 text-base">
+                            Sent by: <span class="font-semibold">Sender's Name</span>
+                        </p>
+                    </div>
+                    <div class="px-6 py-4">
+                        <p class="text-gray-600 text-sm">
+                            Date: <span class="font-semibold">Date and Time</span>
+                        </p>
+                    </div>
+                    <div class="px-6">
+                        <div class="border-t border-gray-200"></div>
+                    </div>
+                    <div class="px-6 py-4">
+                        <p class="text-gray-700 leading-relaxed">
+                            Hello,
+                            <br><br>
+                            This is the body of the email. It contains the message sent by the sender. It can be multiple lines long and
+                            include details pertinent to the email's purpose.
+                            <br><br>
+                            Best regards,
+                            <br>
+                            Sender's Name
+                        </p>
+                    </div>
+                </div> -->
+
+            <script
+                type="module"
+                src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+            ></script>
+            <script
+                nomodule
+                src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+            ></script>
+            <script src="{{ url_for('static', filename='script.js') }}"></script>
+        </div>
+    </body>
+</html>

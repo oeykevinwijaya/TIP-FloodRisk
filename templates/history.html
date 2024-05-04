@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Historical Data</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+        <!-- Menu Button -->
+        <button
+            id="sidebar-toggle"
+            class="text-white focus:outline-none bg-gray-700 p-2.5 fixed top-2.5 left-2.5 z-30"
+        >
+            <svg class="fill-current h-6 w-6" viewBox="0 0 24 24">
+                <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"></path>
+            </svg>
+        </button>
+
+        <!-- Sidebar -->
+        <div
+            id="sidebar"
+            class="transform -translate-x-full fixed inset-y-0 left-0 w-64 space-y-6 py-7 px-2 z-20 bg-white shadow-md transition-transform duration-500 ease-in-out"
+            style="will-change: transform"
+        >
+            <a href="#" class="text-gray-800 flex items-center space-x-2 px-4">
+                <span class="text-2xl font-medium mt-10">Menu</span>
+            </a>
+            <!-- Sidebar content -->
+            <nav class="text-black text-base">
+                <a
+                    href="warning.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    Warning
+                </a>
+                <a
+                    href="weather_forecast.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    Weather Forecast
+                </a>
+                <a
+                    href="history.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    Historical data
+                </a>
+                <a
+                    href="faq.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    FAQ
+                </a>
+                <a
+                    href="contact.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    Contact
+                </a>
+                <a
+                    href="noti.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    Notification Setting
+                </a>
+                <a
+                    href="admin_access.html"
+                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm mt-20"
+                >
+                    Admin Page
+                </a>
+            </nav>
+        </div>
+
+        <!-- Header -->
+        <nav class="bg-gray-700 p-4 fixed w-full z-10">
+            <div class="flex items-center justify-between flex-wrap">
+                <div class="flex items-center flex-shrink-0 text-white mr-6">
+                    <span class="font-semibold text-xl tracking-tight mx-14"
+                        >Hong Kong Flood</span
+                    >
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main
+            class="p-8 transition-padding duration-500 ease-in-out"
+            id="main-content"
+            style="will-change: padding"
+        >
+            <section id="data-selection">
+                <!-- Dropdowns for selecting location, year, and month -->
+                <p class="mt-10 font-bold mx-8 text-2xl">
+                    Monthly Data History
+                </p>
+                <hr />
+                <div class="flex items-center justify-center space-x-4 mt-10">
+                    <!-- Location Dropdown -->
+                    <div class="flex flex-col">
+                        <label for="location">Location:</label>
+                        <select
+                            id="location"
+                            name="location"
+                            class="p-2 border rounded"
+                        >
+                            <option value="all">All</option>
+                            <option value="islands">Islands</option>
+                            <option value="kwai_tsing">Kwai Tsing</option>
+                            <option value="north">North</option>
+                            <option value="sai_kung">Sai Kung</option>
+                            <option value="sha_tin">Sha Tin</option>
+                            <option value="tai_po">Tai Po</option>
+                            <option value="tsuen_wan">Tsuen Wan</option>
+                            <option value="tuen_mun">Tuen Mun</option>
+                            <option value="yuen_long">Yuen Long</option>
+                            <option value="kowloon_city">Kowloon City</option>
+                            <option value="kwun_tong">Kwun Tong</option>
+                            <option value="sham_shui_po">Sham Shui Po</option>
+                            <option value="wong_tai_sin">Wong Tai Sin</option>
+                            <option value="yau_tsim_mong">Yau Tsim Mong</option>
+                            <option value="central_and_western">
+                                Central and Western
+                            </option>
+                            <option value="eastern">Eastern</option>
+                            <option value="southern">Southern</option>
+                            <option value="wan_chai">Wan Chai</option>
+                        </select>
+                    </div>
+                    <!-- Year Dropdown -->
+                    <div class="flex flex-col">
+                        <label for="year">Year:</label>
+                        <select
+                            id="year"
+                            name="year"
+                            class="p-2 border rounded"
+                        >
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                        </select>
+                    </div>
+                    <!-- Month Dropdown -->
+                    <div class="flex flex-col">
+                        <label for="month">Month:</label>
+                        <select
+                            id="month"
+                            name="month"
+                            class="p-2 border rounded"
+                        >
+                            <option value="jan">January</option>
+                            <option value="feb">February</option>
+                            <option value="mar">March</option>
+                            <option value="apr">April</option>
+                            <option value="may">May</option>
+                            <option value="jun">June</option>
+                            <option value="jul">July</option>
+                            <option value="aug">August</option>
+                            <option value="sep">September</option>
+                            <option value="oct">October</option>
+                            <option value="nov">November</option>
+                            <option value="dec">December</option>
+                        </select>
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="flex flex-col mt-6">
+                        <button
+                            id="submit"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Go
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Table Container -->
+            <section class="overflow-x-auto mt-8 p-8">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-700 text-white">
+                        <tr>
+                            <th
+                                class="text-left py-3 px-4 uppercase font-semibold text-sm"
+                            >
+                                Location
+                            </th>
+                            <th
+                                class="text-left py-3 px-4 uppercase font-semibold text-sm"
+                            >
+                                Precipitation
+                            </th>
+                            <th
+                                class="text-left py-3 px-4 uppercase font-semibold text-sm"
+                            >
+                                Maximum Temperature (°C)
+                            </th>
+                            <th
+                                class="text-left py-3 px-4 uppercase font-semibold text-sm"
+                            >
+                                Minimum Temperature (°C)
+                            </th>
+                            <th
+                                class="text-left py-3 px-4 uppercase font-semibold text-sm"
+                            >
+                                Humidity
+                            </th>
+                            <th
+                                class="text-left py-3 px-4 uppercase font-semibold text-sm"
+                            >
+                                Tidal Level
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <!-- Table rows -->
+                        <tr>
+                            <td class="text-left py-3 px-4">Sai Kung</td>
+                            <td class="text-left py-3 px-4">-</td>
+                            <td class="text-left py-3 px-4">-</td>
+                            <td class="text-left py-3 px-4">-</td>
+                            <td class="text-left py-3 px-4">-</td>
+                            <td class="text-left py-3 px-4">-</td>
+                        </tr>
+                        <!-- for more rows -->
+                    </tbody>
+                </table>
+            </section>
+
+            <p class="mt-10 font-bold mx-8 text-2xl">Rainfall Data History</p>
+            <hr />
+            <!-- Placeholder for Graph -->
+            <div id="graph" class="border-t border-b py-8">
+                <section id="chart-container" class="mt-4 p-4">
+                    <canvas id="rainfallChart"></canvas>
+                </section>
+            </div>
+            <script>
+                const ctx = document
+                    .getElementById("rainfallChart")
+                    .getContext("2d");
+                const rainfallChart = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: ["Jan", "Mar", "May", "Jul", "Sep", "Nov"],
+                        datasets: [
+                            {
+                                label: "Rainfall (in %)",
+                                data: [10, 20, 30, 50, 20, 10],
+                                backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+                                borderColor: ["rgba(54, 162, 235, 1)"],
+                                borderWidth: 1,
+                            },
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    },
+                });
+            </script>
+        </main>
+
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </body>
+</html>
