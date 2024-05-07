@@ -252,77 +252,74 @@
         </main>
 
         <script src="{{ url_for('static', filename='script.js') }}"></script>
-        <script>
-            // Get the data for the bar chart from the server
-            fetch("/get_rainfall_data")
-                .then((response) => response.json())
-                .then((data) => {
-                    const labels = data.map((row) => row["MONTH"]);
-                    const values = data.map((row) => parseFloat(row["VALUE"]));
-
-                    // Create a bar chart
-                    var ctx = document
-                        .getElementById("barChart")
-                        .getContext("2d");
-                    var myChart = new Chart(ctx, {
-                        type: "bar",
-                        data: {
-                            labels: labels,
-                            datasets: [
-                                {
-                                    label: "Rainfall",
-                                    data: values,
-                                    backgroundColor: "rgba(54, 162, 235, 0.2)",
-                                    borderColor: "rgba(54, 162, 235, 1)",
-                                    borderWidth: 1,
-                                },
-                            ],
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                },
-                            },
-                        },
-                    });
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                });
-        </script>
 
         <script>
+            var myChart; // Define myChart outside the function
+
             document
-                .getElementById("submit")
-                .addEventListener("click", function (event) {
-                    event.preventDefault(); // Prevent default form submission
+                .getElementById("year")
+                .addEventListener("change", updateChartData);
+            document
+                .getElementById("month")
+                .addEventListener("change", updateChartData);
 
-                    // Get selected values
-                    var location = document.getElementById("location").value;
-                    var year = document.getElementById("year").value;
-                    var month = document.getElementById("month").value;
+            function updateChartData() {
+                var location = document.getElementById("location").value;
+                var year = document.getElementById("year").value;
+                var month = document.getElementById("month").value;
 
-                    // Construct the URL based on the selected values
-                    var url = `/history.html?location=${location}&year=${year}&month=${month}`;
+                var url = `/get_rainfall_data?location=${location}&year=${year}&month=${month}`;
 
-                    // Fetch the data from the server using the constructed URL
-                    fetch(url)
-                        .then((response) => response.json())
-                        .then((data) => {
-                            // Update the table with the fetched data
-                            var tableBody = document.querySelector("tbody");
-                            tableBody.innerHTML = "";
-                            data.forEach((row) => {
-                                var newRow = document.createElement("tr");
-                                newRow.innerHTML = `<td>${row["Year"]}</td><td>${row["Month"]}</td><td>${row["Day"]}</td><td>${row["Value"]}</td><td>${row["data Completeness"]}</td>`;
-                                tableBody.appendChild(newRow);
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        const labels = data.map((row) => row["MONTH"]);
+                        const values = data.map((row) =>
+                            parseFloat(row["VALUE"])
+                        );
+
+                        // Check if myChart is already defined
+                        if (!myChart) {
+                            var ctx = document
+                                .getElementById("barChart")
+                                .getContext("2d");
+                            myChart = new Chart(ctx, {
+                                type: "bar",
+                                data: {
+                                    labels: labels,
+                                    datasets: [
+                                        {
+                                            label: "Rainfall",
+                                            data: values,
+                                            backgroundColor:
+                                                "rgba(54, 162, 235, 0.2)",
+                                            borderColor:
+                                                "rgba(54, 162, 235, 1)",
+                                            borderWidth: 1,
+                                        },
+                                    ],
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                        },
+                                    },
+                                },
                             });
-                        })
-                        .catch((error) => {
-                            console.error("Error:", error);
-                        });
-                });
+                        } else {
+                            // Update the chart data
+                            myChart.data.labels = labels;
+                            myChart.data.datasets[0].data = values;
+                            myChart.update();
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                    });
+            }
+
+            updateChartData(); // Initial call to updateChartData to populate the chart with default values
         </script>
     </body>
 </html>

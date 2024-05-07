@@ -87,8 +87,8 @@ def history():
 def get_rainfall_data():
     # Extract query parameters
     selected_location = request.args.get('location', 'cheung_chau')
-    selected_year = request.args.get('year', '2023')
-    selected_month = request.args.get('month', '1')
+    selected_year = request.args.get('year', '2023')  # Default to '2023' if not provided
+    selected_month = request.args.get('month', '1')  # Default to '1' if not provided
 
     # Construct CSV file path based on selected location
     csv_file_path = os.path.join(os.getcwd(), f"backend/data/Daily Rainfall/{selected_location}.csv")
@@ -118,6 +118,7 @@ def get_rainfall_data():
     chart_data = [{'MONTH': row['Month'], 'VALUE': row['Value']} for row in filtered_forecasts]
 
     return jsonify(chart_data)
+
 
 
 # Route for warning.html
