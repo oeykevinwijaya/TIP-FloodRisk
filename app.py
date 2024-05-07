@@ -79,23 +79,23 @@ def contact():
     return render_template('contact.html')
 
 # Route for email.html
-@app.route ('email.html')
+@app.route ('/email.html')
 def email():
     return render_template('email.html')
 
 # Route for data_management.html
-@app.route ('data_management.html')
-def email():
+@app.route ('/data_management.html')
+def data_management():
     return render_template('data_management.html')
 
 # Route for email.html
-@app.route ('admin_page_alert.html')
-def email():
+@app.route ('/admin_page_alert.html')
+def admin_page_alert():
     return render_template('admin_page_alert.html')
 
 # Route for email.html
-@app.route ('admin_access.html')
-def email():
+@app.route ('/admin_access.html')
+def admin_access():
     return render_template('admin_access.html')
 
 if __name__ == '__main__':
