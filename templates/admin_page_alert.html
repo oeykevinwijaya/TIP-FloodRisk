@@ -140,32 +140,34 @@
                             <td
                                 class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
-                                {{ row[0] }}
+                                {{ row['Id'] }}
                             </td>
                             <td
                                 class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
-                                {{ row[1] }}
+                                {{ row['Location'] }}
                             </td>
                             <td
                                 class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
-                                {{ row[2] }}
+                                {{ row['Name'] }}
                             </td>
                             <td
                                 class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
-                                {{ row[3] }}
+                                {{ row['Email'] }}
                             </td>
                             <td
                                 class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
-                                {{ row[4] }}
+                                {% if row['Rainfall'] %} Registered {% else %}
+                                Not Registered {% endif %}
                             </td>
                             <td
                                 class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
-                                {{ row[5] }}
+                                {% if row['Flood'] %} Registered {% else %} Not
+                                Registered {% endif %}
                             </td>
                             <td
                                 class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"

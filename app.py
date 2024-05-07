@@ -5,6 +5,9 @@ import csv
 import os
 import mysql.connector
 
+# Path to the CSV file
+data_file_path = os.path.join(os.getcwd(), 'backend/data/userdata.csv')
+
 app = Flask(__name__)
 
 # Route for landing page
@@ -85,8 +88,16 @@ def submit_preferences():
     rainfall = 'rainfall' in request.form
     flood = 'flood' in request.form
 
-    # Insert notification preferences into the database
-    insert_notification_preferences(location, name, email, rainfall, flood)
+    # Create CSV file if it doesn't exist
+    if not os.path.exists(data_file_path):
+        with open(data_file_path, mode='w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['Location', 'Name', 'Email', 'Rainfall Alert', 'Flood Alert'])
+
+    # Append new preferences to the CSV file
+    with open(data_file_path, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([location, name, email, rainfall, flood])
 
     return render_template('noti.html', success=True)
 
@@ -110,16 +121,13 @@ def data_management():
 # Route for admin_page_alert.html
 @app.route('/admin_page_alert.html')
 def admin_page_alert():
-    db_connection = mysql.connector.connect(
-        host="feenix-mariadb.swin.edu.au",
-        user="s104341635",
-        password="swinburne",
-        database="s104341635_db"
-    )
-    cursor = db_connection.cursor()
-
-    cursor.execute("SELECT * FROM users")
-    data = cursor.fetchall()
+    # Read data from the CSV file
+    data = []
+    if os.path.exists(data_file_path):
+        with open(data_file_path, mode='r') as file:
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                data.append(row)
 
     return render_template('admin_page_alert.html', data=data)
 
