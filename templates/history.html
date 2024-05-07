@@ -239,17 +239,59 @@
                 </table>
             </section>
 
+            <canvas id="barChart"></canvas>
+
             <p class="mx-8 mt-10 text-2xl font-bold">Rainfall Data History</p>
             <hr />
-            <!-- Placeholder for Graph -->
-            <div id="graph" class="py-8 border-t border-b">
+            <!-- Placeholder for Bar Chart -->
+            <div id="barChartContainer" class="py-8 border-t border-b">
                 <section id="chart-container" class="p-4 mt-4">
-                    <canvas id="rainfallChart"></canvas>
+                    <canvas id="barChart"></canvas>
                 </section>
             </div>
         </main>
 
         <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <script>
+            // Get the data for the bar chart from the server
+            fetch("/get_rainfall_data")
+                .then((response) => response.json())
+                .then((data) => {
+                    const labels = data.map((row) => row["MONTH"]);
+                    const values = data.map((row) => parseFloat(row["VALUE"]));
+
+                    // Create a bar chart
+                    var ctx = document
+                        .getElementById("barChart")
+                        .getContext("2d");
+                    var myChart = new Chart(ctx, {
+                        type: "bar",
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: "Rainfall",
+                                    data: values,
+                                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                                    borderColor: "rgba(54, 162, 235, 1)",
+                                    borderWidth: 1,
+                                },
+                            ],
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                },
+                            },
+                        },
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+        </script>
+
         <script>
             document
                 .getElementById("submit")
