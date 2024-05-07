@@ -1,4 +1,6 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
+from backend.services.dbconnect import insert_notification_preferences
+
 import csv
 import os
 
@@ -72,6 +74,21 @@ def faq():
 @app.route ('/noti.html')
 def noti():
     return render_template('noti.html')
+
+# Route to handle form submission
+@app.route('/submit_preferences', methods=['POST'])
+def submit_preferences():
+    location = request.form['location']
+    name = request.form['name']
+    email = request.form['email']
+    rainfall = 'rainfall' in request.form
+    flood = 'flood' in request.form
+
+    # Insert notification preferences into the database
+    insert_notification_preferences(location, name, email, rainfall, flood)
+
+    return render_template('noti.html', success=True)
+
 
 # Route for contact.html
 @app.route ('/contact.html')
