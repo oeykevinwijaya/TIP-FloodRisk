@@ -49,20 +49,40 @@ def weatherforecast():
 # Route for history.html
 @app.route('/history.html')
 def history():
-    # Path to CSV file
-    # csv_file_path = os.path.join(os.getcwd(), 'backend/data/9dforecast.csv')
-    
+    # Extract query parameters
+    selected_location = request.args.get('location', 'cheung_chau')  # Default to 'cheung_chau' if not provided
+    selected_year = request.args.get('year', '2022')
+    selected_month = request.args.get('month', '1')
+
+    # Construct CSV file path based on selected location
+    csv_file_path = os.path.join(os.getcwd(), f"backend/data/Daily Rainfall/{selected_location}.csv")
+
+    # Check if the file exists
+    if not os.path.exists(csv_file_path):
+        return f"CSV file not found: {csv_file_path}"
+
     # List to hold rows of data
     forecasts = []
-    
+
     # Read CSV data
-    with open(csv_file_path, mode='r') as file:
-        csv_reader = csv.DictReader(file)
-        for row in csv_reader:
-            forecasts.append(row)
-    
+    try:
+        with open(csv_file_path, mode='r', encoding='utf-8-sig') as file:
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                # Remove BOM from keys
+                row = {key.strip('\ufeff'): value for key, value in row.items()}
+                forecasts.append(row)
+    except Exception as e:
+        return f"Error reading CSV file: {str(e)}"
+
+    # Filter data based on query parameters
+    filtered_forecasts = [forecast for forecast in forecasts if forecast['Month'] == selected_month and forecast['Year'] == selected_year]
+
     # Pass data to the template
-    return render_template('history.html', forecasts=forecasts)
+    return render_template('history.html', forecasts=filtered_forecasts)
+
+
+
 
 # Route for warning.html
 @app.route ('/warning.html')

@@ -1,6 +1,4 @@
-﻿日總雨量(毫米) - 天文台
-Daily Total Rainfall (mm) at the Hong Kong Observatory
-年/Year,月/Month,日/Day,數值/Value,數據完整性/data Completeness
+﻿Year,Month,Day,Value,data Completeness
 1884,3,1,0.0,C
 1884,3,2,0.0,C
 1884,3,3,0.0,C
