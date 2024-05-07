@@ -1,6 +1,8 @@
 # sample code to insert data into a MariaDB database table
 
 import mysql.connector
+# from dbsetting import db_settings
+
 
 def insert_notification_preferences(location, name, email, rainfall, flood):
     db_connection = mysql.connector.connect(
@@ -13,8 +15,8 @@ def insert_notification_preferences(location, name, email, rainfall, flood):
     cursor = db_connection.cursor()
 
     try:
-        sql = "INSERT INTO users (location, name, email, rainfall, flood) VALUES (%s, %s, %s, %s, %s)"
-        cursor.execute(sql, (location, name, email, rainfall, flood))
+        sql = "INSERT INTO notification_preferences (location, name, email, rainfall, flood) VALUES (%s, %s, %s, %s, %s)"
+        cursor.execute(sql, (location, name, email, rainfall_alert, flood_alert))
         db_connection.commit()
         print("Notification preferences inserted successfully!")
 

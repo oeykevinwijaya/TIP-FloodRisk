@@ -3,6 +3,7 @@ from backend.services.dbconnect import insert_notification_preferences
 
 import csv
 import os
+import mysql.connector
 
 app = Flask(__name__)
 
@@ -105,12 +106,25 @@ def email():
 def data_management():
     return render_template('data_management.html')
 
-# Route for email.html
-@app.route ('/admin_page_alert.html')
-def admin_page_alert():
-    return render_template('admin_page_alert.html')
 
-# Route for email.html
+# Route for admin_page_alert.html
+@app.route('/admin_page_alert.html')
+def admin_page_alert():
+    db_connection = mysql.connector.connect(
+        host="feenix-mariadb.swin.edu.au",
+        user="s104341635",
+        password="swinburne",
+        database="s104341635_db"
+    )
+    cursor = db_connection.cursor()
+
+    cursor.execute("SELECT * FROM users")
+    data = cursor.fetchall()
+
+    return render_template('admin_page_alert.html', data=data)
+
+
+# Route for admin_access.html
 @app.route ('/admin_access.html')
 def admin_access():
     return render_template('admin_access.html')
