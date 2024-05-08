@@ -1,4 +1,4 @@
-Date,Day,Max Temp (°C),Min Temp (°C),Max RH (%),Min RH (%),Weather
+Date,Day,Max Temp,Min Temp,Max RH (%),Min RH (%),Weather
 20240503,Friday,27,24,95,75,Mainly cloudy with a few showers.
 20240504,Saturday,29,25,95,70,Mainly cloudy with a few showers. Isolated thunderstorms later.
 20240505,Sunday,28,25,95,75,Mainly cloudy with occasional showers. Isolated thunderstorms at first.
