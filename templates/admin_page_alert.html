@@ -188,7 +188,14 @@
                     </tbody>
                 </table>
             </div>
-
+            <div class="flex justify-center mt-5">
+                <button
+                    id="sendNotificationBtn"
+                    class="px-10 py-1 text-sm text-white bg-gray-500 rounded-full hover:bg-gray-700"
+                >
+                    Send Notification
+                </button>
+            </div>
             <div>
                 &nbsp; &nbsp;
                 <!-- Alter history title-->
@@ -305,6 +312,40 @@
             nomodule
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
         ></script>
+        <script>
+            document
+                .getElementById("sendNotificationBtn")
+                .addEventListener("click", function () {
+                    // Make a request to the /send_email route
+                    fetch("/send_email", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            recipient_email: "104341635@student.swin.edu.au",
+                        }),
+                    })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error("Failed to send notification");
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log(data.message); // Log the response message
+                            // Optionally, display a success message to the user
+                            alert("Notification sent successfully");
+                        })
+                        .catch((error) => {
+                            console.error("Error sending notification:", error);
+                            // Optionally, display an error message to the user
+                            alert(
+                                "Failed to send notification. Please try again later."
+                            );
+                        });
+                });
+        </script>
         <script src="{{ url_for('static', filename='script.js') }}"></script>
     </body>
 </html>
