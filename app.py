@@ -49,7 +49,7 @@ def weatherforecast():
     # Pass data to the template
     return render_template('weather_forecast.html', forecasts=forecasts)
 
-@app.route('/history')
+@app.route('/history.html')
 def history():
     # Extract query parameters
     selected_location = request.args.get('location', 'cheung_chau')  # Default to 'cheung_chau' if not provided
