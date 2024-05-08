@@ -110,7 +110,12 @@
                 </p>
                 <hr />
                 <div class="flex items-center justify-center mt-10 space-x-4">
-                    <form action="/history" method="GET" class="flex space-x-4">
+                    <form
+                        id="rainfallForm"
+                        action="/history"
+                        method="GET"
+                        class="flex space-x-4"
+                    >
                         <!-- Location Dropdown -->
                         <div class="flex flex-col">
                             <label for="location">Location:</label>
@@ -171,7 +176,8 @@
                         <!-- Submit Button -->
                         <div class="flex flex-col">
                             <button
-                                type="submit"
+                                type="button"
+                                id="goButton"
                                 class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
                             >
                                 Go
@@ -213,109 +219,142 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody class="text-gray-700">
-                        <!-- Table rows -->
-                        {% for row in forecasts %}
-                        <tr>
-                            <td class="px-4 py-3 text-left">
-                                {{ row['Year'] }}
-                            </td>
-                            <td class="px-4 py-3 text-left">
-                                {% set month_names = { '1': 'January', '2':
-                                'February', '3': 'March', '4': 'April', '5':
-                                'May', '6': 'June', '7': 'July', '8': 'August',
-                                '9': 'September', '10': 'October', '11':
-                                'November', '12': 'December' } %} {{
-                                month_names[row['Month']] }}
-                            </td>
-
-                            <td class="px-4 py-3 text-left">
-                                {{ row['Day'] }}
-                            </td>
-                            <td class="px-4 py-3 text-left">
-                                {{ row['Value'] }}
-                            </td>
-                            <td class="px-4 py-3 text-left">
-                                {{ row['data Completeness'] }}
-                            </td>
-                        </tr>
-                        {% endfor %}
+                    <tbody id="tableBody" class="text-gray-700">
+                        <!-- Table rows will be dynamically populated -->
                     </tbody>
                 </table>
             </section>
-
-            <!-- <canvas id="barChart"></canvas> -->
         </main>
 
         <script src="{{ url_for('static', filename='script.js') }}"></script>
 
         <script>
-            var myChart; // Define myChart outside the function
+            var myChart;
 
-            document
-                .getElementById("year")
-                .addEventListener("change", updateChartData);
-            document
-                .getElementById("month")
-                .addEventListener("change", updateChartData);
+            document.getElementById("goButton").addEventListener("click", updateData);
+
+            function updateData() {
+                updateChartData();
+                updateTableData();
+            }
 
             function updateChartData() {
-                var location = document.getElementById("location").value;
-                var year = document.getElementById("year").value;
-                var month = document.getElementById("month").value;
+            var location = document.getElementById("location").value;
+            var year = document.getElementById("year").value;
+            var month = document.getElementById("month").value;
 
-                var url = `/get_rainfall_data?location=${location}&year=${year}&month=${month}`;
+            var url = `/get_rainfall_data?location=${location}&year=${year}&month=${month}`;
 
-                fetch(url)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        const labels = data.map((row) => row["MONTH"]);
-                        const values = data.map((row) =>
-                            parseFloat(row["VALUE"])
-                        );
+            fetch(url)
+                .then((response) => response.json())
+                .then((data) => {
+                    const days = data.map((row) => row["DAY"]);
+                    const values = data.map((row) => parseFloat(row["VALUE"]));
+                    const monthNumber = data[0]["MONTH"];
+                    const monthName = getMonthName(monthNumber);
 
-                        // Check if myChart is already defined
-                        if (!myChart) {
-                            var ctx = document
-                                .getElementById("barChart")
-                                .getContext("2d");
-                            myChart = new Chart(ctx, {
-                                type: "bar",
-                                data: {
-                                    labels: labels,
-                                    datasets: [
-                                        {
-                                            label: "Rainfall",
-                                            data: values,
-                                            backgroundColor:
-                                                "rgba(54, 162, 235, 0.2)",
-                                            borderColor:
-                                                "rgba(54, 162, 235, 1)",
-                                            borderWidth: 1,
+                    const labels = days.map((day, index) => `${index + 1}`);
+
+                    if (!myChart) {
+                        var ctx = document.getElementById("barChart").getContext("2d");
+                        myChart = new Chart(ctx, {
+                            type: "bar",
+                            data: {
+                                labels: labels,
+                                datasets: [
+                                    {
+                                        label: "Rainfall (mm)",
+                                        data: values,
+                                        backgroundColor: "rgba(54, 162, 235, 0.2)",
+                                        borderColor: "rgba(54, 162, 235, 1)",
+                                        borderWidth: 1,
+                                    },
+                                ],
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        title: {
+                                            display: true,
+                                            text: "Rainfall (mm)",
                                         },
-                                    ],
-                                },
-                                options: {
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true,
+                                    },
+                                    x: {
+                                        title: {
+                                            display: true,
+                                            text: monthName,
                                         },
                                     },
                                 },
-                            });
-                        } else {
-                            // Update the chart data
-                            myChart.data.labels = labels;
-                            myChart.data.datasets[0].data = values;
-                            myChart.update();
-                        }
-                    })
-                    .catch((error) => {
-                        console.error("Error:", error);
+                            },
+                        });
+                    } else {
+                        myChart.data.labels = labels;
+                        myChart.data.datasets[0].data = values;
+                        myChart.options.scales.x.title.text = monthName;
+                        myChart.update();
+                    }
+                });
+        }
+
+
+            function updateTableData() {
+            var location = document.getElementById("location").value;
+            var year = document.getElementById("year").value;
+            var month = document.getElementById("month").value;
+
+            var url = `/get_rainfall_data?location=${location}&year=${year}&month=${month}`;
+
+            fetch(url)
+                .then((response) => response.json())
+                .then((data) => {
+                    const tableBody = document.getElementById("tableBody");
+                    tableBody.innerHTML = "";
+
+                    data.forEach((row) => {
+                        const tr = document.createElement("tr");
+
+                        const tdYear = document.createElement("td");
+                        tdYear.className = "px-4 py-3 text-left";
+                        tdYear.textContent = row["YEAR"];
+
+                        const tdMonth = document.createElement("td");
+                        tdMonth.className = "px-4 py-3 text-left";
+                        tdMonth.textContent = getMonthName(row["MONTH"]);
+
+                        const tdDay = document.createElement("td");
+                        tdDay.className = "px-4 py-3 text-left";
+                        tdDay.textContent = row["DAY"];
+
+                        const tdValue = document.createElement("td");
+                        tdValue.className = "px-4 py-3 text-left";
+                        tdValue.textContent = row["VALUE"];
+
+                        const tdCompleteness = document.createElement("td");
+                        tdCompleteness.className = "px-4 py-3 text-left";
+                        tdCompleteness.textContent = row["DATA_COMPLETENESS"];
+
+                        tr.appendChild(tdYear);
+                        tr.appendChild(tdMonth);
+                        tr.appendChild(tdDay);
+                        tr.appendChild(tdValue);
+                        tr.appendChild(tdCompleteness);
+
+                        tableBody.appendChild(tr);
                     });
+                });
+        }
+
+            function getMonthName(monthNumber) {
+                const months = [
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ];
+                return months[monthNumber - 1];
             }
 
-            updateChartData(); // Initial call to updateChartData to populate the chart with default values
+            updateData();
         </script>
     </body>
 </html>
