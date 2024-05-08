@@ -228,8 +228,8 @@ def admin_page_alert():
 
     return render_template('admin_page_alert.html', data=data)
 
-@app.route('/send_email', methods=['POST'])
-def send_email():
+@app.route('/send_notification', methods=['POST'])
+def send_notification():
     # Load the recipient email addresses from the CSV file
     recipients = []
     with open('backend/data/userdata.csv', mode='r') as file:
@@ -238,7 +238,7 @@ def send_email():
             recipients.append(row['Email'])
 
     # Load email subject and body from the CSV file
-    with open('backend/data/emaildata.csv', mode='r') as file:
+    with open('backend/data/notification/emaildata.csv', mode='r') as file:
         csv_reader = csv.DictReader(file)
         for row in csv_reader:
             subject = row['subject']
@@ -253,6 +253,43 @@ def send_email():
             table += '<tr>' + ''.join(f'<td>{value}</td>' for value in row.values()) + '</tr>'
         table += '</table>'
         body += table
+
+    # Email sender details
+
+
+    # Send email to each recipient
+    for recipient in recipients:
+        msg = MIMEMultipart()
+        msg.attach(MIMEText(body, 'html'))
+        msg['Subject'] = subject
+        msg['From'] = sender
+        msg['To'] = recipient
+        try:
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
+                smtp_server.login(sender, password)
+                smtp_server.sendmail(sender, recipient, msg.as_string())
+            print(f"Message sent to {recipient}")
+        except Exception as e:
+            print(f"Failed to send email to {recipient}: {str(e)}")
+
+    return "Emails sent successfully!"
+
+# Route for send_alert
+@app.route('/send_alert', methods=['POST'])
+def send_alert():
+    # Load the recipient email addresses from the CSV file
+    recipients = []
+    with open('backend/data/userdata.csv', mode='r') as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            recipients.append(row['Email'])
+
+    # Load email subject and body from the CSV file
+    with open('backend/data/notification/rainfallwarning.csv', mode='r') as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            subject = row['subject']
+            body = row['body']
 
     # Email sender details
 
