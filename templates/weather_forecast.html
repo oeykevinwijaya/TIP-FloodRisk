@@ -176,6 +176,28 @@
                     </div>
                 </div>
             </div>
+            <!-- History data based on prediction-->
+            <div class="mx-10 overflow-hidden">
+                {% if prediction == '1' %}
+                    <div class="flex items-center px-4 py-1 mt-3 space-x-3 border border-gray-500 rounded">
+                        <div class="text-red-500">
+                            <ion-icon name="alert-circle" size="large"></ion-icon>
+                        </div>
+                        <p class="flex-grow text-sm font-semibold text-red-500">
+                            High risk of flood. Take necessary precautions.
+                        </p>
+                    </div>
+                {% else %}
+                    <div class="flex items-center px-4 py-1 mt-3 space-x-3 border border-gray-300 rounded">
+                        <div class="text-green-500">
+                            <ion-icon name="checkmark-circle" size="large"></ion-icon>
+                        </div>
+                        <p class="flex-grow text-sm font-semibold text-green-500">
+                            No flooding issues detected.
+                        </p>
+                    </div>
+                {% endif %}
+            </div> 
         </main>
 
         <script

@@ -1,14 +1,78 @@
 from flask import Flask, render_template, jsonify, request
 from backend.services.dbconnect import insert_notification_preferences
+from datetime import datetime
+import pandas as pd
 
 import csv
 import os
 import mysql.connector
+import joblib
+import requests
 
 # Path to the CSV file
 data_file_path = os.path.join(os.getcwd(), 'backend/data/userdata.csv')
 
 app = Flask(__name__)
+model = joblib.load('backend/models/flood_prediction_model.pkl')
+    
+
+@app.route('/predict_flood', methods=['POST'])
+def predict_flood_api():
+    prediction = predict_flood()
+    if prediction is not None:
+        return jsonify({'prediction': str(prediction)})
+    else:
+        return jsonify({'error': 'Failed to make prediction'}), 500
+
+def predict_flood(test_data=None, return_prob=False):
+    try:
+        if test_data is None:
+            # No test data provided, fetch real-time data
+            api_url = 'https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en'
+            response = requests.get(api_url)
+            if response.status_code != 200:
+                return None
+            real_time_data = response.json()
+        else:
+            # Use test data provided
+            real_time_data = test_data
+
+        feature_vector = extract_feature_vector(real_time_data)
+        feature_df = pd.DataFrame([feature_vector], columns=['Rainfall', 'Humidity', 'Year', 'Month', 'Day', 'Temperature'])
+        probabilities = model.predict_proba(feature_df)[:, 1]
+        prediction = (probabilities > 0.68).astype(int)
+        if return_prob:
+            return prediction[0], probabilities[0]
+        return prediction[0]
+    except Exception as e:
+        print(str(e))
+        return None
+
+# Function to extract feature vector from real-time data
+def extract_feature_vector(real_time_data):
+    # Extract the temperature, humidity, and rainfall
+    temperature = real_time_data['temperature']['data'][0]['value']
+    humidity = real_time_data['humidity']['data'][0]['value']
+    rainfall = max(item['max'] for item in real_time_data['rainfall']['data'])
+
+   # Safely extract recordTime or use a default
+    record_time = real_time_data['temperature'].get('recordTime', "2024-05-08T14:00:00+08:00")
+    parsed_date = datetime.strptime(record_time, "%Y-%m-%dT%H:%M:%S+08:00")
+
+    year = parsed_date.year
+    month = parsed_date.month
+    day = parsed_date.day
+
+    feature_vector = {
+        'Rainfall': rainfall,
+        'Humidity': humidity,
+        'Year': year,
+        'Month': month,
+        'Day': day,
+        'Temperature': temperature
+    }
+    return feature_vector
+
 
 # Route for landing page
 @app.route('/')
@@ -43,8 +107,12 @@ def weatherforecast():
         for row in csv_reader:
             forecasts.append(row)
     
-    # Pass data to the template
-    return render_template('weather_forecast.html', forecasts=forecasts)
+    # Call the prediction function and store the result
+    prediction_result = predict_flood()  # Ensure this function returns just the prediction or adjust as needed
+    
+    # Pass data to the template, including the prediction result
+    return render_template('weather_forecast.html', forecasts=forecasts, prediction=prediction_result)
+
 
 # Route for history.html
 @app.route('/history.html')
