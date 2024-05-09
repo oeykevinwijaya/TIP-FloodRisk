@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Warning Page</title>
+    <title>Admin Login</title>
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
@@ -93,23 +93,78 @@
       id="main-content"
       style="will-change: padding"
     >
-      <!-- Title-->
       <div class="mx-10 mt-8 p-5 border-b border-gray-700 font-bold text-xl">
-        Live Rainfall Map
+        Admin Login
       </div>
-      <!-- User Management table-->
-      <div class="overflow-hidden mx-8 p-3 mt-5"></div>
+      <div class="overflow-hidden mx-8 p-3 mt-5">
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
+          <h2 class="text-2xl font-bold mb-6 text-gray-700">Admin Login</h2>
+          <form action="/admin_access.html" method="POST">
+            <div class="mb-4">
+              <label class="block text-gray-700 font-bold mb-2" for="username">
+                Username
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="username"
+                type="text"
+                name="username"
+                placeholder="Enter your username"
+              />
+            </div>
+            <div class="mb-6">
+              <label class="block text-gray-700 font-bold mb-2" for="password">
+                Password
+              </label>
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+              />
+            </div>
+            <div class="flex items-center justify-between">
+              <button
+                class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                Login
+              </button>
+              <a
+                class="inline-block align-baseline font-bold text-sm text-gray-700 hover:text-gray-900"
+                href="#"
+              >
+                Forgot Password?
+              </a>
+            </div>
+          </form>
+
+          <!-- Button for testing incorrect username and password -->
+          <button
+            class="mt-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            onclick="showErrorMessage()"
+          >
+            Test Incorrect Login
+          </button>
+        </div>
+      </div>
     </main>
 
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <script src="{{ url_for('static', filename='mainpage.js') }}"></script>
+    <!-- Sidebar Toggle Script -->
+    <script>
+      // Sidebar Toggle Function
+      document
+        .getElementById("sidebar-toggle")
+        .addEventListener("click", function () {
+          const sidebar = document.getElementById("sidebar");
+          sidebar.classList.toggle("-translate-x-full");
+        });
+
+      // Script to show alert message for testing
+      function showErrorMessage() {
+        alert("Incorrect username or password.");
+      }
+    </script>
   </body>
 </html>
