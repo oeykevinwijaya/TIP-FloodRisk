@@ -1,19 +1,19 @@
-Date,Place,Rainfall (mm),Main
-02/05/2024,Central & Western District,0,FALSE
-02/05/2024,Eastern District,0,FALSE
-02/05/2024,Kwai Tsing,0,FALSE
-02/05/2024,Islands District,0,FALSE
-02/05/2024,North District,0,FALSE
-02/05/2024,Sai Kung,0,FALSE
-02/05/2024,Sha Tin,0,FALSE
-02/05/2024,Southern District,0,FALSE
-02/05/2024,Tai Po,0,FALSE
-02/05/2024,Tsuen Wan,0,FALSE
-02/05/2024,Tuen Mun,0,FALSE
-02/05/2024,Wan Chai,0,FALSE
-02/05/2024,Yuen Long,0,FALSE
-02/05/2024,Yau Tsim Mong,0,FALSE
-02/05/2024,Sham Shui Po,0,FALSE
-02/05/2024,Kowloon City,0,FALSE
-02/05/2024,Wong Tai Sin,0,FALSE
-02/05/2024,Kwun Tong,0,FALSE
+Place,Rainfall (mm),Main
+Central & Western District,0,FALSE
+Eastern District,0,FALSE
+Kwai Tsing,0,FALSE
+Islands District,0,FALSE
+North District,0,FALSE
+Sai Kung,0,FALSE
+Sha Tin,0,FALSE
+Southern District,0,FALSE
+Tai Po,0,FALSE
+Tsuen Wan,0,FALSE
+Tuen Mun,0,FALSE
+Wan Chai,0,FALSE
+Yuen Long,0,FALSE
+Yau Tsim Mong,0,FALSE
+Sham Shui Po,0,FALSE
+Kowloon City,0,FALSE
+Wong Tai Sin,0,FALSE
+Kwun Tong,0,FALSE
