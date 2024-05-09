@@ -56,7 +56,7 @@
                     Email
                 </a>
                 <a
-                    href="#"
+                    href="weather_forecast.html"
                     class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Home Page
@@ -187,8 +187,20 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <div class="pt-5"></div>
+                <button
+                    id="sendNotificationBtn"
+                    class="px-10 py-1 text-sm text-white bg-gray-500 rounded-full hover:bg-gray-700"
+                >
+                    Send Weather Notification
+                </button>
+                <button
+                    id="sendAlertBtn"
+                    class="px-10 py-1 text-sm text-white bg-gray-500 rounded-full hover:bg-gray-700"
+                >
+                    Send Alert
+                </button>
             </div>
-
             <div>
                 &nbsp; &nbsp;
                 <!-- Alter history title-->
@@ -305,6 +317,72 @@
             nomodule
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
         ></script>
+        <script>
+            document
+                .getElementById("sendNotificationBtn")
+                .addEventListener("click", function () {
+                    // Make a request to the /send_email route
+                    fetch("/send_notification", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            recipient_email: "104341635@student.swin.edu.au",
+                        }),
+                    })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error("Failed to send notification");
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log(data.message); // Log the response message
+                            // Optionally, display a success message to the user
+                            alert("Notification sent successfully");
+                        })
+                        .catch((error) => {
+                            console.error("Error sending notification:", error);
+                            // Optionally, display an error message to the user
+                            alert(
+                                "Failed to send notification. Please try again later."
+                            );
+                        });
+                });
+            document
+                .getElementById("sendAlertBtn")
+                .addEventListener("click", function () {
+                    // Make a request to the /send_email route
+                    fetch("/send_alert", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            recipient_email: "104341635@student.swin.edu.au",
+                        }),
+                    })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error("Failed to send notification");
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log(data.message); // Log the response message
+                            // Optionally, display a success message to the user
+                            alert("Notification sent successfully");
+                        })
+                        .catch((error) => {
+                            console.error("Error sending notification:", error);
+                            // Optionally, display an error message to the user
+                            alert(
+                                "Failed to send notification. Please try again later."
+                            );
+                        });
+                });
+        </script>
         <script src="{{ url_for('static', filename='script.js') }}"></script>
     </body>
 </html>
