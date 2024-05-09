@@ -208,8 +208,8 @@ def get_rainfall_data():
     # Filter data based on query parameters
     filtered_forecasts = [forecast for forecast in forecasts if forecast['Month'] == selected_month and forecast['Year'] == selected_year]
 
-    # Prepare the chart data including Year, Month, Day, Value, and Data Completeness
-    chart_data = [{'YEAR': row['Year'], 'MONTH': row['Month'], 'DAY': row['Day'], 'VALUE': row['Value'], 'DATA_COMPLETENESS': row['data Completeness']} for row in filtered_forecasts]
+    # Prepare the chart data including Year, Month, Day, and Value
+    chart_data = [{'YEAR': row['Year'], 'MONTH': row['Month'], 'DAY': row['Day'], 'VALUE': row['Value']} for row in filtered_forecasts]
 
     return jsonify(chart_data)
 

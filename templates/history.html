@@ -1,360 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Historical Data</title>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <link
-            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-            rel="stylesheet"
-        />
-    </head>
-    <body class="font-sans leading-normal tracking-normal bg-gray-100">
-        <!-- Menu Button -->
-        <button
-            id="sidebar-toggle"
-            class="text-white focus:outline-none bg-gray-700 p-2.5 fixed top-2.5 left-2.5 z-30"
-        >
-            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"></path>
-            </svg>
-        </button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Historical Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-sans leading-normal tracking-normal bg-gray-100">
+    <!-- Menu Button -->
+    <button
+      id="sidebar-toggle"
+      class="text-white focus:outline-none bg-gray-700 p-2.5 fixed top-2.5 left-2.5 z-30"
+    >
+      <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+        <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"></path>
+      </svg>
+    </button>
 
-        <!-- Sidebar -->
-        <div
-            id="sidebar"
-            class="fixed inset-y-0 left-0 z-20 w-64 px-2 space-y-6 transition-transform duration-500 ease-in-out transform -translate-x-full bg-white shadow-md py-7"
-            style="will-change: transform"
+    <!-- Sidebar -->
+    <div
+      id="sidebar"
+      class="fixed inset-y-0 left-0 z-20 w-64 px-2 space-y-6 transition-transform duration-500 ease-in-out transform -translate-x-full bg-white shadow-md py-7"
+      style="will-change: transform"
+    >
+      <a href="#" class="flex items-center px-4 space-x-2 text-gray-800">
+        <span class="mt-10 text-2xl font-medium">Menu</span>
+      </a>
+      <!-- Sidebar content -->
+      <nav class="text-base text-black">
+        <a
+          href="warning.html"
+          class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
         >
-            <a href="#" class="flex items-center px-4 space-x-2 text-gray-800">
-                <span class="mt-10 text-2xl font-medium">Menu</span>
-            </a>
-            <!-- Sidebar content -->
-            <nav class="text-base text-black">
-                <a
-                    href="warning.html"
-                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
-                >
-                    Warning
-                </a>
-                <a
-                    href="weather_forecast.html"
-                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
-                >
-                    Weather Forecast
-                </a>
-                <a
-                    href="history.html"
-                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
-                >
-                    Historical data
-                </a>
-                <a
-                    href="faq.html"
-                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
-                >
-                    FAQ
-                </a>
-                <a
-                    href="contact.html"
-                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
-                >
-                    Contact
-                </a>
-                <a
-                    href="noti.html"
-                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
-                >
-                    Notification Setting
-                </a>
-                <a
-                    href="admin_access.html"
-                    class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
-                >
-                    Admin Page
-                </a>
-            </nav>
+          Warning
+        </a>
+        <a
+          href="weather_forecast.html"
+          class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+        >
+          Weather Forecast
+        </a>
+        <a
+          href="history.html"
+          class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+        >
+          Historical data
+        </a>
+        <a
+          href="faq.html"
+          class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+        >
+          FAQ
+        </a>
+        <a
+          href="contact.html"
+          class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+        >
+          Contact
+        </a>
+        <a
+          href="noti.html"
+          class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+        >
+          Notification Setting
+        </a>
+        <a
+          href="admin_access.html"
+          class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+        >
+          Admin Page
+        </a>
+      </nav>
+    </div>
+
+    <!-- Header -->
+    <nav class="fixed z-10 w-full p-4 bg-gray-700">
+      <div class="flex flex-wrap items-center justify-between">
+        <div class="flex items-center flex-shrink-0 mr-6 text-white">
+          <span class="text-xl font-semibold tracking-tight mx-14"
+            >Hong Kong Flood</span
+          >
         </div>
+      </div>
+    </nav>
 
-        <!-- Header -->
-        <nav class="fixed z-10 w-full p-4 bg-gray-700">
-            <div class="flex flex-wrap items-center justify-between">
-                <div class="flex items-center flex-shrink-0 mr-6 text-white">
-                    <span class="text-xl font-semibold tracking-tight mx-14"
-                        >Hong Kong Flood</span
-                    >
-                </div>
+    <!-- Main content -->
+    <main
+      class="p-8 duration-500 ease-in-out transition-padding"
+      id="main-content"
+      style="will-change: padding"
+    >
+      <p class="mx-8 mt-10 text-2xl font-bold mb-5">Rainfall Data History</p>
+      <!-- Placeholder for Bar Chart -->
+      <div id="barChartContainer" class="py-8 border-t border-b">
+        <section id="chart-container" class="p-4">
+          <canvas id="barChart" width="400" height="120"></canvas>
+        </section>
+      </div>
+
+      <section id="data-selection">
+        <div class="flex items-center justify-center mt-8 space-x-4">
+          <form
+            id="rainfallForm"
+            action="/history"
+            method="GET"
+            class="flex space-x-4"
+          >
+            <!-- Location Dropdown -->
+            <div class="flex flex-col">
+              <label for="location">Location:</label>
+              <select id="location" name="location" class="p-2 border rounded">
+                <option value="cheung_chau">Cheung Chau</option>
+                <option value="hk_international_airport">
+                  HK International Airport
+                </option>
+                <option value="hk_observatory">HK Observatory</option>
+                <option value="lau_fau_shan">Lau Fau Shan</option>
+                <option value="peng_chau">Peng Chau</option>
+              </select>
             </div>
-        </nav>
 
-        <!-- Main content -->
-        <main
-            class="p-8 duration-500 ease-in-out transition-padding"
-            id="main-content"
-            style="will-change: padding"
-        >
-            <p class="mx-8 mt-10 text-2xl font-bold">Rainfall Data History</p>
-            <!-- Placeholder for Bar Chart -->
-            <div id="barChartContainer" class="py-8 border-t border-b">
-                <section id="chart-container" class="p-4 mt-4">
-                    <canvas id="barChart" width="400" height="120"></canvas>
-                </section>
+            <!-- Year Dropdown -->
+            <div class="flex flex-col">
+              <label for="year">Year:</label>
+              <select id="year" name="year" class="p-2 border rounded">
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+              </select>
             </div>
-            <hr />
+            <!-- Month Dropdown -->
+            <div class="flex flex-col">
+              <label for="month">Month:</label>
+              <select id="month" name="month" class="p-2 border rounded">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
 
-            <section id="data-selection">
-                <!-- Dropdowns for selecting location, year, and month -->
-                <p class="mx-8 mt-10 text-2xl font-bold">
-                    Monthly Data History
-                </p>
-                <hr />
-                <div class="flex items-center justify-center mt-10 space-x-4">
-                    <form
-                        id="rainfallForm"
-                        action="/history"
-                        method="GET"
-                        class="flex space-x-4"
-                    >
-                        <!-- Location Dropdown -->
-                        <div class="flex flex-col">
-                            <label for="location">Location:</label>
-                            <select
-                                id="location"
-                                name="location"
-                                class="p-2 border rounded"
-                            >
-                                <option value="cheung_chau">Cheung Chau</option>
-                                <option value="hk_international_airport">
-                                    HK International Airport
-                                </option>
-                                <option value="hk_observatory">
-                                    HK Observatory
-                                </option>
-                                <option value="lau_fau_shan">
-                                    Lau Fau Shan
-                                </option>
-                                <option value="peng_chau">Peng Chau</option>
-                            </select>
-                        </div>
+            <!-- Submit Button -->
+            <div class="flex flex-col">
+              <button
+                type="button"
+                id="goButton"
+                class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 mt-6"
+              >
+                Go
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- Dropdowns for selecting location, year, and month -->
+        <p class="mx-8 mt-10 text-2xl mb-5 font-bold">Monthly Data History</p>
+        <hr />
+      </section>
 
-                        <!-- Year Dropdown -->
-                        <div class="flex flex-col">
-                            <label for="year">Year:</label>
-                            <select
-                                id="year"
-                                name="year"
-                                class="p-2 border rounded"
-                            >
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                            </select>
-                        </div>
-                        <!-- Month Dropdown -->
-                        <div class="flex flex-col">
-                            <label for="month">Month:</label>
-                            <select
-                                id="month"
-                                name="month"
-                                class="p-2 border rounded"
-                            >
-                                <option value="1">January</option>
-                                <option value="2">February</option>
-                                <option value="3">March</option>
-                                <option value="4">April</option>
-                                <option value="5">May</option>
-                                <option value="6">June</option>
-                                <option value="7">July</option>
-                                <option value="8">August</option>
-                                <option value="9">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
-                            </select>
-                        </div>
-                        <!-- Submit Button -->
-                        <div class="flex flex-col">
-                            <button
-                                type="button"
-                                id="goButton"
-                                class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-                            >
-                                Go
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </section>
+      <!-- Table Container -->
+      <section
+        class="p-8 mt-8 mx-auto w-4/5 max-w-4xl h-[400px] overflow-auto bg-white shadow-lg rounded-lg"
+      >
+        <table class="min-w-full bg-white">
+          <thead class="text-white bg-gray-700">
+            <tr>
+              <th class="px-4 py-3 text-sm font-semibold text-center uppercase">
+                Year
+              </th>
+              <th class="px-4 py-3 text-sm font-semibold text-center uppercase">
+                Month
+              </th>
+              <th class="px-4 py-3 text-sm font-semibold text-center uppercase">
+                Day
+              </th>
+              <th class="px-4 py-3 text-sm font-semibold text-center uppercase">
+                Value
+              </th>
+            </tr>
+          </thead>
+          <tbody id="tableBody" class="text-gray-700">
+            <!-- Table rows will be dynamically populated -->
+          </tbody>
+        </table>
+      </section>
+    </main>
 
-            <!-- Table Container -->
-            <section class="p-8 mt-8 overflow-x-auto">
-                <table class="min-w-full bg-white">
-                    <thead class="text-white bg-gray-700">
-                        <tr>
-                            <th
-                                class="px-4 py-3 text-sm font-semibold text-left uppercase"
-                            >
-                                Year
-                            </th>
-                            <th
-                                class="px-4 py-3 text-sm font-semibold text-left uppercase"
-                            >
-                                Month
-                            </th>
-                            <th
-                                class="px-4 py-3 text-sm font-semibold text-left uppercase"
-                            >
-                                Day
-                            </th>
-                            <th
-                                class="px-4 py-3 text-sm font-semibold text-left uppercase"
-                            >
-                                Value
-                            </th>
-                            <th
-                                class="px-4 py-3 text-sm font-semibold text-left uppercase"
-                            >
-                                Data Completeness
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody" class="text-gray-700">
-                        <!-- Table rows will be dynamically populated -->
-                    </tbody>
-                </table>
-            </section>
-        </main>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
-        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+      var myChart;
 
-        <script>
-            var myChart;
+      document.getElementById("goButton").addEventListener("click", updateData);
 
-            document.getElementById("goButton").addEventListener("click", updateData);
+      function updateData() {
+        updateChartData();
+        updateTableData();
+      }
 
-            function updateData() {
-                updateChartData();
-                updateTableData();
+      function updateChartData() {
+        var location = document.getElementById("location").value;
+        var year = document.getElementById("year").value;
+        var month = document.getElementById("month").value;
+
+        var url = `/get_rainfall_data?location=${location}&year=${year}&month=${month}`;
+
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const days = data.map((row) => row["DAY"]);
+            const values = data.map((row) => parseFloat(row["VALUE"]));
+            const monthNumber = data[0]["MONTH"];
+            const monthName = getMonthName(monthNumber);
+
+            const labels = days.map((day, index) => `${index + 1}`);
+
+            if (!myChart) {
+              var ctx = document.getElementById("barChart").getContext("2d");
+              myChart = new Chart(ctx, {
+                type: "bar",
+                data: {
+                  labels: labels,
+                  datasets: [
+                    {
+                      label: "Rainfall (mm)",
+                      data: values,
+                      backgroundColor: "rgba(54, 162, 235, 0.2)",
+                      borderColor: "rgba(54, 162, 235, 1)",
+                      borderWidth: 1,
+                    },
+                  ],
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                      title: {
+                        display: true,
+                        text: "Rainfall (mm)",
+                      },
+                    },
+                    x: {
+                      title: {
+                        display: true,
+                        text: monthName,
+                      },
+                    },
+                  },
+                },
+              });
+            } else {
+              myChart.data.labels = labels;
+              myChart.data.datasets[0].data = values;
+              myChart.options.scales.x.title.text = monthName;
+              myChart.update();
             }
+          });
+      }
 
-            function updateChartData() {
-            var location = document.getElementById("location").value;
-            var year = document.getElementById("year").value;
-            var month = document.getElementById("month").value;
+      function updateTableData() {
+        var location = document.getElementById("location").value;
+        var year = document.getElementById("year").value;
+        var month = document.getElementById("month").value;
 
-            var url = `/get_rainfall_data?location=${location}&year=${year}&month=${month}`;
+        var url = `/get_rainfall_data?location=${location}&year=${year}&month=${month}`;
 
-            fetch(url)
-                .then((response) => response.json())
-                .then((data) => {
-                    const days = data.map((row) => row["DAY"]);
-                    const values = data.map((row) => parseFloat(row["VALUE"]));
-                    const monthNumber = data[0]["MONTH"];
-                    const monthName = getMonthName(monthNumber);
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = "";
 
-                    const labels = days.map((day, index) => `${index + 1}`);
+            data.forEach((row) => {
+              const tr = document.createElement("tr");
 
-                    if (!myChart) {
-                        var ctx = document.getElementById("barChart").getContext("2d");
-                        myChart = new Chart(ctx, {
-                            type: "bar",
-                            data: {
-                                labels: labels,
-                                datasets: [
-                                    {
-                                        label: "Rainfall (mm)",
-                                        data: values,
-                                        backgroundColor: "rgba(54, 162, 235, 0.2)",
-                                        borderColor: "rgba(54, 162, 235, 1)",
-                                        borderWidth: 1,
-                                    },
-                                ],
-                            },
-                            options: {
-                                scales: {
-                                    y: {
-                                        beginAtZero: true,
-                                        title: {
-                                            display: true,
-                                            text: "Rainfall (mm)",
-                                        },
-                                    },
-                                    x: {
-                                        title: {
-                                            display: true,
-                                            text: monthName,
-                                        },
-                                    },
-                                },
-                            },
-                        });
-                    } else {
-                        myChart.data.labels = labels;
-                        myChart.data.datasets[0].data = values;
-                        myChart.options.scales.x.title.text = monthName;
-                        myChart.update();
-                    }
-                });
-        }
+              const tdYear = document.createElement("td");
+              tdYear.className = "px-4 py-3 text-center";
+              tdYear.textContent = row["YEAR"];
 
+              const tdMonth = document.createElement("td");
+              tdMonth.className = "px-4 py-3 text-center";
+              tdMonth.textContent = getMonthName(row["MONTH"]);
 
-            function updateTableData() {
-            var location = document.getElementById("location").value;
-            var year = document.getElementById("year").value;
-            var month = document.getElementById("month").value;
+              const tdDay = document.createElement("td");
+              tdDay.className = "px-4 py-3 text-center";
+              tdDay.textContent = row["DAY"];
 
-            var url = `/get_rainfall_data?location=${location}&year=${year}&month=${month}`;
+              const tdValue = document.createElement("td");
+              tdValue.className = "px-4 py-3 text-center";
+              tdValue.textContent = row["VALUE"];
 
-            fetch(url)
-                .then((response) => response.json())
-                .then((data) => {
-                    const tableBody = document.getElementById("tableBody");
-                    tableBody.innerHTML = "";
+              tr.appendChild(tdYear);
+              tr.appendChild(tdMonth);
+              tr.appendChild(tdDay);
+              tr.appendChild(tdValue);
 
-                    data.forEach((row) => {
-                        const tr = document.createElement("tr");
+              tableBody.appendChild(tr);
+            });
+          });
+      }
 
-                        const tdYear = document.createElement("td");
-                        tdYear.className = "px-4 py-3 text-left";
-                        tdYear.textContent = row["YEAR"];
+      function getMonthName(monthNumber) {
+        const months = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+        return months[monthNumber - 1];
+      }
 
-                        const tdMonth = document.createElement("td");
-                        tdMonth.className = "px-4 py-3 text-left";
-                        tdMonth.textContent = getMonthName(row["MONTH"]);
-
-                        const tdDay = document.createElement("td");
-                        tdDay.className = "px-4 py-3 text-left";
-                        tdDay.textContent = row["DAY"];
-
-                        const tdValue = document.createElement("td");
-                        tdValue.className = "px-4 py-3 text-left";
-                        tdValue.textContent = row["VALUE"];
-
-                        const tdCompleteness = document.createElement("td");
-                        tdCompleteness.className = "px-4 py-3 text-left";
-                        tdCompleteness.textContent = row["DATA_COMPLETENESS"];
-
-                        tr.appendChild(tdYear);
-                        tr.appendChild(tdMonth);
-                        tr.appendChild(tdDay);
-                        tr.appendChild(tdValue);
-                        tr.appendChild(tdCompleteness);
-
-                        tableBody.appendChild(tr);
-                    });
-                });
-        }
-
-            function getMonthName(monthNumber) {
-                const months = [
-                    "January", "February", "March", "April", "May", "June",
-                    "July", "August", "September", "October", "November", "December"
-                ];
-                return months[monthNumber - 1];
-            }
-
-            updateData();
-        </script>
-    </body>
+      updateData();
+    </script>
+  </body>
 </html>
