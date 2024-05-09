@@ -9,13 +9,13 @@
             rel="stylesheet"
         />
     </head>
-    <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <body class="font-sans leading-normal tracking-normal bg-gray-100">
         <!-- Menu Button -->
         <button
             id="sidebar-toggle"
             class="text-white focus:outline-none bg-gray-700 p-2.5 fixed top-2.5 left-2.5 z-30"
         >
-            <svg class="fill-current h-6 w-6" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
                 <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"></path>
             </svg>
         </button>
@@ -23,53 +23,50 @@
         <!-- Sidebar -->
         <div
             id="sidebar"
-            class="transform -translate-x-full fixed inset-y-0 left-0 w-64 space-y-6 py-7 px-2 z-20 bg-white shadow-md transition-transform duration-500 ease-in-out"
+            class="fixed inset-y-0 left-0 z-20 w-64 px-2 space-y-6 transition-transform duration-500 ease-in-out transform -translate-x-full bg-white shadow-md py-7"
             style="will-change: transform"
         >
-            <a href="#" class="text-gray-800 flex items-center space-x-2 px-4">
-                <span class="text-2xl font-medium mt-10">Menu</span>
-            </a>
             <!-- Sidebar content -->
-            <nav class="text-black text-base">
+            <nav class="text-base text-black">
                 <a
                     href="warning.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Warning
                 </a>
                 <a
                     href="weather_forecast.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Weather Forecast
                 </a>
                 <a
                     href="history.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Historical data
                 </a>
                 <a
                     href="faq.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     FAQ
                 </a>
                 <a
                     href="contact.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Contact
                 </a>
                 <a
                     href="noti.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Notification Setting
                 </a>
                 <a
                     href="admin_access.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm mt-20"
+                    class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Admin Page
                 </a>
@@ -77,10 +74,10 @@
         </div>
 
         <!-- Header -->
-        <nav class="bg-gray-700 p-4 fixed w-full z-10">
-            <div class="flex items-center justify-between flex-wrap">
-                <div class="flex items-center flex-shrink-0 text-white mr-6">
-                    <span class="font-semibold text-xl tracking-tight mx-14"
+        <nav class="fixed z-10 w-full p-4 bg-gray-700">
+            <div class="flex flex-wrap items-center justify-between">
+                <div class="flex items-center flex-shrink-0 mr-6 text-white">
+                    <span class="text-xl font-semibold tracking-tight mx-14"
                         >Hong Kong Flood</span
                     >
                 </div>
@@ -89,107 +86,65 @@
 
         <!-- Main Content -->
         <main
-            class="pt-16 p-8 transition-padding duration-500 ease-in-out"
+            class="p-8 pt-16 duration-500 ease-in-out transition-padding"
             id="main-content"
             style="will-change: padding"
         >
-            <div class="max-w-4xl mx-auto px-8">
+            <div class="max-w-4xl px-8 mx-auto">
                 <!-- FAQ Section -->
-                <h2 class="text-4xl font-bold text-center my-10">
+                <h2 class="my-10 text-4xl font-bold text-center">
                     Ask Us Anything
                 </h2>
-                <p class="text-center mb-10">
+                <p class="mb-10 text-center">
                     Have any questions? We are here to assist you.
                 </p>
 
                 <!-- Search Bar -->
-                <div
-                    class="bg-white flex items-center rounded-full shadow-xl mb-12"
+                <form
+                    id="searchForm"
+                    class="mb-12 bg-white rounded-full shadow-xl"
                 >
-                    <input
-                        class="rounded-l-full w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none"
-                        id="search"
-                        type="text"
-                        placeholder="Search Here"
-                    />
-                    <div class="p-2">
-                        <button
-                            class="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-10 h-10 flex items-center justify-center"
-                        >
-                            <i class="fas fa-search"></i>
-                        </button>
+                    <div class="flex items-center">
+                        <input
+                            id="searchInput"
+                            class="w-full px-4 py-3 leading-tight text-gray-700 rounded-l-full focus:outline-none"
+                            type="text"
+                            placeholder="Search Here"
+                        />
+                        <div class="p-2">
+                            <button
+                                id="searchButton"
+                                class="flex items-center justify-center w-10 h-10 p-2 text-white bg-blue-500 rounded-full hover:bg-blue-400 focus:outline-none"
+                            >
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
+
+                <!-- Search Results -->
+                <div id="searchResults"></div>
 
                 <!-- Accordion -->
                 <div id="accordion" class="space-y-4">
                     <!-- Accordion Item -->
-                    <div class="accordion-item bg-white rounded-lg">
+                    {% for faq_item in faq_data %}
+                    <div class="bg-white rounded-lg accordion-item">
                         <h3
-                            class="accordion-header px-4 py-3 rounded-lg flex justify-between items-center cursor-pointer"
+                            class="flex items-center justify-between px-4 py-3 rounded-lg cursor-pointer accordion-header"
                         >
                             <span class="font-semibold"
-                                >Q: How accurate are the weather forecasts
-                                provided on this website?</span
+                                >Q: {{ faq_item['question'] }}</span
                             >
                             <button class="text-navy-500">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </h3>
-                        <div class="accordion-panel p-4 hidden">
-                            <p>
-                                A: Our weather forecasts are sourced from
-                                reputable meteorological agencies and updated
-                                regularly to provide accurate predictions for
-                                Hong Kong. While we strive for accuracy, weather
-                                conditions can change rapidly, so it's essential
-                                to stay vigilant and monitor updates from
-                                official sources during severe weather events.
-                            </p>
+                        <div class="hidden p-4 accordion-panel">
+                            <p>A: {{ faq_item['answer'] }}</p>
                         </div>
                     </div>
-                    <div class="accordion-item bg-white rounded-lg">
-                        <h3
-                            class="accordion-header px-4 py-3 rounded-lg flex justify-between items-center cursor-pointer"
-                        >
-                            <span class="font-semibold"
-                                >Q: Can I turn off notifications?</span
-                            >
-                            <button class="text-navy-500">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </h3>
-                        <div class="accordion-panel p-4 hidden">
-                            <p>
-                                A: Absolutely! If you ever wish to stop
-                                receiving notifications, you can easily do so by
-                                clicking on the provided link within the email.
-                                We understand that preferences can change, so
-                                we've made it simple for you to manage your
-                                notification settings at any time.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- more FAQs -->
-                </div>
-
-                <div class="mt-12 text-left bg-gray-200 p-4 rounded-lg">
-                    <!-- Contact Section -->
-                    <div class="flex items-center">
-                        <div class="flex-grow">
-                            <p class="mb-4 font-semibold text-base">
-                                Still have questions?
-                            </p>
-                            <p class="mb-4">Please email us here.</p>
-                        </div>
-                        <div>
-                            <button
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            >
-                                Contact Us
-                            </button>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </main>
@@ -211,14 +166,77 @@
                                 ? "none"
                                 : "block";
                         itemToggle.classList.toggle("active");
+
+                        // Update the icon based on the accordion state
+                        const icon = itemToggle.querySelector("i");
+                        icon.className =
+                            itemPanel.style.display === "block"
+                                ? "fas fa-minus"
+                                : "fas fa-plus";
                     }
                 }
+
+                // Initialize accordion state
+                const accordionItems =
+                    document.querySelectorAll(".accordion-item");
+                accordionItems.forEach((item) => {
+                    const panel = item.querySelector(".accordion-panel");
+                    if (panel.style.display === "block") {
+                        const header = item.querySelector(".accordion-header");
+                        header.classList.add("active");
+                        const icon = header.querySelector("i");
+                        icon.className = "fas fa-minus";
+                    }
+                });
 
                 document
                     .getElementById("accordion")
                     .addEventListener("click", toggleAccordion);
+
+                document
+                    .getElementById("searchButton")
+                    .addEventListener("click", function (event) {
+                        event.preventDefault();
+                        const query = document
+                            .getElementById("searchInput")
+                            .value.toLowerCase();
+
+                        // Send a POST request to the Flask backend
+                        fetch("/search", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ query: query }),
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                // Clear previous results
+                                const searchResultsContainer =
+                                    document.getElementById("searchResults");
+                                searchResultsContainer.innerHTML = "";
+
+                                // Display the best match question and answer
+                                const resultElement =
+                                    document.createElement("div");
+                                resultElement.classList.add(
+                                    "bg-white",
+                                    "rounded-lg",
+                                    "p-4",
+                                    "mb-4"
+                                );
+                                resultElement.innerHTML = `
+                <h3 class="font-semibold">Q: ${data.best_match_question.question}</h3>
+                <p>A: ${data.best_match_question.answer}</p>`;
+                                searchResultsContainer.appendChild(
+                                    resultElement
+                                );
+                            })
+                            .catch((error) => {
+                                console.error("Error:", error);
+                            });
+                    });
             });
         </script>
-        <script src="{{ url_for('static', filename='script.js') }}"></script>
     </body>
 </html>

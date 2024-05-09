@@ -11,6 +11,7 @@ from backend.services.dbconnect import insert_notification_preferences
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
+from sentence_transformers import SentenceTransformer, util
 
 # Path to the CSV file
 data_file_path = os.path.join(os.getcwd(), 'backend/data/userdata.csv')
@@ -217,10 +218,44 @@ def get_rainfall_data():
 def warning():
     return render_template('warning.html')
 
+# Load FAQ data
+faq_data = []
+faq_answers = []
+with open('backend/data/faq.csv', mode='r') as file:
+    csv_reader = csv.DictReader(file)
+    for row in csv_reader:
+        faq_data.append(row['question'])
+        faq_answers.append(row['answer'])
+
+# Initialize the sentence transformer model
+model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+
+@app.route('/search', methods=['POST'])
+def search():
+    data = request.get_json()
+    query = data['query']
+    query_embedding = model.encode(query)
+    faq_embeddings = model.encode(faq_data)
+
+    # Find the most similar FAQ question to the query
+    similarity_scores = [util.pytorch_cos_sim(query_embedding, faq_embedding) for faq_embedding in faq_embeddings]
+    best_match_index = similarity_scores.index(max(similarity_scores))
+    best_match_question = faq_data[best_match_index]
+    best_match_answer = faq_answers[best_match_index]
+
+    return {"query": query, "best_match_question": {"question": best_match_question, "answer": best_match_answer}}
+
+
 # Route for faq.html
 @app.route ('/faq.html')
 def faq():
-    return render_template('faq.html')
+    faq_data = []
+    with open('backend/data/faq.csv', mode='r') as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            faq_data.append({'question': row['question'], 'answer': row['answer']})
+
+    return render_template('faq.html', faq_data=faq_data)
 
 # Route for noti.html
 @app.route ('/noti.html')
