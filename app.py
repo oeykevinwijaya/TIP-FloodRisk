@@ -399,9 +399,24 @@ def send_alert():
 
 
 # Route for admin_access.html
-@app.route ('/admin_access.html')
+@app.route('/admin_access.html', methods=['GET', 'POST'])
 def admin_access():
+    if request.method == 'POST':
+        # Extract username and password from form
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        # Simple validation for demonstration purposes
+        if username == 'admin' and password == 'password':
+            return render_template('admin_access.html')
+        else:
+            return render_template('loginadmin.html', error='Invalid username or password')
+
     return render_template('admin_access.html')
+
+@app.route('/loginadmin.html')
+def admin_login():
+    return render_template('loginadmin.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

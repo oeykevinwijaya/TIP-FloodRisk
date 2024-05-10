@@ -14,7 +14,7 @@
     <!-- style for bar chart -->
     <style>
         .chart-container {
-            width: 70%;
+            width: 90%;
             margin: auto;
             display: flex;
             flex-direction: column;
@@ -113,10 +113,17 @@
                 </a>
                 <a
                     href="admin_access.html"
-                    class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Admin Page
                 </a>
+                <a
+                    href="loginadmin.html"
+                    class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    Admin Login
+                </a>
+
             </nav>
         </div>
 
@@ -148,7 +155,7 @@
             <!-- User Management table-->
             <div class="p-3 mx-8 mt-5 overflow-hidden">
             <!-- Main Forecast -->
-            <main class="container mx-auto w-3/4 bg-white shadow-md rounded-md p-4">
+            <div class="container mx-auto w-3/4 bg-white shadow-md rounded-md p-4">
                 <div class="overflow-x-auto">
                     <table class="w-full bg-white">
                         <thead>
@@ -165,7 +172,6 @@
                         </tbody>
                     </table>
                 </div>
-            </main>
 
             <!-- Bar Chart for Max and Min Temperatures -->
             <div class="chart-container">
@@ -228,6 +234,7 @@
                     </div>
                 {% endif %}
             </div> 
+            </div>
         </main>
 
         <script
