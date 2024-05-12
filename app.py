@@ -4,6 +4,8 @@ from backend.services.dbconnect import insert_notification_preferences
 import csv
 import os
 import mysql.connector
+import pandas as pd
+import os
 
 # Path to the CSV file
 data_file_path = os.path.join(os.getcwd(), 'backend/data/userdata.csv')
@@ -27,6 +29,7 @@ def index():
     
     # Pass data to the template
     return render_template('weather_forecast.html', forecasts=forecasts)
+
 
 # Route for weather forecast page
 @app.route('/weather_forecast.html')
@@ -82,13 +85,19 @@ def history():
     return render_template('history.html', forecasts=filtered_forecasts)
 
 
-
-
 # Route for warning.html
-@app.route ('/warning.html')
+@app.route('/warning.html')
 def warning():
-    return render_template('warning.html')
-
+    # Read the rainplace.csv file
+    rainplace_df = pd.read_csv('backend/data/rainplace.csv')
+    
+    # Extract coordinates and rainfall values
+    coordinates = rainplace_df['coordinate'].tolist()
+    rainfall_values = rainplace_df['Rainfall (mm)'].tolist()
+    
+    # Pass data to the template
+    return render_template('warning.html', coordinates=coordinates, rainfall_values=rainfall_values)
+    
 # Route for faq.html
 @app.route ('/faq.html')
 def faq():
@@ -159,3 +168,4 @@ def admin_access():
 
 if __name__ == '__main__':
     app.run(debug=True)
+

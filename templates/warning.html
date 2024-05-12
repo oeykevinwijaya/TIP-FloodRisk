@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Warning Page</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
     <!-- Menu Button -->
@@ -46,14 +49,46 @@
         <div class="mx-10 mt-8 p-5 border-b border-gray-700 font-bold text-xl">
             Live Rainfall Map
         </div>
-        <!-- Embedded OpenStreetMap iframe -->
-        <iframe width="60%" height="500" src="https://www.openstreetmap.org/export/embed.html?bbox=113.67553710937501%2C22.115541022017492%2C114.68490600585939%2C22.579778522819318&amp;layer=mapnik" style="border: 1px solid black"></iframe>
-        <br/><small><a href="https://www.openstreetmap.org/#map=11/22.3479/114.1802">View Larger Map</a></small>
+        <!-- Leaflet Map Container -->
+        <div id="map" style="width: 60%; height: 500px;"></div>
     </main>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script src="{{ url_for('static', filename='mainpage.js') }}"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script>
+        var coordinates = JSON.parse('{{ coordinates | tojson | safe }}');
+        var rainfallValues = JSON.parse('{{ rainfall_values | tojson | safe }}');
+
+        // Initialize Leaflet map instance
+        var map = L.map('map').setView([22.3479, 114.1802], 11);
+
+        // Add OpenStreetMap base layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Add markers with rainfall values to the map
+        for (var i = 0; i < coordinates.length; i++) {
+            var coordinate = coordinates[i].split(',').map(parseFloat); // Parse coordinates
+            var rainfall = rainfallValues[i]; // Get rainfall value
+        
+            // Create a div icon with the rainfall value as text
+            var icon = L.divIcon({
+                className: 'rainfall-label',
+                html: '<div>' + rainfall + 'mm</div>',
+            });
+        
+            // Add the text label to the map at the specified coordinates
+            L.marker([coordinate[0], coordinate[1]], { icon: icon }).addTo(map);
+        
+            // console check
+            console.log("Label added at:", coordinate);
+        }
+
+    </script>
 </body>
 </html>
