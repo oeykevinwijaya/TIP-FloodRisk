@@ -5,6 +5,7 @@ import joblib
 import requests
 import smtplib
 import pandas as pd
+import os
 
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from backend.services.dbconnect import insert_notification_preferences
@@ -102,6 +103,7 @@ def index():
 
     # Pass data to the template
     return render_template("weather_forecast.html", forecasts=forecasts)
+
 
 
 # Route for weather forecast page
@@ -265,10 +267,10 @@ def get_rainfall_data():
     return jsonify(chart_data)
 
 
-# Route for warning.html
-@app.route("/warning.html")
-def warning():
-    return render_template("warning.html")
+# # Route for warning.html
+# @app.route("/warning.html")
+# def warning():
+#     return render_template("warning.html")
 
 
 # Load FAQ data
@@ -309,6 +311,19 @@ def search():
     }
 
 
+# Route for warning.html
+@app.route('/warning.html')
+def warning():
+    # Read the rainplace.csv file
+    rainplace_df = pd.read_csv('backend/data/rainplace.csv')
+    
+    # Extract coordinates and rainfall values
+    coordinates = rainplace_df['coordinate'].tolist()
+    rainfall_values = rainplace_df['Rainfall (mm)'].tolist()
+    
+    # Pass data to the template
+    return render_template('warning.html', coordinates=coordinates, rainfall_values=rainfall_values)
+    
 # Route for faq.html
 @app.route("/faq.html")
 def faq():
@@ -590,3 +605,4 @@ def delete_faq():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
