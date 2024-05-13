@@ -500,13 +500,13 @@ def admin_access():
 
         # Simple validation for demonstration purposes
         if username == "admin" and password == "password":
-            return render_template("admin_access.html")
+            return render_template("admin_page_alert.html")
         else:
             return render_template(
                 "loginadmin.html", error="Invalid username or password"
             )
 
-    return render_template("admin_access.html")
+    return render_template("admin_page_alert.html")
 
 
 @app.route("/loginadmin.html")

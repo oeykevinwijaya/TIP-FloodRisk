@@ -9,13 +9,13 @@
             rel="stylesheet"
         />
     </head>
-    <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <body class="font-sans leading-normal tracking-normal bg-gray-100">
         <!-- Menu Button -->
         <button
             id="sidebar-toggle"
             class="text-white focus:outline-none bg-gray-700 p-2.5 fixed top-2.5 left-2.5 z-30"
         >
-            <svg class="fill-current h-6 w-6" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
                 <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"></path>
             </svg>
         </button>
@@ -23,64 +23,64 @@
         <!-- Sidebar -->
         <div
             id="sidebar"
-            class="transform -translate-x-full fixed inset-y-0 left-0 w-64 space-y-6 py-7 px-2 z-20 bg-white shadow-md transition-transform duration-500 ease-in-out"
+            class="fixed inset-y-0 left-0 z-20 w-64 px-2 space-y-6 transition-transform duration-500 ease-in-out transform -translate-x-full bg-white shadow-md py-7"
             style="will-change: transform"
         >
-            <a href="#" class="text-gray-800 flex items-center space-x-2 px-4">
-                <span class="text-2xl font-medium mt-10">Menu</span>
+            <a href="#" class="flex items-center px-4 space-x-2 text-gray-800">
+                <span class="mt-10 text-2xl font-medium">Menu</span>
             </a>
             <!-- Sidebar content -->
-            <nav class="text-black text-base">
+            <nav class="text-base text-black">
                 <a
                     href="warning.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Warning
                 </a>
                 <a
                     href="weather_forecast.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Weather Forecast
                 </a>
                 <a
                     href="history.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Historical data
                 </a>
                 <a
                     href="faq.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     FAQ
                 </a>
                 <a
                     href="contact.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Contact
                 </a>
                 <a
                     href="noti.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Notification Setting
                 </a>
                 <a
-                    href="admin_access.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm mt-20"
+                    href="loginadmin.html"
+                    class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
-                    Admin Page
+                    Admin Login Page
                 </a>
             </nav>
         </div>
 
         <!-- Header -->
-        <nav class="bg-gray-700 p-4 fixed w-full z-10">
-            <div class="flex items-center justify-between flex-wrap">
-                <div class="flex items-center flex-shrink-0 text-white mr-6">
-                    <span class="font-semibold text-xl tracking-tight mx-14"
+        <nav class="fixed z-10 w-full p-4 bg-gray-700">
+            <div class="flex flex-wrap items-center justify-between">
+                <div class="flex items-center flex-shrink-0 mr-6 text-white">
+                    <span class="text-xl font-semibold tracking-tight mx-14"
                         >Hong Kong Flood</span
                     >
                 </div>
@@ -89,7 +89,7 @@
 
         <!-- Main Content -->
         <main
-            class="p-8 transition-padding duration-500 ease-in-out"
+            class="p-8 duration-500 ease-in-out transition-padding"
             id="main-content"
             style="will-change: padding"
         >
@@ -97,7 +97,7 @@
             <div class="flex h-full">
                 <!-- Email info -->
                 <div class="w-[900px] duration-300 overflow-hidden">
-                    <div class="mt-60 mx-32">
+                    <div class="mx-32 mt-60">
                         <h1 class="text-6xl font-bold">Let's Talk</h1>
                         <p>Have Any Questions? We Are Here To Assist You.</p>
                         <br /><br /><br /><br />
@@ -110,9 +110,9 @@
                     </div>
                 </div>
                 <!-- Email detail -->
-                <div class="duration-300 overflow-hidden w-full mt-28">
+                <div class="w-full overflow-hidden duration-300 mt-28">
                     <form
-                        class="flex flex-col space-y-6 w-full max-w-lg mx-auto py-8"
+                        class="flex flex-col w-full max-w-lg py-8 mx-auto space-y-6"
                     >
                         <div class="flex flex-col">
                             <label
@@ -123,7 +123,7 @@
                             <input
                                 type="text"
                                 id="name"
-                                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 block w-full shadow-sm sm:text-sm border rounded-md py-2 px-4"
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             />
                         </div>
                         <div class="flex flex-col">
@@ -135,7 +135,7 @@
                             <input
                                 type="tel"
                                 id="phone"
-                                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 block w-full shadow-sm sm:text-sm border rounded-md py-2 px-4"
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             />
                         </div>
                         <div class="flex flex-col">
@@ -147,7 +147,7 @@
                             <input
                                 type="email"
                                 id="email"
-                                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 block w-full shadow-sm sm:text-sm border rounded-md py-2 px-4"
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             />
                         </div>
                         <div class="flex flex-col">
@@ -159,12 +159,12 @@
                             <textarea
                                 id="message"
                                 rows="4"
-                                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 block w-full shadow-sm sm:text-sm border rounded-md py-2 px-4"
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             ></textarea>
                         </div>
                         <button
                             type="submit"
-                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-500 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-gray-500 border border-transparent rounded-md shadow-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             Submit
                         </button>

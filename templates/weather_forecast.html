@@ -10,7 +10,7 @@
         />
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
-    
+
     <!-- style for bar chart -->
     <style>
         .chart-container {
@@ -112,18 +112,11 @@
                     Notification Setting
                 </a>
                 <a
-                    href="admin_access.html"
-                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
-                >
-                    Admin Page
-                </a>
-                <a
                     href="loginadmin.html"
                     class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
-                    Admin Login
+                    Admin Login Page
                 </a>
-
             </nav>
         </div>
 
@@ -149,91 +142,132 @@
 
             <!-- Title -->
             <header class="container mt-20 text-center">
-                <h1 class="text-4xl font-bold text-gray-800 mb-4">9-day Weather Forecast</h1>
+                <h1 class="mb-4 text-4xl font-bold text-gray-800">
+                    9-day Weather Forecast
+                </h1>
             </header>
 
             <!-- User Management table-->
             <div class="p-3 mx-8 mt-5 overflow-hidden">
-            <!-- Main Forecast -->
-            <div class="container mx-auto w-3/4 bg-white shadow-md rounded-md p-4">
-                <div class="overflow-x-auto">
-                    <table class="w-full bg-white">
-                        <thead>
-                            <tr class="w-full bg-gray-300 text-gray-600 uppercase text-sm leading-normal">
-                                <th class="py-3 px-4 text-center">Day</th>
-                                <th class="py-3 px-4 text-center">Temperature</th>
-                                <th class="py-3 px-4 text-center">Relative Humidity</th>
-                                <th class="py-3 px-4 text-center">Rain Probability</th>
-                                <th class="py-3 px-4 text-center">Condition</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-gray-600 text-sm" id="forecast-table-body">
-                            <!-- Dynamic rows will be inserted here -->
-                        </tbody>
-                    </table>
-                </div>
-
-            <!-- Bar Chart for Max and Min Temperatures -->
-            <div class="chart-container">
-                <h2 class="title mt-10">Highest (°C) and Lowest (°C) Temperatures</h2>
-                <canvas id="temperatureChart"></canvas>
-            </div>
-
-            <!-- Bar Chart for Max and Min Relative Humidity -->
-            <div class="chart-container">
-                <h2 class="title mt-10">Highest (%) and Lowest (%) Relative Humidity</h2>
-                <canvas id="humidityChart"></canvas>
-            </div>
-
-            <!-- Alter history title-->
-            <div
-                class="pb-2 pl-5 mx-10 mt-10 text-xl font-bold border-b border-gray-700"
-            >
-                Alert History
-            </div>
-            <!-- History data-->
-            <div class="mx-10 overflow-hidden">
-                <!-- Alert Item -->
+                <!-- Main Forecast -->
                 <div
-                    class="flex items-center px-4 py-1 mt-3 space-x-3 border border-gray-500 rounded"
+                    class="container w-3/4 p-4 mx-auto bg-white rounded-md shadow-md"
                 >
-                    <div class="text-red-500">
-                        <ion-icon name="alert-circle" size="large"></ion-icon>
+                    <div class="overflow-x-auto">
+                        <table class="w-full bg-white">
+                            <thead>
+                                <tr
+                                    class="w-full text-sm leading-normal text-gray-600 uppercase bg-gray-300"
+                                >
+                                    <th class="px-4 py-3 text-center">Day</th>
+                                    <th class="px-4 py-3 text-center">
+                                        Temperature
+                                    </th>
+                                    <th class="px-4 py-3 text-center">
+                                        Relative Humidity
+                                    </th>
+                                    <th class="px-4 py-3 text-center">
+                                        Rain Probability
+                                    </th>
+                                    <th class="px-4 py-3 text-center">
+                                        Condition
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody
+                                class="text-sm text-gray-600"
+                                id="forecast-table-body"
+                            >
+                                <!-- Dynamic rows will be inserted here -->
+                            </tbody>
+                        </table>
                     </div>
-                    <p class="flex-grow text-sm font-semibold text-red-500">
-                        Heavy Rain Advisory In Effect From Early This Afternoon
-                        (03/28) Through This Evening (03/28)
-                    </p>
-                    <div class="text-gray-700">
-                        <ion-icon
-                            name="chevron-forward-outline"
-                            size="large"
-                        ></ion-icon>
+
+                    <!-- Bar Chart for Max and Min Temperatures -->
+                    <div class="chart-container">
+                        <h2 class="mt-10 title">
+                            Highest (°C) and Lowest (°C) Temperatures
+                        </h2>
+                        <canvas id="temperatureChart"></canvas>
+                    </div>
+
+                    <!-- Bar Chart for Max and Min Relative Humidity -->
+                    <div class="chart-container">
+                        <h2 class="mt-10 title">
+                            Highest (%) and Lowest (%) Relative Humidity
+                        </h2>
+                        <canvas id="humidityChart"></canvas>
+                    </div>
+
+                    <!-- Alter history title-->
+                    <div
+                        class="pb-2 pl-5 mx-10 mt-10 text-xl font-bold border-b border-gray-700"
+                    >
+                        Alert History
+                    </div>
+                    <!-- History data-->
+                    <div class="mx-10 overflow-hidden">
+                        <!-- Alert Item -->
+                        <div
+                            class="flex items-center px-4 py-1 mt-3 space-x-3 border border-gray-500 rounded"
+                        >
+                            <div class="text-red-500">
+                                <ion-icon
+                                    name="alert-circle"
+                                    size="large"
+                                ></ion-icon>
+                            </div>
+                            <p
+                                class="flex-grow text-sm font-semibold text-red-500"
+                            >
+                                Heavy Rain Advisory In Effect From Early This
+                                Afternoon (03/28) Through This Evening (03/28)
+                            </p>
+                            <div class="text-gray-700">
+                                <ion-icon
+                                    name="chevron-forward-outline"
+                                    size="large"
+                                ></ion-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- History data based on prediction-->
+                    <div class="mx-10 overflow-hidden">
+                        {% if prediction == '1' %}
+                        <div
+                            class="flex items-center px-4 py-1 mt-3 space-x-3 border border-gray-500 rounded"
+                        >
+                            <div class="text-red-500">
+                                <ion-icon
+                                    name="alert-circle"
+                                    size="large"
+                                ></ion-icon>
+                            </div>
+                            <p
+                                class="flex-grow text-sm font-semibold text-red-500"
+                            >
+                                High risk of flood. Take necessary precautions.
+                            </p>
+                        </div>
+                        {% else %}
+                        <div
+                            class="flex items-center px-4 py-1 mt-3 space-x-3 border border-gray-300 rounded"
+                        >
+                            <div class="text-green-500">
+                                <ion-icon
+                                    name="checkmark-circle"
+                                    size="large"
+                                ></ion-icon>
+                            </div>
+                            <p
+                                class="flex-grow text-sm font-semibold text-green-500"
+                            >
+                                No flooding issues detected.
+                            </p>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
-            </div>
-            <!-- History data based on prediction-->
-            <div class="mx-10 overflow-hidden">
-                {% if prediction == '1' %}
-                    <div class="flex items-center px-4 py-1 mt-3 space-x-3 border border-gray-500 rounded">
-                        <div class="text-red-500">
-                            <ion-icon name="alert-circle" size="large"></ion-icon>
-                        </div>
-                        <p class="flex-grow text-sm font-semibold text-red-500">
-                            High risk of flood. Take necessary precautions.
-                        </p>
-                    </div>
-                {% else %}
-                    <div class="flex items-center px-4 py-1 mt-3 space-x-3 border border-gray-300 rounded">
-                        <div class="text-green-500">
-                            <ion-icon name="checkmark-circle" size="large"></ion-icon>
-                        </div>
-                        <p class="flex-grow text-sm font-semibold text-green-500">
-                            No flooding issues detected.
-                        </p>
-                    </div>
-                {% endif %}
-            </div> 
             </div>
         </main>
 
@@ -250,74 +284,103 @@
         <script>
             // Function to load weather data from the API
             async function loadWeatherData() {
-                const apiUrl = 'https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en';
+                const apiUrl =
+                    "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en";
                 try {
                     const response = await fetch(apiUrl);
                     if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
+                        throw new Error(
+                            `HTTP error! Status: ${response.status}`
+                        );
                     }
                     return await response.json();
                 } catch (error) {
-                    console.error('Error fetching API data:', error);
+                    console.error("Error fetching API data:", error);
                     return null;
                 }
             }
-    
+
             function formatDate(dateStr) {
-                const [year, month, day] = dateStr.match(/(\d{4})(\d{2})(\d{2})/).slice(1, 4);
+                const [year, month, day] = dateStr
+                    .match(/(\d{4})(\d{2})(\d{2})/)
+                    .slice(1, 4);
                 const date = new Date(`${year}-${month}-${day}`);
-                const formatter = new Intl.DateTimeFormat('en', {
-                    day: '2-digit',
-                    month: 'short',
-                    weekday: 'short'
+                const formatter = new Intl.DateTimeFormat("en", {
+                    day: "2-digit",
+                    month: "short",
+                    weekday: "short",
                 });
                 const formattedDate = formatter.format(date);
-                const [weekday, monthName, dayOfMonth] = formattedDate.replace(',', '').split(' ');
+                const [weekday, monthName, dayOfMonth] = formattedDate
+                    .replace(",", "")
+                    .split(" ");
                 return `${dayOfMonth} ${monthName} (${weekday})`;
             }
-    
+
             // Function to render table rows from API data
             function renderTableRows(data) {
-                const tableBody = document.getElementById('forecast-table-body');
-                tableBody.innerHTML = '';
-                data.weatherForecast.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.classList.add('border-b', 'border-gray-200', 'hover:bg-gray-100');
-    
+                const tableBody = document.getElementById(
+                    "forecast-table-body"
+                );
+                tableBody.innerHTML = "";
+                data.weatherForecast.forEach((item) => {
+                    const row = document.createElement("tr");
+                    row.classList.add(
+                        "border-b",
+                        "border-gray-200",
+                        "hover:bg-gray-100"
+                    );
+
                     row.innerHTML = `
-                        <td class="py-3 px-4 text-center">${formatDate(item.forecastDate)}</td>
-                        <td class="py-3 px-4 text-center">${item.forecastMintemp.value} - ${item.forecastMaxtemp.value}°C</td>
-                        <td class="py-3 px-4 text-center">${item.forecastMinrh.value} - ${item.forecastMaxrh.value}%</td>
-                        <td class="py-3 px-4 text-center">${item.PSR}</td>
-                        <td class="py-3 px-4 text-center">${item.forecastWeather}</td>
+                        <td class="px-4 py-3 text-center">${formatDate(
+                            item.forecastDate
+                        )}</td>
+                        <td class="px-4 py-3 text-center">${
+                            item.forecastMintemp.value
+                        } - ${item.forecastMaxtemp.value}°C</td>
+                        <td class="px-4 py-3 text-center">${
+                            item.forecastMinrh.value
+                        } - ${item.forecastMaxrh.value}%</td>
+                        <td class="px-4 py-3 text-center">${item.PSR}</td>
+                        <td class="px-4 py-3 text-center">${
+                            item.forecastWeather
+                        }</td>
                     `;
                     tableBody.appendChild(row);
                 });
             }
-    
+
             // Function to render bar chart for max and min temperatures using Chart.js
             function renderTemperatureChart(data) {
-                const labels = data.weatherForecast.map(item => formatDate(item.forecastDate));
-                const maxTemps = data.weatherForecast.map(item => parseInt(item.forecastMaxtemp.value));
-                const minTemps = data.weatherForecast.map(item => parseInt(item.forecastMintemp.value));
-    
-                const ctx = document.getElementById('temperatureChart').getContext('2d');
+                const labels = data.weatherForecast.map((item) =>
+                    formatDate(item.forecastDate)
+                );
+                const maxTemps = data.weatherForecast.map((item) =>
+                    parseInt(item.forecastMaxtemp.value)
+                );
+                const minTemps = data.weatherForecast.map((item) =>
+                    parseInt(item.forecastMintemp.value)
+                );
+
+                const ctx = document
+                    .getElementById("temperatureChart")
+                    .getContext("2d");
                 new Chart(ctx, {
-                    type: 'bar',
+                    type: "bar",
                     data: {
                         labels: labels,
                         datasets: [
                             {
-                                label: 'Highest (°C)',
+                                label: "Highest (°C)",
                                 data: maxTemps,
-                                backgroundColor: '#FD8A8A'
+                                backgroundColor: "#FD8A8A",
                             },
                             {
-                                label: 'Lowest (°C)',
+                                label: "Lowest (°C)",
                                 data: minTemps,
-                                backgroundColor: '#ADC2FF'
-                            }
-                        ]
+                                backgroundColor: "#ADC2FF",
+                            },
+                        ],
                     },
                     options: {
                         responsive: true,
@@ -326,44 +389,52 @@
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'Days'
-                                }
+                                    text: "Days",
+                                },
                             },
                             y: {
                                 title: {
                                     display: true,
-                                    text: 'Temperature (°C)'
+                                    text: "Temperature (°C)",
                                 },
-                                beginAtZero: true
-                            }
-                        }
-                    }
+                                beginAtZero: true,
+                            },
+                        },
+                    },
                 });
             }
-    
+
             // Function to render bar chart for max and min relative humidity using Chart.js
             function renderHumidityChart(data) {
-                const labels = data.weatherForecast.map(item => formatDate(item.forecastDate));
-                const maxRH = data.weatherForecast.map(item => parseInt(item.forecastMaxrh.value));
-                const minRH = data.weatherForecast.map(item => parseInt(item.forecastMinrh.value));
-    
-                const ctx = document.getElementById('humidityChart').getContext('2d');
+                const labels = data.weatherForecast.map((item) =>
+                    formatDate(item.forecastDate)
+                );
+                const maxRH = data.weatherForecast.map((item) =>
+                    parseInt(item.forecastMaxrh.value)
+                );
+                const minRH = data.weatherForecast.map((item) =>
+                    parseInt(item.forecastMinrh.value)
+                );
+
+                const ctx = document
+                    .getElementById("humidityChart")
+                    .getContext("2d");
                 new Chart(ctx, {
-                    type: 'bar',
+                    type: "bar",
                     data: {
                         labels: labels,
                         datasets: [
                             {
-                                label: 'Highest (%)',
+                                label: "Highest (%)",
                                 data: maxRH,
-                                backgroundColor: '#FD8A8A'
+                                backgroundColor: "#FD8A8A",
                             },
                             {
-                                label: 'Lowest (%)',
+                                label: "Lowest (%)",
                                 data: minRH,
-                                backgroundColor: '#ADC2FF'
-                            }
-                        ]
+                                backgroundColor: "#ADC2FF",
+                            },
+                        ],
                     },
                     options: {
                         responsive: true,
@@ -372,21 +443,21 @@
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'Days'
-                                }
+                                    text: "Days",
+                                },
                             },
                             y: {
                                 title: {
                                     display: true,
-                                    text: 'Relative Humidity (%)'
+                                    text: "Relative Humidity (%)",
                                 },
-                                beginAtZero: true
-                            }
-                        }
-                    }
+                                beginAtZero: true,
+                            },
+                        },
+                    },
                 });
             }
-    
+
             // Load and render API data on page load
             async function loadAndRenderForecast() {
                 const weatherData = await loadWeatherData();
@@ -395,10 +466,10 @@
                     renderTemperatureChart(weatherData);
                     renderHumidityChart(weatherData);
                 } else {
-                    console.error('Failed to load or parse API data');
+                    console.error("Failed to load or parse API data");
                 }
             }
-    
+
             // Start the process
             loadAndRenderForecast();
         </script>
