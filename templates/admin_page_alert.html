@@ -185,15 +185,16 @@
                             <td
                                 class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
-                                {% if row['Rainfall'] %} Registered {% else %}
-                                Not Registered {% endif %}
+                                {% if row['Rainfall Alert'] == 'True' %}
+                                Registered {% else %} Not Registered {% endif %}
                             </td>
                             <td
                                 class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
-                                {% if row['Flood'] %} Registered {% else %} Not
-                                Registered {% endif %}
+                                {% if row['Flood Alert'] == 'True' %} Registered
+                                {% else %} Not Registered {% endif %}
                             </td>
+
                             <td
                                 class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
                             >
