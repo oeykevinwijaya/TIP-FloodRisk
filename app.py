@@ -11,79 +11,138 @@ from flask import Flask, render_template, jsonify, request, redirect, url_for
 from backend.services.dbconnect import insert_notification_preferences
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from datetime import datetime
+from datetime import datetime, timedelta
 from sentence_transformers import SentenceTransformer, util
 
 # Path to the CSV file
 data_file_path = os.path.join(os.getcwd(), "backend/data/userdata.csv")
 
 app = Flask(__name__)
-model = joblib.load("backend/models/flood_prediction_model.pkl")
+model = joblib.load('backend/models/flood_prediction_model.pkl')
+
+@app.route('/predict_realflood', methods=['GET'])
+# Usage in the predict_realflood endpoint
+def predict_realflood():
+    try:
+        api_url = 'https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en'
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            real_time_data = response.json()
+            feature = extract_feature(real_time_data)
+
+            featureDf = pd.DataFrame([feature])
+            prediction_proba = model.predict_proba(featureDf)[0] 
+            probability = round(prediction_proba[1] * 100, 2) 
+         
+            return jsonify({'realPrediction': {'probability': probability}})
+        else:
+            return jsonify({'error': f"Error: {response.status_code}"})
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 
-@app.route("/predict_flood", methods=["POST"])
-def predict_flood_api():
-    prediction = predict_flood()
+
+def extract_feature(real_time_data):
+    max_rainfall = max([d['max'] for d in real_time_data['rainfall']['data'] if 'max' in d])
+    avg_temperature = sum([t['value'] for t in real_time_data['temperature']['data']]) / len(real_time_data['temperature']['data'])
+    avg_humidity = sum([h['value'] for h in real_time_data['humidity']['data']]) / len(real_time_data['humidity']['data'])
+
+    now = datetime.now()
+
+    feature = {
+        'Rainfall': max_rainfall,
+        'Humidity': avg_humidity,
+        'Year': now.year,
+        'Month': now.month,
+        'Day': now.day,
+        'Temperature': avg_temperature
+    }
+    return feature
+
+
+
+# Feature for historical flood prediction
+@app.route('/admin_simulation.html')
+def show_predict_form():
+    return render_template('admin_simulation.html')
+
+@app.route('/predict_historical_flood', methods=['GET'])
+def predict_flood_from_date():
+    date = request.args.get('date')
+    if not date:
+        return jsonify({'error': 'No date provided'}), 400
+    prediction, probability = predict_flood(date=date)
     if prediction is not None:
-        return jsonify({"prediction": str(prediction)})
+        return jsonify({'prediction': str(prediction), 'probability': str(probability)})
     else:
         return jsonify({"error": "Failed to make prediction"}), 500
 
 
-def predict_flood(test_data=None, return_prob=False):
+def predict_flood(date=None):
     try:
-        if test_data is None:
-            # No test data provided, fetch real-time data
-            api_url = "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en"
-            response = requests.get(api_url)
-            if response.status_code != 200:
-                return None
-            real_time_data = response.json()
+        if date:
+            df = pd.read_csv('backend/data/training_df.csv')
+            df['Date'] = pd.to_datetime(df[['Year', 'Month', 'Day']])
+            date_parsed = datetime.strptime(date, "%Y-%m-%d")
+            historical_data = df[df['Date'] == date_parsed]
+            if historical_data.empty:
+                return None, None, None
+            
+            rainfall = historical_data['Rainfall'].values[0]
+            feature_vector = {
+                'Rainfall': rainfall,
+                'Humidity': historical_data['Humidity'].values[0],
+                'Year': historical_data['Year'].values[0],
+                'Month': historical_data['Month'].values[0],
+                'Day': historical_data['Day'].values[0],
+                'Temperature': historical_data['Temperature'].values[0]
+            }
+            feature_df = pd.DataFrame([feature_vector])
+
+            probabilities = model.predict_proba(feature_df)[:, 1]
+            prediction = int(probabilities > 0.68)
+            probability = round(probabilities[0] * 100, 2)
+
+            return prediction, probability, rainfall
         else:
-            # Use test data provided
-            real_time_data = test_data
-
-        feature_vector = extract_feature_vector(real_time_data)
-        feature_df = pd.DataFrame(
-            [feature_vector],
-            columns=["Rainfall", "Humidity", "Year", "Month", "Day", "Temperature"],
-        )
-        probabilities = model.predict_proba(feature_df)[:, 1]
-        prediction = (probabilities > 0.68).astype(int)
-        if return_prob:
-            return prediction[0], probabilities[0]
-        return prediction[0]
+            return None, None, None
     except Exception as e:
-        print(str(e))
-        return None
+        print(f"Error in predict_flood: {str(e)}")
+        return None, None, None
 
 
-# Function to extract feature vector from real-time data
-def extract_feature_vector(real_time_data):
-    # Extract the temperature, humidity, and rainfall
-    temperature = real_time_data["temperature"]["data"][0]["value"]
-    humidity = real_time_data["humidity"]["data"][0]["value"]
-    rainfall = max(item["max"] for item in real_time_data["rainfall"]["data"])
 
-    # Safely extract recordTime or use a default
-    record_time = real_time_data["temperature"].get(
-        "recordTime", "2024-05-08T14:00:00+08:00"
-    )
-    parsed_date = datetime.strptime(record_time, "%Y-%m-%dT%H:%M:%S+08:00")
+@app.route('/predict_flood_range', methods=['GET'])
+def predict_flood_range():
+    selected_date = request.args.get('date')
+    if not selected_date:
+        return jsonify({'error': 'No date provided'}), 400
 
-    year = parsed_date.year
-    month = parsed_date.month
-    day = parsed_date.day
+    try:
+        start_date = datetime.strptime(selected_date, "%Y-%m-%d") - timedelta(days=1)
+        end_date = start_date + timedelta(days=2)
+        date_range = pd.date_range(start_date, end_date)
 
-    feature_vector = {
-        "Rainfall": rainfall,
-        "Humidity": humidity,
-        "Year": year,
-        "Month": month,
-        "Day": day,
-        "Temperature": temperature,
-    }
-    return feature_vector
+        results = []
+        for single_date in date_range:
+            prediction, probability, rainfall = predict_flood(date=single_date.strftime("%Y-%m-%d"))
+            if prediction is not None:
+                results.append({
+                    'date': single_date.strftime("%Y-%m-%d"), 
+                    'probability': probability, 
+                    'rainfall': rainfall
+                })
+            else:
+                results.append({
+                    'date': single_date.strftime("%Y-%m-%d"), 
+                    'probability': None, 
+                    'rainfall': None
+                })
+
+        return jsonify(results)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 
 # Route for landing page
