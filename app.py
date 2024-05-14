@@ -66,6 +66,19 @@ def extract_feature(real_time_data):
 def show_predict_form():
     return render_template('admin_simulation.html')
 
+@app.route('/updateResult', methods=['POST'])
+def update_result():
+    data = request.get_json()
+    probability = data.get('probability')
+    rainfall = data.get('rainfall')
+    message = data.get('message')
+
+    with open('backend/data/currentprediction.csv', mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([message])
+
+    return 'Result updated successfully'
+
 @app.route('/predict_historical_flood', methods=['GET'])
 def predict_flood_from_date():
     date = request.args.get('date')
@@ -147,58 +160,84 @@ def predict_flood_range():
 # Route for landing page
 @app.route("/")
 def index():
-    # Path to CSV file
-    csv_file_path = os.path.join(os.getcwd(), "backend/data/9dforecast.csv")
+    # Path to CSV file for 9-day forecast
+    csv_file_path_forecast = os.path.join(os.getcwd(), "backend/data/9dforecast.csv")
 
-    # List to hold rows of data
+    # List to hold rows of data for 9-day forecast
     forecasts = []
 
-    # Read CSV data
-    with open(csv_file_path, mode="r") as file:
+    # Read CSV data for 9-day forecast
+    with open(csv_file_path_forecast, mode="r") as file:
         csv_reader = csv.DictReader(file)
         for row in csv_reader:
             forecasts.append(row)
 
-    # Pass data to the template
-    return render_template("weather_forecast.html", forecasts=forecasts)
+    # Path to CSV file for current prediction
+    csv_file_path_prediction = os.path.join(os.getcwd(), "backend/data/currentprediction.csv")
 
+    # Read CSV data for current prediction
+    with open(csv_file_path_prediction, mode="r") as file:
+        csv_reader = csv.reader(file)
+        # Assuming there is only one line in the CSV file
+        message = next(csv_reader)[0]
+
+    # Pass data to the template
+    return render_template("weather_forecast.html", forecasts=forecasts, message=message)
 
 
 # Route for weather forecast page
 @app.route("/weather_forecast.html")
 def weatherforecast():
-    # Path to CSV file
-    csv_file_path = os.path.join(os.getcwd(), "backend/data/9dforecast.csv")
+    # Path to CSV file for 9-day forecast
+    csv_file_path_forecast = os.path.join(os.getcwd(), "backend/data/9dforecast.csv")
 
-    # List to hold rows of data
+    # List to hold rows of data for 9-day forecast
     forecasts = []
 
-    # Read CSV data
-    with open(csv_file_path, mode="r") as file:
+    # Read CSV data for 9-day forecast
+    with open(csv_file_path_forecast, mode="r") as file:
         csv_reader = csv.DictReader(file)
         for row in csv_reader:
             forecasts.append(row)
 
+    # Path to CSV file for current prediction
+    csv_file_path_prediction = os.path.join(os.getcwd(), "backend/data/currentprediction.csv")
+
+    # Read CSV data for current prediction
+    with open(csv_file_path_prediction, mode="r") as file:
+        csv_reader = csv.reader(file)
+        # Assuming there is only one line in the CSV file
+        message = next(csv_reader)[0]
+
     # Pass data to the template
-    return render_template("weather_forecast.html", forecasts=forecasts)
+    return render_template("weather_forecast.html", forecasts=forecasts, message=message)
 
 # Route for weather forecast page
 @app.route("/admin_weather_forecast.html")
 def adminweatherforecast():
-    # Path to CSV file
-    csv_file_path = os.path.join(os.getcwd(), "backend/data/9dforecast.csv")
+    # Path to CSV file for 9-day forecast
+    csv_file_path_forecast = os.path.join(os.getcwd(), "backend/data/9dforecast.csv")
 
-    # List to hold rows of data
+    # List to hold rows of data for 9-day forecast
     forecasts = []
 
-    # Read CSV data
-    with open(csv_file_path, mode="r") as file:
+    # Read CSV data for 9-day forecast
+    with open(csv_file_path_forecast, mode="r") as file:
         csv_reader = csv.DictReader(file)
         for row in csv_reader:
             forecasts.append(row)
 
+    # Path to CSV file for current prediction
+    csv_file_path_prediction = os.path.join(os.getcwd(), "backend/data/currentprediction.csv")
+
+    # Read CSV data for current prediction
+    with open(csv_file_path_prediction, mode="r") as file:
+        csv_reader = csv.reader(file)
+        # Assuming there is only one line in the CSV file
+        message = next(csv_reader)[0]
+
     # Pass data to the template
-    return render_template("admin_weather_forecast.html", forecasts=forecasts)
+    return render_template("admin_weather_forecast.html", forecasts=forecasts, message=message)
 
 
 # Route for history.html

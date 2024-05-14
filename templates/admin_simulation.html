@@ -271,6 +271,27 @@
                             "mt-4 text-lg font-medium text-red-500";
                     }
                     resultDiv.textContent = message;
+
+                    // Send the data to the server
+                    fetch("/updateResult", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            probability: probability,
+                            rainfall: rainfall,
+                            message: message,
+                        }),
+                    })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error("Failed to update result");
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error updating result:", error);
+                        });
                 } else {
                     resultDiv.textContent =
                         "No data available for the selected date.";

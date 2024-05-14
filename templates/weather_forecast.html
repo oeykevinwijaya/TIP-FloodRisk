@@ -149,24 +149,47 @@
 
             <!-- Table-->
             <div class="p-3 mx-8 mt-5 overflow-hidden">
-            <!-- Main Forecast -->
-            <div class="container mx-auto w-3/4 bg-white shadow-md rounded-md p-4">
-                <div class="overflow-x-auto">
-                    <table class="w-full bg-white">
-                        <thead>
-                            <tr class="w-full bg-gray-300 text-gray-600 uppercase text-sm leading-normal">
-                                <th class="py-3 px-4 text-center">Day</th>
-                                <th class="py-3 px-4 text-center">Temperature</th>
-                                <th class="py-3 px-4 text-center">Relative Humidity</th>
-                                <th class="py-3 px-4 text-center">Rain Probability</th>
-                                <th class="py-3 px-4 text-center">Condition</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-gray-600 text-sm" id="forecast-table-body">
-                            <!-- Insert Dynamic rows -->
-                        </tbody>
-                    </table>
-                </div>
+                <!-- Main Forecast -->
+                <div
+                    class="container w-3/4 p-4 mx-auto bg-white rounded-md shadow-md"
+                >
+                    <div class="overflow-x-auto">
+                        <table class="w-full bg-white">
+                            <thead>
+                                <tr
+                                    class="w-full text-sm leading-normal text-gray-600 uppercase bg-gray-300"
+                                >
+                                    <th class="px-4 py-3 text-center">Day</th>
+                                    <th class="px-4 py-3 text-center">
+                                        Temperature
+                                    </th>
+                                    <th class="px-4 py-3 text-center">
+                                        Relative Humidity
+                                    </th>
+                                    <th class="px-4 py-3 text-center">
+                                        Rain Probability
+                                    </th>
+                                    <th class="px-4 py-3 text-center">
+                                        Condition
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody
+                                class="text-sm text-gray-600"
+                                id="forecast-table-body"
+                            >
+                                <!-- Insert Dynamic rows -->
+                            </tbody>
+                        </table>
+                        <!-- Current Prediction -->
+                        <div class="mt-5 overflow-hidden">
+                            <div
+                                class="justify-center pb-2 pl-5 text-xl font-bold border-2 border-gray-700"
+                            >
+                                Current Prediction: {{ message }}
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Bar Chart for Max and Min Temperatures -->
                     <div class="chart-container">
@@ -184,35 +207,40 @@
                         <canvas id="humidityChart"></canvas>
                     </div>
 
-            <!-- Alter history title-->
-            <div
-                class="pb-2 pl-5 mx-10 mt-10 text-xl font-bold border-b border-gray-700"
-            >
-                Alert History
-            </div>
-            <!-- History data-->
-            <div class="mx-10 overflow-hidden">
-                <!-- Alert Item -->
-                <div
-                    class="flex items-center px-4 py-1 mt-3 space-x-3 border border-gray-500 rounded"
-                >
-                    <div class="text-red-500">
-                        <ion-icon name="alert-circle" size="large"></ion-icon>
+                    <!-- Alter history title-->
+                    <div
+                        class="pb-2 pl-5 mx-10 mt-10 text-xl font-bold border-b border-gray-700"
+                    >
+                        Alert History
                     </div>
-                    <p class="flex-grow text-sm font-semibold text-red-500">
-                        Heavy Rain Advisory In Effect From Early This Afternoon
-                        (03/28) Through This Evening (03/28)
-                    </p>
-                    <div class="text-gray-700">
-                        <ion-icon
-                            name="chevron-forward-outline"
-                            size="large"
-                        ></ion-icon>
+                    <!-- History data-->
+                    <div class="mx-10 overflow-hidden">
+                        <!-- Alert Item -->
+                        <div
+                            class="flex items-center px-4 py-1 mt-3 space-x-3 border border-gray-500 rounded"
+                        >
+                            <div class="text-red-500">
+                                <ion-icon
+                                    name="alert-circle"
+                                    size="large"
+                                ></ion-icon>
+                            </div>
+                            <p
+                                class="flex-grow text-sm font-semibold text-red-500"
+                            >
+                                Heavy Rain Advisory In Effect From Early This
+                                Afternoon (03/28) Through This Evening (03/28)
+                            </p>
+                            <div class="text-gray-700">
+                                <ion-icon
+                                    name="chevron-forward-outline"
+                                    size="large"
+                                ></ion-icon>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <!-- real-time data based on prediction-->
-            <!-- <div class="mx-10 overflow-hidden">
+                    <!-- real-time data based on prediction-->
+                    <!-- <div class="mx-10 overflow-hidden">
                 {% if realPrediction == '1' %}
                     <div class="flex items-center px-4 py-1 mt-3 space-x-3 border border-gray-500 rounded">
                         <div class="text-red-500">
@@ -234,44 +262,45 @@
                 {% endif %}
             </div>  -->
 
-
-            <!-- Placeholder for Real-Time Flood Prediction -->
-            <div id="flood-warning" class="mx-10 overflow-hidden">
-                <!-- Dynamic content will be inserted here by JavaScript -->
+                    <!-- Placeholder for Real-Time Flood Prediction -->
+                    <div id="flood-warning" class="mx-10 overflow-hidden">
+                        <!-- Dynamic content will be inserted here by JavaScript -->
+                    </div>
+                </div>
             </div>
-
         </main>
 
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            fetchFloodPrediction();
-        });
+            document.addEventListener("DOMContentLoaded", function () {
+                fetchFloodPrediction();
+            });
 
-        function fetchFloodPrediction() {
-            fetch('/predict_realflood')
-                .then(response => response.json())
-                .then(data => {
-                    const probability = data.realPrediction.probability;
-                    updateFloodWarning(probability);
-                })
-                .catch(error => console.error('Error fetching flood prediction:', error));
-        }
-
-        function updateFloodWarning(probability) {
-            const container = document.getElementById('flood-warning');
-            let content = '';
-            if (probability < 50) {
-                content = `<div class="text-green-500"><ion-icon name="checkmark-circle" size="large"></ion-icon>No flooding issues detected.</div>`;
-            } else if (probability < 85) {
-                content = `<div class="text-yellow-500"><ion-icon name="warning" size="large"></ion-icon>Warning: Potential flood risk. Stay alert.</div>`;
-            } else {
-                content = `<div class="text-red-500"><ion-icon name="alert-circle" size="large"></ion-icon>Danger: High risk of flood. Take necessary precautions.</div>`;
+            function fetchFloodPrediction() {
+                fetch("/predict_realflood")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        const probability = data.realPrediction.probability;
+                        updateFloodWarning(probability);
+                    })
+                    .catch((error) =>
+                        console.error("Error fetching flood prediction:", error)
+                    );
             }
-            container.innerHTML = content;
-        }
+
+            function updateFloodWarning(probability) {
+                const container = document.getElementById("flood-warning");
+                let content = "";
+                if (probability < 50) {
+                    content = `<div class="text-green-500"><ion-icon name="checkmark-circle" size="large"></ion-icon>No flooding issues detected.</div>`;
+                } else if (probability < 85) {
+                    content = `<div class="text-yellow-500"><ion-icon name="warning" size="large"></ion-icon>Warning: Potential flood risk. Stay alert.</div>`;
+                } else {
+                    content = `<div class="text-red-500"><ion-icon name="alert-circle" size="large"></ion-icon>Danger: High risk of flood. Take necessary precautions.</div>`;
+                }
+                container.innerHTML = content;
+            }
         </script>
 
-        
         <script
             type="module"
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -283,15 +312,24 @@
         <script src="{{ url_for('static', filename='script.js') }}"></script>
         <!-- <script src="mainpage.js"></script> -->
         <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/static/serviceWorker.js').then(function(registration) {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                }).catch(function(err) {
-                    console.log('Service Worker registration failed:', err);
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", function () {
+                    navigator.serviceWorker
+                        .register("/static/serviceWorker.js")
+                        .then(function (registration) {
+                            console.log(
+                                "Service Worker registered with scope:",
+                                registration.scope
+                            );
+                        })
+                        .catch(function (err) {
+                            console.log(
+                                "Service Worker registration failed:",
+                                err
+                            );
+                        });
                 });
-            });
-        }
+            }
             // Function to load weather data from the API
             async function loadWeatherData() {
                 const apiUrl =
@@ -483,6 +521,5 @@
             // Start the process
             loadAndRenderForecast();
         </script>
-    
     </body>
 </html>
