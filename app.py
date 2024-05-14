@@ -504,6 +504,8 @@ def send_notification():
         body += table
 
     # Email sender details
+    sender = "@gmail.com"
+    password = "insert key here"
 
     # Send email to each recipient
     for recipient in recipients:
@@ -524,8 +526,8 @@ def send_notification():
 
 
 # Route for send_alert
-@app.route("/send_alert", methods=["POST"])
-def send_alert():
+@app.route("/send_alert_amber", methods=["POST"])
+def send_alert_amber():
     # Load the recipient email addresses from the CSV file
     recipients = []
     with open("backend/data/userdata.csv", mode="r") as file:
@@ -534,13 +536,91 @@ def send_alert():
             recipients.append(row["Email"])
 
     # Load email subject and body from the CSV file
-    with open("backend/data/notification/rainfallwarning.csv", mode="r") as file:
+    with open("backend/data/notification/amberwarning.csv", mode="r") as file:
         csv_reader = csv.DictReader(file)
         for row in csv_reader:
             subject = row["subject"]
             body = row["body"]
 
     # Email sender details
+    sender = "@gmail.com"
+    password = "insert key here"
+
+    # Send email to each recipient
+    for recipient in recipients:
+        msg = MIMEMultipart()
+        msg.attach(MIMEText(body, "html"))
+        msg["Subject"] = subject
+        msg["From"] = sender
+        msg["To"] = recipient
+        try:
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp_server:
+                smtp_server.login(sender, password)
+                smtp_server.sendmail(sender, recipient, msg.as_string())
+            print(f"Message sent to {recipient}")
+        except Exception as e:
+            print(f"Failed to send email to {recipient}: {str(e)}")
+
+    return "Emails sent successfully!"
+
+# Route for send_alert
+@app.route("/send_alert_red", methods=["POST"])
+def send_alert_red():
+    # Load the recipient email addresses from the CSV file
+    recipients = []
+    with open("backend/data/userdata.csv", mode="r") as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            recipients.append(row["Email"])
+
+    # Load email subject and body from the CSV file
+    with open("backend/data/notification/redwarning.csv", mode="r") as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            subject = row["subject"]
+            body = row["body"]
+
+    # Email sender details
+    sender = "@gmail.com"
+    password = "insert key here"
+
+    # Send email to each recipient
+    for recipient in recipients:
+        msg = MIMEMultipart()
+        msg.attach(MIMEText(body, "html"))
+        msg["Subject"] = subject
+        msg["From"] = sender
+        msg["To"] = recipient
+        try:
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp_server:
+                smtp_server.login(sender, password)
+                smtp_server.sendmail(sender, recipient, msg.as_string())
+            print(f"Message sent to {recipient}")
+        except Exception as e:
+            print(f"Failed to send email to {recipient}: {str(e)}")
+
+    return "Emails sent successfully!"
+
+# Route for send_alert
+@app.route("/send_alert_black", methods=["POST"])
+def send_alert_black():
+    # Load the recipient email addresses from the CSV file
+    recipients = []
+    with open("backend/data/userdata.csv", mode="r") as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            recipients.append(row["Email"])
+
+    # Load email subject and body from the CSV file
+    with open("backend/data/notification/blackwarning.csv", mode="r") as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            subject = row["subject"]
+            body = row["body"]
+
+    # Email sender details
+    sender = "@gmail.com"
+    password = "insert key here"
 
     # Send email to each recipient
     for recipient in recipients:

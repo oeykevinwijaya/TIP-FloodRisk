@@ -216,7 +216,7 @@
                     <div class="flex">
                         <div class="w-1/4">
                             <button
-                                id="sendAlertBtn"
+                                id="sendNotificationBtn"
                                 class="w-full px-10 py-1 text-sm text-white bg-gray-500 rounded-full hover:bg-gray-700"
                             >
                                 Send Weather Notification
@@ -230,7 +230,7 @@
                     <div class="flex mt-5">
                         <div class="w-1/4">
                             <button
-                                id="sendAlertBtn"
+                                id="sendAlertAmber"
                                 class="w-full px-10 py-1 text-sm text-white bg-yellow-500 rounded-full hover:bg-gray-700"
                             >
                                 Send AMBER RAINSTORM SIGNAL
@@ -283,7 +283,7 @@
                     <div class="flex mt-5">
                         <div class="w-1/4">
                             <button
-                                id="sendAlertBtn"
+                                id="sendAlertRed"
                                 class="w-full px-10 py-1 text-sm text-white bg-red-500 rounded-full hover:bg-gray-700"
                             >
                                 Send RED RAINSTORM SIGNAL
@@ -334,7 +334,7 @@
                     <div class="flex mt-5">
                         <div class="w-1/4">
                             <button
-                                id="sendAlertBtn"
+                                id="sendAlertBlack"
                                 class="w-full px-10 py-1 text-sm text-white bg-black rounded-full hover:bg-gray-700"
                             >
                                 Send BLACK RAINSTORM SIGNAL
@@ -529,10 +529,74 @@
                         });
                 });
             document
-                .getElementById("sendAlertBtn")
+                .getElementById("sendAlertAmber")
                 .addEventListener("click", function () {
                     // Make a request to the /send_email route
-                    fetch("/send_alert", {
+                    fetch("/send_alert_amber", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            recipient_email: "104341635@student.swin.edu.au",
+                        }),
+                    })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error("Failed to send notification");
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log(data.message); // Log the response message
+                            // Optionally, display a success message to the user
+                            alert("Notification sent successfully");
+                        })
+                        .catch((error) => {
+                            console.error("Error sending notification:", error);
+                            // Optionally, display an error message to the user
+                            alert(
+                                "Failed to send notification. Please try again later."
+                            );
+                        });
+                });
+            document
+                .getElementById("sendAlertRed")
+                .addEventListener("click", function () {
+                    // Make a request to the /send_email route
+                    fetch("/send_alert_red", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            recipient_email: "104341635@student.swin.edu.au",
+                        }),
+                    })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error("Failed to send notification");
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log(data.message); // Log the response message
+                            // Optionally, display a success message to the user
+                            alert("Notification sent successfully");
+                        })
+                        .catch((error) => {
+                            console.error("Error sending notification:", error);
+                            // Optionally, display an error message to the user
+                            alert(
+                                "Failed to send notification. Please try again later."
+                            );
+                        });
+                });
+            document
+                .getElementById("sendAlertBlack")
+                .addEventListener("click", function () {
+                    // Make a request to the /send_email route
+                    fetch("/send_alert_black", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
