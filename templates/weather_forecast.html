@@ -152,7 +152,7 @@
                 <h1 class="text-4xl font-bold text-gray-800 mb-4">9-day Weather Forecast</h1>
             </header>
 
-            <!-- User Management table-->
+            <!-- Table-->
             <div class="p-3 mx-8 mt-5 overflow-hidden">
             <!-- Main Forecast -->
             <div class="container mx-auto w-3/4 bg-white shadow-md rounded-md p-4">
@@ -168,7 +168,7 @@
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 text-sm" id="forecast-table-body">
-                            <!-- Dynamic rows will be inserted here -->
+                            <!-- Insert Dynamic rows -->
                         </tbody>
                     </table>
                 </div>
@@ -248,6 +248,15 @@
         <script src="{{ url_for('static', filename='script.js') }}"></script>
         <!-- <script src="mainpage.js"></script> -->
         <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/static/serviceWorker.js').then(function(registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                }).catch(function(err) {
+                    console.log('Service Worker registration failed:', err);
+                });
+            });
+        }
             // Function to load weather data from the API
             async function loadWeatherData() {
                 const apiUrl = 'https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en';
