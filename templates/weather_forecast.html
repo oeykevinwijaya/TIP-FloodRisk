@@ -147,41 +147,26 @@
                 </h1>
             </header>
 
-            <!-- User Management table-->
+            <!-- Table-->
             <div class="p-3 mx-8 mt-5 overflow-hidden">
-                <!-- Main Forecast -->
-                <div
-                    class="container w-3/4 p-4 mx-auto bg-white rounded-md shadow-md"
-                >
-                    <div class="overflow-x-auto">
-                        <table class="w-full bg-white">
-                            <thead>
-                                <tr
-                                    class="w-full text-sm leading-normal text-gray-600 uppercase bg-gray-300"
-                                >
-                                    <th class="px-4 py-3 text-center">Day</th>
-                                    <th class="px-4 py-3 text-center">
-                                        Temperature
-                                    </th>
-                                    <th class="px-4 py-3 text-center">
-                                        Relative Humidity
-                                    </th>
-                                    <th class="px-4 py-3 text-center">
-                                        Rain Probability
-                                    </th>
-                                    <th class="px-4 py-3 text-center">
-                                        Condition
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody
-                                class="text-sm text-gray-600"
-                                id="forecast-table-body"
-                            >
-                                <!-- Dynamic rows will be inserted here -->
-                            </tbody>
-                        </table>
-                    </div>
+            <!-- Main Forecast -->
+            <div class="container mx-auto w-3/4 bg-white shadow-md rounded-md p-4">
+                <div class="overflow-x-auto">
+                    <table class="w-full bg-white">
+                        <thead>
+                            <tr class="w-full bg-gray-300 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-4 text-center">Day</th>
+                                <th class="py-3 px-4 text-center">Temperature</th>
+                                <th class="py-3 px-4 text-center">Relative Humidity</th>
+                                <th class="py-3 px-4 text-center">Rain Probability</th>
+                                <th class="py-3 px-4 text-center">Condition</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm" id="forecast-table-body">
+                            <!-- Insert Dynamic rows -->
+                        </tbody>
+                    </table>
+                </div>
 
                     <!-- Bar Chart for Max and Min Temperatures -->
                     <div class="chart-container">
@@ -298,6 +283,15 @@
         <script src="{{ url_for('static', filename='script.js') }}"></script>
         <!-- <script src="mainpage.js"></script> -->
         <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/static/serviceWorker.js').then(function(registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                }).catch(function(err) {
+                    console.log('Service Worker registration failed:', err);
+                });
+            });
+        }
             // Function to load weather data from the API
             async function loadWeatherData() {
                 const apiUrl =
