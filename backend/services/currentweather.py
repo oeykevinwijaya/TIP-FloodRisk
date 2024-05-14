@@ -2,6 +2,7 @@ import requests
 import json
 import csv
 from datetime import datetime
+import pandas as pd
 
 # Fetch JSON data from the API
 url = "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=en"
@@ -17,6 +18,7 @@ temperature_data = data["temperature"]["data"]
 # Define CSV file paths
 rainfall_csv_file = "backend/data/currentrain.csv"
 temperature_csv_file = "backend/data/currenttemp.csv"
+rainplace_csv_file = "backend/data/rainplace.csv"
 
 # Function to format date
 def format_date(date_str):
@@ -47,3 +49,15 @@ with open(temperature_csv_file, mode='w', newline='') as file:
 
 print("Rainfall data saved successfully at:", rainfall_csv_file)
 print("Temperature data saved successfully at:", temperature_csv_file)
+
+# Read data from currentrain.csv and hkdistrict.csv
+currentrain_df = pd.read_csv(rainfall_csv_file)
+hkdistrict_df = pd.read_csv("backend/data/hkdistrict.csv")
+
+# Merge data on the 'Place' column
+merged_df = pd.merge(hkdistrict_df, currentrain_df, on='Place', how='left')
+
+# Output merged data to rainplace.csv
+merged_df.to_csv(rainplace_csv_file, index=False)
+
+print("Merged data saved successfully at:", rainplace_csv_file)
