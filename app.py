@@ -183,6 +183,24 @@ def weatherforecast():
     # Pass data to the template
     return render_template("weather_forecast.html", forecasts=forecasts)
 
+# Route for weather forecast page
+@app.route("/admin_weather_forecast.html")
+def adminweatherforecast():
+    # Path to CSV file
+    csv_file_path = os.path.join(os.getcwd(), "backend/data/9dforecast.csv")
+
+    # List to hold rows of data
+    forecasts = []
+
+    # Read CSV data
+    with open(csv_file_path, mode="r") as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            forecasts.append(row)
+
+    # Pass data to the template
+    return render_template("admin_weather_forecast.html", forecasts=forecasts)
+
 
 # Route for history.html
 @app.route("/history.html")
@@ -559,13 +577,13 @@ def admin_access():
 
         # Simple validation for demonstration purposes
         if username == "admin" and password == "password":
-            return render_template("admin_page_alert.html")
+            return admin_page_alert()
         else:
             return render_template(
                 "loginadmin.html", error="Invalid username or password"
             )
 
-    return render_template("admin_page_alert.html")
+    return admin_page_alert()
 
 
 @app.route("/loginadmin.html")
