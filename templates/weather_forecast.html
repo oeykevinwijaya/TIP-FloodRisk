@@ -206,9 +206,9 @@
                     </div>
                 </div>
             </div>
-            <!-- History data based on prediction-->
-            <div class="mx-10 overflow-hidden">
-                {% if prediction == '1' %}
+            <!-- real-time data based on prediction-->
+            <!-- <div class="mx-10 overflow-hidden">
+                {% if realPrediction == '1' %}
                     <div class="flex items-center px-4 py-1 mt-3 space-x-3 border border-gray-500 rounded">
                         <div class="text-red-500">
                             <ion-icon name="alert-circle" size="large"></ion-icon>
@@ -227,9 +227,46 @@
                         </p>
                     </div>
                 {% endif %}
-            </div> 
+            </div>  -->
+
+
+            <!-- Placeholder for Real-Time Flood Prediction -->
+            <div id="flood-warning" class="mx-10 overflow-hidden">
+                <!-- Dynamic content will be inserted here by JavaScript -->
+            </div>
+
         </main>
 
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchFloodPrediction();
+        });
+
+        function fetchFloodPrediction() {
+            fetch('/predict_realflood')
+                .then(response => response.json())
+                .then(data => {
+                    const probability = data.realPrediction.probability;
+                    updateFloodWarning(probability);
+                })
+                .catch(error => console.error('Error fetching flood prediction:', error));
+        }
+
+        function updateFloodWarning(probability) {
+            const container = document.getElementById('flood-warning');
+            let content = '';
+            if (probability < 50) {
+                content = `<div class="text-green-500"><ion-icon name="checkmark-circle" size="large"></ion-icon>No flooding issues detected.</div>`;
+            } else if (probability < 85) {
+                content = `<div class="text-yellow-500"><ion-icon name="warning" size="large"></ion-icon>Warning: Potential flood risk. Stay alert.</div>`;
+            } else {
+                content = `<div class="text-red-500"><ion-icon name="alert-circle" size="large"></ion-icon>Danger: High risk of flood. Take necessary precautions.</div>`;
+            }
+            container.innerHTML = content;
+        }
+        </script>
+
+        
         <script
             type="module"
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -395,5 +432,6 @@
             // Start the process
             loadAndRenderForecast();
         </script>
+    
     </body>
 </html>
