@@ -420,8 +420,8 @@ def search():
     }
 
 
-# Route for warning.html
-@app.route('/warning.html')
+# Route for rainfallmap.html
+@app.route('/rainfallmap.html')
 def warning():
     # Read the rainplace.csv file
     rainplace_df = pd.read_csv('backend/data/rainplace.csv')
@@ -431,7 +431,7 @@ def warning():
     rainfall_values = rainplace_df['Rainfall (mm)'].tolist()
     
     # Pass data to the template
-    return render_template('warning.html', coordinates=coordinates, rainfall_values=rainfall_values)
+    return render_template('rainfallmap.html', coordinates=coordinates, rainfall_values=rainfall_values)
     
 # Route for faq.html
 @app.route("/faq.html")

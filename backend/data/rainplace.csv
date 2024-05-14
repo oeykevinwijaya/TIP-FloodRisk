@@ -1,19 +1,19 @@
 id,Place,coordinate,Rainfall (mm),Main
-1,Central & Western District,"22.28499386, 114.15072273",17,False
-2,Eastern District,"22.267434, 114.249063",8,False
-3,Kwai Tsing,"22.344044, 114.100998",31,False
-4,Islands District,"22.308046, 113.918480",42,False
-5,North District,"22.50166, 114.12895",7,False
-6,Sai Kung,"22.38333, 114.26667",10,False
-7,Sha Tin,"22.3771, 114.1974",16,False
-8,Southern District,"22.23833238, 114.15333272",5,False
-9,Tai Po,"22.45007, 114.16877",17,False
-10,Tsuen Wan,"22.37137, 114.11329",26,False
-11,Tuen Mun,"22.400723, 113.97157",16,False
-12,Wan Chai,"22.28066, 114.18096",6,False
-13,Yuen Long,"22.4400132399, 114.022146578",16,False
-14,Yau Tsim Mong,"22.302219, 114.174637",8,False
-15,Sham Shui Po,"22.33183, 114.1621",15,False
-16,Kowloon City,"22.3260336959, 114.186529254",12,False
-17,Wong Tai Sin,"22.35, 114.18333",12,False
-18,Kwun Tong,"22.3038021181, 114.219602455",7,False
+1,Central & Western District,"22.28499386, 114.15072273",0,False
+2,Eastern District,"22.267434, 114.249063",0,False
+3,Kwai Tsing,"22.344044, 114.100998",0,False
+4,Islands District,"22.308046, 113.918480",0,False
+5,North District,"22.50166, 114.12895",0,False
+6,Sai Kung,"22.38333, 114.26667",20,False
+7,Sha Tin,"22.3771, 114.1974",0,False
+8,Southern District,"22.23833238, 114.15333272",10,False
+9,Tai Po,"22.45007, 114.16877",0,False
+10,Tsuen Wan,"22.37137, 114.11329",0,False
+11,Tuen Mun,"22.400723, 113.97157",0,False
+12,Wan Chai,"22.28066, 114.18096",0,False
+13,Yuen Long,"22.4400132399, 114.022146578",30,False
+14,Yau Tsim Mong,"22.302219, 114.174637",0,False
+15,Sham Shui Po,"22.33183, 114.1621",0,False
+16,Kowloon City,"22.3260336959, 114.186529254",0,False
+17,Wong Tai Sin,"22.35, 114.18333",0,False
+18,Kwun Tong,"22.3038021181, 114.219602455",0,False
