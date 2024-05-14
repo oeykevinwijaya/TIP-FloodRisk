@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 from sentence_transformers import SentenceTransformer, util
 
 # Path to the CSV file
-data_file_path = os.path.join(os.getcwd(), "backend/data/userdata.csv")
+data_file_path = os.path.join(os.getcwd(), 'backend/data/userdata.csv')
 
 app = Flask(__name__)
 model = joblib.load('backend/models/flood_prediction_model.pkl')
@@ -75,8 +75,7 @@ def predict_flood_from_date():
     if prediction is not None:
         return jsonify({'prediction': str(prediction), 'probability': str(probability)})
     else:
-        return jsonify({"error": "Failed to make prediction"}), 500
-
+        return jsonify({'error': 'Failed to make prediction'}), 500
 
 def predict_flood(date=None):
     try:
@@ -344,27 +343,21 @@ def get_rainfall_data():
     return jsonify(chart_data)
 
 
-# # Route for warning.html
-# @app.route("/warning.html")
-# def warning():
-#     return render_template("warning.html")
-
-
-# Load FAQ data
-faq_data = []
-faq_answers = []
-with open("backend/data/faq.csv", mode="r") as file:
-    csv_reader = csv.DictReader(file)
-    for row in csv_reader:
-        faq_data.append(row["question"])
-        faq_answers.append(row["answer"])
-
-# Initialize the sentence transformer model
-model = SentenceTransformer("paraphrase-MiniLM-L6-v2")
 
 
 @app.route("/search", methods=["POST"])
 def search():
+    # Load FAQ data
+    faq_data = []
+    faq_answers = []
+    with open("backend/data/faq.csv", mode="r") as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            faq_data.append(row["question"])
+            faq_answers.append(row["answer"])
+
+    # Initialize the sentence transformer model
+    model = SentenceTransformer("paraphrase-MiniLM-L6-v2")
     data = request.get_json()
     query = data["query"]
     query_embedding = model.encode(query)
