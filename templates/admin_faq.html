@@ -1,203 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FAQ Management</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body class="bg-white font-sans leading-normal tracking-normal">
-    <!-- Menu Button -->
-    <button
-      id="sidebar-toggle"
-      class="text-white focus:outline-none bg-gray-700 p-2.5 fixed top-2.5 left-2.5 z-30"
-    >
-      <svg class="fill-current h-6 w-6" viewBox="0 0 24 24">
-        <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"></path>
-      </svg>
-    </button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FAQ Management</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body class="font-sans leading-normal tracking-normal bg-white">
+        <!-- Menu Button -->
+        <button
+            id="sidebar-toggle"
+            class="text-white focus:outline-none bg-gray-700 p-2.5 fixed top-2.5 left-2.5 z-30"
+        >
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"></path>
+            </svg>
+        </button>
 
-    <!-- Sidebar -->
-    <div
-      id="sidebar"
-      class="transform -translate-x-full fixed inset-y-0 left-0 w-64 space-y-6 py-7 px-2 z-20 bg-white shadow-md transition-transform duration-500 ease-in-out"
-      style="will-change: transform"
-    >
-      <a href="#" class="text-gray-800 flex items-center space-x-2 px-4">
-        <span class="text-2xl font-medium mt-10">Menu</span>
-      </a>
-      <!-- Sidebar content -->
-      <nav class="text-black text-base">
-        <a
-          href="admin_page_alert.html"
-          class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+        <!-- Sidebar -->
+        <div
+            id="sidebar"
+            class="fixed inset-y-0 left-0 z-20 w-64 px-2 space-y-6 transition-transform duration-500 ease-in-out transform -translate-x-full bg-white shadow-md py-7"
+            style="will-change: transform"
         >
-          User Alter Management
-        </a>
-        <a
-          href="data_management.html"
-          class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
-        >
-          Data Management
-        </a>
-        <a
-          href="admin_access.html"
-          class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
-        >
-          Admin Management
-        </a>
-        <a
-          href="email.html"
-          class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
-        >
-          Email
-        </a>
-        <a
-          href="admin_file"
-          class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
-        >
-          File Management
-        </a>
-        <a
-          href="admin_faq"
-          class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
-        >
-          FAQ Management
-        </a>
-        <a
-          href="weather_forecast.html"
-          class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm mt-44"
-        >
-          Home Page
-        </a>
-      </nav>
-    </div>
-
-    <!-- Header -->
-    <nav class="bg-gray-700 p-4 fixed w-full z-10">
-      <div class="flex items-center justify-between flex-wrap">
-        <div class="flex items-center flex-shrink-0 text-white mr-6">
-          <span class="font-semibold text-xl tracking-tight mx-14"
-            >Hong Kong Flood</span
-          >
+            <a href="#" class="flex items-center px-4 space-x-2 text-gray-800">
+                <span class="mt-10 text-2xl font-medium">Menu</span>
+            </a>
+            <!-- Sidebar content -->
+            <nav class="text-base text-black">
+                <a
+                    href="admin_page_alert.html"
+                    class="flex items-center justify-center px-5 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    Notification Management
+                </a>
+                <a
+                    href="admin_simulation.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    Flood Prediction
+                </a>
+                <a
+                    href="admin_weather_forecast.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    Weather Forecast
+                </a>
+                <a
+                    href="admin_file"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    File Management
+                </a>
+                <a
+                    href="admin_faq"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    FAQ Management
+                </a>
+                <a
+                    href="admin_user"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    User Management
+                </a>
+                <div>
+                {% if session.logged_in %}
+                    <a href="{{ url_for('logout') }}"
+                       class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                        Logout
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('login') }}"
+                       class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                        Login
+                    </a>
+                {% endif %}
+            </div>
+                <!--
+                <a
+                    href="data_management.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    Data Management
+                </a>
+                <a
+                    href="admin_access.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    Admin Management
+                </a>
+                <a
+                    href="email.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    Email
+                </a> -->
+            </nav>
         </div>
-      </div>
-    </nav>
 
-    <!-- Main Content -->
-    <main
-      class="p-8 transition-padding duration-500 ease-in-out"
-      id="main-content"
-      style="will-change: padding"
-    >
-      <!-- Top black area-->
-      <div class="h-[55px] bg-gray-700"></div>
-      <!-- Title-->
-      <div class="overflow-hidden mx-10 border-b border-gray-700 pb-2">
-        <div class="flex justify-between items-center mx-10 mt-8 p-5">
-          <div class="font-bold text-xl">FAQ Management</div>
-        </div>
-      </div>
-      <!-- Table-->
-      <div class="overflow-hidden mx-10 p-3">
-        <form id="searchForm" method="GET" action="/search_faq">
-            <input type="text" id="searchInput" name="query" class="border border-gray-400 px-4 py-2 rounded" placeholder="Search questions...">
-            <button type="submit" class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">
-                Search
-            </button>
-        </form>
-      </div>
-      <table class="w-full text-left shadow-md rounded-lg overflow-hidden mx-3">
-          <thead class="bg-gray-500 text-white">
-              <tr class="px-4 py-2">
-                  <th class="border px-4 py-2">Question</th>
-                  <th class="border px-4 py-2">Answer</th>
-                  <th class="border px-4 py-2">Edit</th>
-                  <th class="border px-4 py-2">Delete</th>
-                  
-              </tr>
-          </thead>
-          <tbody>
-              {% for faq in faqs %}
-<tr>
-    <form method="post" action="/update_faq">
-        <td class="border px-4 py-2">
-            <span class="faq-text">{{ faq['question'] }}</span>
-            <input type="text" name="question" class="faq-edit border border-gray-400 px-4 py-2 rounded focus:border-blue-500 hidden" value="{{ faq['question'] }}">
-        </td>
-        <td class="border px-4 py-2">
-            <span class="faq-text">{{ faq['answer'] }}</span>
-            <input type="text" name="answer" class="faq-edit border border-gray-400 px-4 py-2 rounded focus:border-blue-500 hidden" value="{{ faq['answer'] }}">
-        </td>
-        <td class="border px-4 py-2">
-            <button type="button" onclick="toggleEdit(this.parentNode.parentNode)" class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Edit</button>
-            <input type="hidden" name="id" value="{{ loop.index0 }}">
-            <input type="submit" value="Save" class="hidden faq-save">
-        </td>
-    </form>
-    <td  class="border px-4 py-2">
-        <form method="post" action="/delete_faq">
-            <input type="hidden" name="id" value="{{ loop.index0 }}">
-            <button type="submit" class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">Delete</button>
-        </form>
-    </td>
-</tr>
-{% endfor %}
+        <!-- Header -->
+        <nav class="fixed z-10 w-full p-4 bg-gray-700">
+            <div class="flex flex-wrap items-center justify-between">
+                <div class="flex items-center flex-shrink-0 mr-6 text-white">
+                    <span class="text-xl font-semibold tracking-tight mx-14"
+                        >Hong Kong Flood</span
+                    >
+                </div>
+            </div>
+        </nav>
 
-          </tbody>
-      </table>
-      <form method="post" action="/add_faq" class = "m-3">
-          <input type="text" name="question" class="border border-gray-400 px-4 py-2 rounded w-2/5" placeholder="New Question">
-          <input type="text" name="answer" class="border border-gray-400 px-4 py-2 rounded w-2/5" placeholder="New Answer">
-          <button type="submit" class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">Add FAQ</button>
-      </form>
-    </div>
-    </main>
+        <!-- Main Content -->
+        <main
+            class="p-8 duration-500 ease-in-out transition-padding"
+            id="main-content"
+            style="will-change: padding"
+        >
+            <!-- Top black area-->
+            <div class="h-[55px] bg-gray-700"></div>
+            <!-- Title-->
+            <div class="pb-2 mx-10 overflow-hidden border-b border-gray-700">
+                <div class="flex items-center justify-between p-5 mx-10 mt-8">
+                    <div class="text-xl font-bold">FAQ Management</div>
+                </div>
+            </div>
+            <!-- Table-->
+            <div class="p-3 mx-10 overflow-hidden">
+                <form id="searchForm" method="GET" action="/search_faq">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        name="query"
+                        class="px-4 py-2 border border-gray-400 rounded"
+                        placeholder="Search questions..."
+                    />
+                    <button
+                        type="submit"
+                        class="px-4 py-2 font-bold text-white bg-gray-600 rounded hover:bg-gray-800"
+                    >
+                        Search
+                    </button>
+                </form>
+            </div>
+            <table
+                class="w-full mx-3 overflow-hidden text-left rounded-lg shadow-md"
+            >
+                <thead class="text-white bg-gray-500">
+                    <tr class="px-4 py-2">
+                        <th class="px-4 py-2 border">Question</th>
+                        <th class="px-4 py-2 border">Answer</th>
+                        <th class="px-4 py-2 border">Edit</th>
+                        <th class="px-4 py-2 border">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for faq in faqs %}
+                    <tr>
+                        <form method="post" action="/update_faq">
+                            <td class="px-4 py-2 border">
+                                <span class="faq-text"
+                                    >{{ faq['question'] }}</span
+                                >
+                                <input
+                                    type="text"
+                                    name="question"
+                                    class="hidden px-4 py-2 border border-gray-400 rounded faq-edit focus:border-blue-500"
+                                    value="{{ faq['question'] }}"
+                                />
+                            </td>
+                            <td class="px-4 py-2 border">
+                                <span class="faq-text"
+                                    >{{ faq['answer'] }}</span
+                                >
+                                <input
+                                    type="text"
+                                    name="answer"
+                                    class="hidden px-4 py-2 border border-gray-400 rounded faq-edit focus:border-blue-500"
+                                    value="{{ faq['answer'] }}"
+                                />
+                            </td>
+                            <td class="px-4 py-2 border">
+                                <button
+                                    type="button"
+                                    onclick="toggleEdit(this.parentNode.parentNode)"
+                                    class="px-4 py-2 font-bold text-white bg-blue-400 rounded hover:bg-blue-600"
+                                >
+                                    Edit
+                                </button>
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value="{{ loop.index0 }}"
+                                />
+                                <input
+                                    type="submit"
+                                    value="Save"
+                                    class="hidden faq-save"
+                                />
+                            </td>
+                        </form>
+                        <td class="px-4 py-2 border">
+                            <form method="post" action="/delete_faq">
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value="{{ loop.index0 }}"
+                                />
+                                <button
+                                    type="submit"
+                                    class="px-4 py-2 font-bold text-white bg-red-400 rounded hover:bg-red-600"
+                                >
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <form method="post" action="/add_faq" class="m-3">
+                <input
+                    type="text"
+                    name="question"
+                    class="w-2/5 px-4 py-2 border border-gray-400 rounded"
+                    placeholder="New Question"
+                />
+                <input
+                    type="text"
+                    name="answer"
+                    class="w-2/5 px-4 py-2 border border-gray-400 rounded"
+                    placeholder="New Answer"
+                />
+                <button
+                    type="submit"
+                    class="px-4 py-2 font-bold text-white bg-gray-600 rounded hover:bg-gray-800"
+                >
+                    Add FAQ
+                </button>
+            </form>
+        </main>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <script>
-        document.getElementById('searchForm').onsubmit = function(event) {
-            event.preventDefault();  
-            const searchValue = document.getElementById('searchInput').value;
-            filterQuestions(searchValue);  
-        };
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <script>
+            document.getElementById("searchForm").onsubmit = function (event) {
+                event.preventDefault();
+                const searchValue =
+                    document.getElementById("searchInput").value;
+                filterQuestions(searchValue);
+            };
 
-        function filterQuestions(searchValue) {
-            const faqRows = document.querySelectorAll('tbody tr'); 
-            faqRows.forEach(row => {
-                const question = row.cells[0].textContent.toLowerCase(); 
-                const answer = row.cells[1].textContent.toLowerCase(); 
-                if (question.includes(searchValue.toLowerCase()) || answer.includes(searchValue.toLowerCase())) {
-                    row.style.display = ''; 
-                } else {
-                    row.style.display = 'none'; 
-                }
-            });
-        }
-
-        function toggleEdit(form) {
-            const textElements = form.querySelectorAll('.faq-text');
-            const inputElements = form.querySelectorAll('.faq-edit');
-            const editButton = form.querySelector('button[type="button"]'); 
-            const saveButton = form.querySelector('input[type="submit"]'); 
-
-            textElements.forEach(el => el.classList.toggle('hidden'));
-            inputElements.forEach(el => el.classList.toggle('hidden'));
-
-            if (editButton.textContent === 'Edit') {
-                editButton.classList.add('hidden'); 
-                saveButton.classList.remove('hidden'); 
-            } else {
-                editButton.classList.remove('hidden'); 
-                saveButton.classList.add('hidden'); 
-                editButton.textContent = 'Edit';
+            function filterQuestions(searchValue) {
+                const faqRows = document.querySelectorAll("tbody tr");
+                faqRows.forEach((row) => {
+                    const question = row.cells[0].textContent.toLowerCase();
+                    const answer = row.cells[1].textContent.toLowerCase();
+                    if (
+                        question.includes(searchValue.toLowerCase()) ||
+                        answer.includes(searchValue.toLowerCase())
+                    ) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
             }
-        }
 
+            function toggleEdit(form) {
+                const textElements = form.querySelectorAll(".faq-text");
+                const inputElements = form.querySelectorAll(".faq-edit");
+                const editButton = form.querySelector('button[type="button"]');
+                const saveButton = form.querySelector('input[type="submit"]');
 
-    </script>
-  </body>
+                textElements.forEach((el) => el.classList.toggle("hidden"));
+                inputElements.forEach((el) => el.classList.toggle("hidden"));
+
+                if (editButton.textContent === "Edit") {
+                    editButton.classList.add("hidden");
+                    saveButton.classList.remove("hidden");
+                } else {
+                    editButton.classList.remove("hidden");
+                    saveButton.classList.add("hidden");
+                    editButton.textContent = "Edit";
+                }
+            }
+        </script>
+    </body>
 </html>

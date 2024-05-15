@@ -33,10 +33,54 @@
             <nav class="text-base text-black">
                 <a
                     href="admin_page_alert.html"
+                    class="flex items-center justify-center px-5 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    Notification Management
+                </a>
+                <a
+                    href="admin_simulation.html"
                     class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
-                    User Alter Management
+                    Flood Prediction
                 </a>
+                <a
+                    href="admin_weather_forecast.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    Weather Forecast
+                </a>
+                <a
+                    href="admin_file"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    File Management
+                </a>
+                <a
+                    href="admin_faq"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    FAQ Management
+                </a>
+                <a
+                    href="admin_user"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
+                    User Management
+                </a>
+                <div>
+                {% if session.logged_in %}
+                    <a href="{{ url_for('logout') }}"
+                       class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                        Logout
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('login') }}"
+                       class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                        Login
+                    </a>
+                {% endif %}
+            </div>
+                <!--
                 <a
                     href="data_management.html"
                     class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
@@ -54,25 +98,7 @@
                     class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Email
-                </a>
-                <a
-                    href="admin_file"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
-                >
-                File Management
-                </a>
-                <a
-                    href="admin_faq"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
-                >
-                FAQ Management
-                </a>
-                <a
-                    href="weather_forecast.html"
-                    class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
-                >
-                    Home Page
-                </a>
+                </a> -->
             </nav>
         </div>
 
@@ -99,7 +125,7 @@
             <div
                 class="p-5 mx-10 mt-8 text-xl font-bold border-b border-gray-700"
             >
-                User Management
+                Notification Management
             </div>
             <!-- User Management table-->
             <div class="p-3 mx-32 mt-5 overflow-hidden">
@@ -199,19 +225,172 @@
                         {% endfor %}
                     </tbody>
                 </table>
-                <div class="pt-5"></div>
-                <button
-                    id="sendNotificationBtn"
-                    class="px-10 py-1 text-sm text-white bg-gray-500 rounded-full hover:bg-gray-700"
-                >
-                    Send Weather Notification
-                </button>
-                <button
-                    id="sendAlertBtn"
-                    class="px-10 py-1 text-sm text-white bg-gray-500 rounded-full hover:bg-gray-700"
-                >
-                    Send Alert
-                </button>
+                <div class="flex flex-col mt-10">
+                    <div class="flex">
+                        <div class="w-1/4">
+                            <button
+                                id="sendNotificationBtn"
+                                class="w-full px-10 py-1 text-sm text-white bg-gray-500 rounded-full hover:bg-gray-700"
+                            >
+                                Send Weather Notification
+                            </button>
+                        </div>
+                        <div class="w-3/4 ml-5">
+                            <!-- <div class="w-1/8">Desc:</div> -->
+                            Send Weather Forecast
+                        </div>
+                    </div>
+                    <div class="flex mt-5">
+                        <div class="w-1/4">
+                            <button
+                                id="sendAlertAmber"
+                                class="w-full px-10 py-1 text-sm text-white bg-yellow-500 rounded-full hover:bg-gray-700"
+                            >
+                                Send AMBER RAINSTORM SIGNAL
+                            </button>
+                        </div>
+                        <div class="w-3/4 ml-5">
+                            <!-- <div class="ml-5 w-1/8">Desc:</div> -->
+                            <p>
+                                Heavy rain has fallen or is expected to fall
+                                generally over Hong Kong, exceeding 30
+                                millimetres in an hour, and is likely to
+                                continue.
+                            </p>
+                            &nbsp;&nbsp;
+                            <p>
+                                - Members of the public should take necessary
+                                precautions to reduce their exposure to risk
+                                posed by heavy rain, such as flooding. Going
+                                near easily flooded watercourses should also be
+                                avoided.
+                            </p>
+
+                            <p>
+                                - Parents, students, school authorities and
+                                school-bus drivers should listen to radio or
+                                television announcements on the weather, road
+                                and traffic conditions.
+                            </p>
+
+                            <p>
+                                - Candidates for public examinations should
+                                attend the examination as normal, but should
+                                listen to radio or watch television in case the
+                                weather deteriorates suddenly.
+                            </p>
+
+                            <p>
+                                - Farmers and fish pond owners, particularly
+                                those in low lying or flood frequented areas,
+                                should take the necessary precautions to
+                                minimise losses, which include checking and
+                                clearing the drainage system within and around
+                                the farm/fish ponds to ensure that all the
+                                drains are not blocked. Where possible, fish
+                                pond operators should reduce the water level of
+                                ponds which are likely to be flooded.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex mt-5">
+                        <div class="w-1/4">
+                            <button
+                                id="sendAlertRed"
+                                class="w-full px-10 py-1 text-sm text-white bg-red-500 rounded-full hover:bg-gray-700"
+                            >
+                                Send RED RAINSTORM SIGNAL
+                            </button>
+                        </div>
+                        <div class="w-3/4 ml-5">
+                            <p>
+                                Heavy rain has fallen or is expected to fall
+                                generally over Hong Kong, exceeding 50
+                                millimetres in an hour, and is likely to
+                                continue.
+                            </p>
+                            &nbsp;&nbsp;
+                            <p>
+                                - Employees working outdoors in areas exposed to
+                                rain should suspend outdoor duties if weather
+                                conditions in those areas so warrant.
+                            </p>
+
+                            <p>
+                                - People who have to travel should carefully
+                                consider weather and road conditions.
+                            </p>
+
+                            <p>
+                                - If the RED signal is issued before working
+                                hours, employees should report for duty as
+                                usual, provided that transport services are
+                                available. Supervisors are encouraged to adopt a
+                                flexible attitude in case their staff have
+                                genuine difficulties in arriving at work on
+                                time.
+                            </p>
+
+                            <p>
+                                - If the RED signal is issued during office
+                                hours, employees working indoors should remain
+                                on duty as usual unless it is dangerous to do
+                                so. Employees in areas where transport services
+                                are about to be suspended can be exceptionally
+                                released at the discretion of the supervisor. In
+                                exercising their discretion, supervisors should
+                                take into account the weather and road
+                                conditions.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex mt-5">
+                        <div class="w-1/4">
+                            <button
+                                id="sendAlertBlack"
+                                class="w-full px-10 py-1 text-sm text-white bg-black rounded-full hover:bg-gray-700"
+                            >
+                                Send BLACK RAINSTORM SIGNAL
+                            </button>
+                        </div>
+                        <div class="w-3/4 ml-5">
+                            <p>
+                                Very heavy rain has fallen or is expected to
+                                fall generally over Hong Kong, exceeding 70
+                                millimetres in an hour, and is likely to
+                                continue.
+                            </p>
+                            &nbsp;&nbsp;
+                            <p>
+                                - Stay indoors or take shelter in a safe place
+                                until the heavy rain has passed.
+                            </p>
+
+                            <p>
+                                - Employees working outdoors in exposed areas
+                                should stop work and take shelter.
+                            </p>
+
+                            <p>
+                                - People having no safe place to go may take
+                                temporary refuge in any of the special temporary
+                                shelters opened by the Home Affairs Department.
+                            </p>
+
+                            <p>
+                                - Employers are advised not to require their
+                                employees to go to work unless prior agreement
+                                on work arrangements during rainstorms has been
+                                made.
+                            </p>
+
+                            <p>
+                                - People who are already at work should stay
+                                where they are unless it is dangerous to do so.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div>
                 &nbsp; &nbsp;
@@ -363,10 +542,74 @@
                         });
                 });
             document
-                .getElementById("sendAlertBtn")
+                .getElementById("sendAlertAmber")
                 .addEventListener("click", function () {
                     // Make a request to the /send_email route
-                    fetch("/send_alert", {
+                    fetch("/send_alert_amber", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            recipient_email: "104341635@student.swin.edu.au",
+                        }),
+                    })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error("Failed to send notification");
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log(data.message); // Log the response message
+                            // Optionally, display a success message to the user
+                            alert("Notification sent successfully");
+                        })
+                        .catch((error) => {
+                            console.error("Error sending notification:", error);
+                            // Optionally, display an error message to the user
+                            alert(
+                                "Failed to send notification. Please try again later."
+                            );
+                        });
+                });
+            document
+                .getElementById("sendAlertRed")
+                .addEventListener("click", function () {
+                    // Make a request to the /send_email route
+                    fetch("/send_alert_red", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            recipient_email: "104341635@student.swin.edu.au",
+                        }),
+                    })
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error("Failed to send notification");
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log(data.message); // Log the response message
+                            // Optionally, display a success message to the user
+                            alert("Notification sent successfully");
+                        })
+                        .catch((error) => {
+                            console.error("Error sending notification:", error);
+                            // Optionally, display an error message to the user
+                            alert(
+                                "Failed to send notification. Please try again later."
+                            );
+                        });
+                });
+            document
+                .getElementById("sendAlertBlack")
+                .addEventListener("click", function () {
+                    // Make a request to the /send_email route
+                    fetch("/send_alert_black", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
