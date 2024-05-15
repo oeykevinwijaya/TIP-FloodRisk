@@ -9,13 +9,13 @@
             rel="stylesheet"
         />
     </head>
-    <body class="bg-white font-sans leading-normal tracking-normal">
+    <body class="font-sans leading-normal tracking-normal bg-white">
         <!-- Menu Button -->
         <button
             id="sidebar-toggle"
             class="text-white focus:outline-none bg-gray-700 p-2.5 fixed top-2.5 left-2.5 z-30"
         >
-            <svg class="fill-current h-6 w-6" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
                 <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"></path>
             </svg>
         </button>
@@ -23,64 +23,70 @@
         <!-- Sidebar -->
         <div
             id="sidebar"
-            class="transform -translate-x-full fixed inset-y-0 left-0 w-64 space-y-6 py-7 px-2 z-20 bg-white shadow-md transition-transform duration-500 ease-in-out"
+            class="fixed inset-y-0 left-0 z-20 w-64 px-2 space-y-6 transition-transform duration-500 ease-in-out transform -translate-x-full bg-white shadow-md py-7"
             style="will-change: transform"
         >
-            <a href="#" class="text-gray-800 flex items-center space-x-2 px-4">
-                <span class="text-2xl font-medium mt-10">Menu</span>
+            <a href="#" class="flex items-center px-4 space-x-2 text-gray-800">
+                <span class="mt-10 text-2xl font-medium">Menu</span>
             </a>
             <!-- Sidebar content -->
-            <nav class="text-black text-base">
+            <nav class="text-base text-black">
                 <a
                     href="admin_page_alert.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     User Alter Management
                 </a>
                 <a
-                    href="data_management.html"
+                    href="admin_simulation.html"
                     class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                >
+                    Flood Prediction
+                </a>
+                <a
+                    href="data_management.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Data Management
                 </a>
-                <a
+                <!-- <a
                     href="admin_access.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Admin Management
                 </a>
                 <a
                     href="email.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Email
-                </a>
+                </a> -->
                 <a
                     href="admin_file"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
-                File Management
+                    File Management
                 </a>
                 <a
                     href="admin_faq"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm"
-                    >
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                >
                     FAQ Management
                 </a>
                 <a
                     href="weather_forecast.html"
-                    class="flex items-center justify-center hover:border-l-4 hover:border-gray-700 px-10 py-5 border-t border-b border-gray-300 text-sm mt-20"
+                    class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
-                    Home Page
+                    Logout Page
                 </a>
             </nav>
         </div>
 
         <!-- Header -->
-        <nav class="bg-gray-700 p-4 fixed w-full z-10">
-            <div class="flex items-center justify-between flex-wrap">
-                <div class="flex items-center flex-shrink-0 text-white mr-6">
-                    <span class="font-semibold text-xl tracking-tight mx-14"
+        <nav class="fixed z-10 w-full p-4 bg-gray-700">
+            <div class="flex flex-wrap items-center justify-between">
+                <div class="flex items-center flex-shrink-0 mr-6 text-white">
+                    <span class="text-xl font-semibold tracking-tight mx-14"
                         >Hong Kong Flood</span
                     >
                 </div>
@@ -89,61 +95,62 @@
 
         <!-- Main Content -->
         <main
-            class="p-8 transition-padding duration-500 ease-in-out"
+            class="p-8 duration-500 ease-in-out transition-padding"
             id="main-content"
             style="will-change: padding"
         >
+    
             <!-- User Management title-->
-            <div class="overflow-hidden mx-10 border-b border-gray-700 pb-2">
-                <div class="flex justify-between items-center mx-10 mt-8 p-5">
-                    <div class="font-bold text-xl">Admin Management</div>
+            <div class="pb-2 mx-10 overflow-hidden border-b border-gray-700">
+                <div class="flex items-center justify-between p-5 mx-10 mt-8">
+                    <div class="text-xl font-bold">Admin Management</div>
                     <button
-                        class="bg-gray-500 hover:bg-gray-700 text-white px-10 py-2 rounded-full text-sm"
+                        class="px-10 py-2 text-sm text-white bg-gray-500 rounded-full hover:bg-gray-700"
                     >
                         Add new admin
                     </button>
                 </div>
             </div>
             <!-- User Management table-->
-            <div class="overflow-hidden mx-32 p-3 mt-5">
+            <div class="p-3 mx-32 mt-5 overflow-hidden">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead
-                        class="bg-white shadow overflow-hidden border border-gray-200 sm:rounded-xl"
+                        class="overflow-hidden bg-white border border-gray-200 shadow sm:rounded-xl"
                     >
                         <tr>
                             <th
                                 scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                             >
                                 Id
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                             >
                                 E-Mail
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                             >
                                 Location
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                             >
                                 Warning
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                             >
                                 Active Date
                             </th>
                             <th
                                 scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                             >
                                 Edit
                             </th>
@@ -152,36 +159,36 @@
                     <tbody class="divide-y divide-gray-200">
                         <tr>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 001
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 scarlettjohansson@gmail.com
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 CONSUMIDORA
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 Rainfall, Flood
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 17/06/2020
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                                class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
                             >
                                 <button
                                     type="button"
-                                    class="menu-button flex items-center text-gray-900 hover:text-blue-600"
+                                    class="flex items-center text-gray-900 menu-button hover:text-blue-600"
                                     aria-expanded="true"
                                     aria-haspopup="true"
                                 >
@@ -193,36 +200,36 @@
                         </tr>
                         <tr>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 001
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 scarlettjohansson@gmail.com
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 CONSUMIDORA
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 Rainfall, Flood
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 17/06/2020
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                                class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
                             >
                                 <button
                                     type="button"
-                                    class="menu-button flex items-center text-gray-900 hover:text-blue-600"
+                                    class="flex items-center text-gray-900 menu-button hover:text-blue-600"
                                     aria-expanded="true"
                                     aria-haspopup="true"
                                 >
@@ -234,36 +241,36 @@
                         </tr>
                         <tr>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 001
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 scarlettjohansson@gmail.com
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 CONSUMIDORA
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 Rainfall, Flood
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 17/06/2020
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                                class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
                             >
                                 <button
                                     type="button"
-                                    class="menu-button flex items-center text-gray-900 hover:text-blue-600"
+                                    class="flex items-center text-gray-900 menu-button hover:text-blue-600"
                                     aria-expanded="true"
                                     aria-haspopup="true"
                                 >
@@ -275,36 +282,36 @@
                         </tr>
                         <tr>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 001
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 scarlettjohansson@gmail.com
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 CONSUMIDORA
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 Rainfall, Flood
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 17/06/2020
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                                class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
                             >
                                 <button
                                     type="button"
-                                    class="menu-button flex items-center text-gray-900 hover:text-blue-600"
+                                    class="flex items-center text-gray-900 menu-button hover:text-blue-600"
                                     aria-expanded="true"
                                     aria-haspopup="true"
                                 >
@@ -316,36 +323,36 @@
                         </tr>
                         <tr>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 001
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 scarlettjohansson@gmail.com
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 CONSUMIDORA
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 Rainfall, Flood
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                                class="px-6 py-4 text-sm text-gray-900 whitespace-nowrap"
                             >
                                 17/06/2020
                             </td>
                             <td
-                                class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                                class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap"
                             >
                                 <button
                                     type="button"
-                                    class="menu-button flex items-center text-gray-900 hover:text-blue-600"
+                                    class="flex items-center text-gray-900 menu-button hover:text-blue-600"
                                     aria-expanded="true"
                                     aria-haspopup="true"
                                 >
