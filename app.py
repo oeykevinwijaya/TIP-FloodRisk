@@ -62,11 +62,11 @@ def extract_feature(real_time_data):
 
 
 # Feature for historical flood prediction
-@app.route('/admin_simulation.html')
+@app.route('/admin_flood_prediction.html')
 def show_predict_form():
     if "username" not in session or session["role"] != "admin":
         return redirect(url_for("index"))
-    return render_template('admin_simulation.html')
+    return render_template('admin_flood_prediction.html')
 
 @app.route('/updateResult', methods=['POST'])
 def update_result():

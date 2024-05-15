@@ -39,7 +39,7 @@
                     Notification Management
                 </a>
                 <a
-                    href="admin_simulation.html"
+                    href="admin_flood_prediction.html"
                     class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
                     Flood Prediction
@@ -124,27 +124,28 @@
             <div
                 class="p-5 mx-10 mt-8 text-xl font-bold border-b border-gray-700"
             >
-                Flood Prediction Simulation
+                Flood Prediction
             </div>
             <!-- User Management table-->
             <div class="p-5 mx-10 mt-8 border-b border-gray-700">
                 <form
                     id="predictionForm"
-                    class="flex flex-col gap-4 items-left"
+                    class="flex flex-col gap-4 items-center"
                 >
-                    <div class="flex items-center w-full max-w-lg gap-2">
-                        <label
-                            for="date"
-                            class="block text-lg font-medium text-gray-700"
-                            >Select Date:</label
-                        >
+                    <div class="flex flex-col items-center w-full max-w-lg gap-2">
+                        <label for="date" class="block text-lg font-medium text-gray-700">
+                            Select Date:
+                        </label>
                         <input
                             type="date"
                             id="date"
                             name="date"
                             required
-                            class="flex-1 block w-full min-w-0 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         />
+                        <p class="text-sm text-gray-600 mt-2">
+                            Quick Help: Use '2023-09-08' to check the system’s predictions on days with expected heavy rainfall and possible flooding.
+                        </p>
                     </div>
                     <button
                         type="submit"
@@ -155,7 +156,7 @@
                 </form>
                 <div
                     id="predictionResult"
-                    class="w-full mt-4 text-lg font-medium text-left"
+                    class="w-full mt-4 text-lg font-medium text-center"
                 ></div>
             </div>
 
@@ -263,7 +264,7 @@
                             data[1].rainfall +
                             "mm";
                         resultDiv.className =
-                            "mt-4 text-lg font-medium text-green-500";
+                            "mt-4 text-lg font-medium text-green-500 text-center";
                     } else if (probability >= 50 && probability <= 85) {
                         message =
                             "Warning level of flooding. Probability: " +
@@ -272,7 +273,7 @@
                             data[1].rainfall +
                             "mm";
                         resultDiv.className =
-                            "mt-4 text-lg font-medium text-yellow-500";
+                            "mt-4 text-lg font-medium text-yellow-500 text-center";
                     } else if (probability > 85) {
                         message =
                             "Danger level of flooding. Probability: " +
@@ -281,7 +282,7 @@
                             data[1].rainfall +
                             "mm";
                         resultDiv.className =
-                            "mt-4 text-lg font-medium text-red-500";
+                            "mt-4 text-lg font-medium text-red-500 text-center";
                     }
                     resultDiv.textContent = message;
 
@@ -309,7 +310,7 @@
                     resultDiv.textContent =
                         "No data available for the selected date.";
                     resultDiv.className =
-                        "mt-4 text-lg font-medium text-gray-500";
+                        "mt-4 text-lg font-medium text-gray-500 text-center";
                 }
             }
         </script>
