@@ -24,36 +24,54 @@
         </svg>
     </button>
 
-    <!-- Sidebar -->
-    <div id="sidebar" class="fixed inset-y-0 left-0 z-20 w-64 px-2 space-y-6 transition-transform duration-500 ease-in-out transform -translate-x-full bg-white shadow-md py-7" style="will-change: transform">
-        <a href="#" class="flex items-center px-4 space-x-2 text-gray-800">
-            <span class="mt-10 text-2xl font-medium">Menu</span>
-        </a>
-        <!-- Sidebar content -->
-        <nav class="text-base text-black">
-            <a href="rainfallmap.html" class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
-                Rainfall Map
+        <!-- Sidebar -->
+        <div id="sidebar"
+            class="fixed inset-y-0 left-0 z-20 w-64 px-2 space-y-6 transition-transform duration-500 ease-in-out transform -translate-x-full bg-white shadow-md py-7"
+            style="will-change: transform">
+            <a href="#" class="flex items-center px-4 space-x-2 text-gray-800">
+                <span class="mt-10 text-2xl font-medium">Menu</span>
             </a>
-            <a href="weather_forecast.html" class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
-                Weather Forecast
-            </a>
-            <a href="history.html" class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
-                Historical data
-            </a>
-            <a href="faq.html" class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
-                FAQ
-            </a>
-            <a href="contact.html" class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
-                Contact
-            </a>
-            <a href="noti.html" class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
-                Notification Setting
-            </a>
-            <a href="loginadmin.html" class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
-                Admin Login Page
-            </a>
-        </nav>
-    </div>
+            <!-- Sidebar content -->
+            <nav class="text-base text-black">
+                <a href="rainfallmap.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                    Rainfall Map
+                </a>
+                <a href="weather_forecast.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                    Weather Forecast
+                </a>
+                <a href="history.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                    Historical data
+                </a>
+                <a href="faq.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                    FAQ
+                </a>
+                <a href="contact.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                    Contact
+                </a>
+                <a href="noti.html"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                    Notification Setting
+                </a>
+                <div>
+                    {% if session.logged_in %}
+                    <a href="{{ url_for('logout') }}"
+                        class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                        Logout
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('login') }}"
+                        class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                        Login
+                    </a>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>
 
     <!-- Main Content -->
     <main class="p-8 duration-500 ease-in-out transition-padding" id="main-content" style="will-change: padding">
@@ -69,7 +87,7 @@
             
             <!-- Legend -->
             <div id="legend" class="ml-5">
-                <h3 class="text-lg font-bold mb-2">Legend</h3>
+                <h3 class="mb-2 text-lg font-bold">Legend</h3>
                 <div class="flex items-center mb-1">
                     <img src="static/rainrain.png" alt="Rainy" class="w-6 h-6 mr-2">
                     <span>Currently is rainning</span>

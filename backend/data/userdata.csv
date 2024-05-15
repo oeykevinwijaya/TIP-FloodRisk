@@ -1,6 +1,3 @@
 Location,Name,Email,Rainfall Alert,Flood Alert
-cheung_chau,kevin,104341635@student.swin.edu.au,False,True
-hk_international_airport,Chun Yat Cheung,104206925@student.swin.edu.au,False,True
-hk_observatory,Yi-Sing Lin,104173676@student.swin.edu.au,True,True
-lau_fau_shan,Li Du,104261254@student.swin.edu.au,True,False
-peng_chau,Yasumin Toothong,104199300@student.swin.edu.au,False,True
+cheung_chau,test,test@test.test,False,True
+hk_international_airport,test2,test2@test.com,False,True
