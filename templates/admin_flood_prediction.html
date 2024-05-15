@@ -181,7 +181,140 @@
         </main>
 
         <script>
-            let floodChart; // Store the chart object for later destruction
+            // let floodChart; // Store the chart object for later destruction
+
+            // document.addEventListener("DOMContentLoaded", function () {
+            //     const canvas = document.getElementById("floodPredictionChart");
+
+            //     const form = document.getElementById("predictionForm");
+            //     form.onsubmit = function (event) {
+            //         event.preventDefault();
+            //         const date = document.getElementById("date").value;
+            //         fetch(`/predict_flood_range?date=${date}`)
+            //             .then((response) => response.json())
+            //             .then((data) => {
+            //                 const chartContainer =
+            //                     document.getElementById("chartContainer");
+            //                 const ctx = document
+            //                     .getElementById("floodPredictionChart")
+            //                     .getContext("2d");
+
+            //                 chartContainer.style.display = "block";
+
+            //                 // Destroy the existing chart if it exists
+            //                 if (floodChart) {
+            //                     floodChart.destroy();
+            //                 }
+
+            //                 floodChart = new Chart(ctx, {
+            //                     type: "line",
+            //                     data: {
+            //                         labels: data.map((item) => item.date),
+            //                         datasets: [
+            //                             {
+            //                                 label: "Flood Probability (%)",
+            //                                 data: data.map(
+            //                                     (item) => item.probability
+            //                                 ),
+            //                                 borderColor: "rgb(75, 192, 192)",
+            //                                 tension: 0.1,
+            //                             },
+            //                         ],
+            //                     },
+            //                     options: {
+            //                         responsive: false,
+            //                         maintainAspectRatio: false,
+            //                         scales: {
+            //                             y: {
+            //                                 beginAtZero: true,
+            //                             },
+            //                         },
+            //                     },
+            //                 });
+
+            //                 const resultDiv =
+            //                     document.getElementById("predictionResult");
+            //                 updateResultDisplay(data, resultDiv); // Function to handle result display
+            //             })
+            //             .catch((error) => {
+            //                 console.error("Error fetching data:", error);
+            //                 document.getElementById(
+            //                     "predictionResult"
+            //                 ).textContent = "Error fetching prediction.";
+            //                 document.getElementById(
+            //                     "predictionResult"
+            //                 ).className =
+            //                     "mt-4 text-lg font-medium text-red-500";
+            //             });
+            //     };
+            // });
+
+            // function updateResultDisplay(data, resultDiv) {
+            //     if (data[1] && data[1].probability !== null) {
+            //         const probability = parseFloat(data[1].probability); // Use the probability of the selected date
+            //         const rainfall = parseFloat(data[1].rainfall); // Use the rainfall of the selected date
+            //         let message = `Probability: ${probability}%, Rainfall: ${rainfall}mm`;
+            //         resultDiv.textContent = message;
+
+            //         if (probability < 50) {
+            //             message =
+            //                 "No flooding issues detected. Probability: " +
+            //                 data[1].probability +
+            //                 "%. Rainfall: " +
+            //                 data[1].rainfall +
+            //                 "mm";
+            //             resultDiv.className =
+            //                 "mt-4 text-lg font-medium text-green-500 text-center";
+            //         } else if (probability >= 50 && probability <= 85) {
+            //             message =
+            //                 "Warning level of flooding. Probability: " +
+            //                 data[1].probability +
+            //                 "%. Rainfall: " +
+            //                 data[1].rainfall +
+            //                 "mm";
+            //             resultDiv.className =
+            //                 "mt-4 text-lg font-medium text-yellow-500 text-center";
+            //         } else if (probability > 85) {
+            //             message =
+            //                 "Danger level of flooding. Probability: " +
+            //                 data[1].probability +
+            //                 "%. Rainfall: " +
+            //                 data[1].rainfall +
+            //                 "mm";
+            //             resultDiv.className =
+            //                 "mt-4 text-lg font-medium text-red-500 text-center";
+            //         }
+            //         resultDiv.textContent = message;
+
+            //         // Send the data to the server
+            //         fetch("/updateResult", {
+            //             method: "POST",
+            //             headers: {
+            //                 "Content-Type": "application/json",
+            //             },
+            //             body: JSON.stringify({
+            //                 probability: probability,
+            //                 rainfall: rainfall,
+            //                 message: message,
+            //             }),
+            //         })
+            //             .then((response) => {
+            //                 if (!response.ok) {
+            //                     throw new Error("Failed to update result");
+            //                 }
+            //             })
+            //             .catch((error) => {
+            //                 console.error("Error updating result:", error);
+            //             });
+            //     } else {
+            //         resultDiv.textContent =
+            //             "No data available for the selected date.";
+            //         resultDiv.className =
+            //             "mt-4 text-lg font-medium text-gray-500 text-center";
+            //     }
+            // }
+
+            let combinedChart; // Store the combined chart object for later destruction
 
             document.addEventListener("DOMContentLoaded", function () {
                 const canvas = document.getElementById("floodPredictionChart");
@@ -193,31 +326,36 @@
                     fetch(`/predict_flood_range?date=${date}`)
                         .then((response) => response.json())
                         .then((data) => {
-                            const chartContainer =
-                                document.getElementById("chartContainer");
-                            const ctx = document
-                                .getElementById("floodPredictionChart")
-                                .getContext("2d");
+                            const chartContainer = document.getElementById("chartContainer");
+                            const ctx = canvas.getContext("2d");
 
                             chartContainer.style.display = "block";
 
-                            // Destroy the existing chart if it exists
-                            if (floodChart) {
-                                floodChart.destroy();
+                            // Destroy the existing combined chart if it exists
+                            if (combinedChart) {
+                                combinedChart.destroy();
                             }
 
-                            floodChart = new Chart(ctx, {
+                            combinedChart = new Chart(ctx, {
                                 type: "line",
                                 data: {
                                     labels: data.map((item) => item.date),
                                     datasets: [
                                         {
+                                            label: "Rainfall (mm)",
+                                            data: data.map((item) => item.rainfall),
+                                            borderColor: "rgba(255, 99, 132, 1)",
+                                            backgroundColor: "rgba(255, 99, 132, 0.2)",
+                                            fill: false,
+                                            yAxisID: "y-axis-1",
+                                        },
+                                        {
                                             label: "Flood Probability (%)",
-                                            data: data.map(
-                                                (item) => item.probability
-                                            ),
-                                            borderColor: "rgb(75, 192, 192)",
-                                            tension: 0.1,
+                                            data: data.map((item) => item.probability),
+                                            borderColor: "rgba(75, 192, 192, 1)",
+                                            backgroundColor: "rgba(75, 192, 192, 0.2)",
+                                            fill: false,
+                                            yAxisID: "y-axis-1",
                                         },
                                     ],
                                 },
@@ -225,25 +363,32 @@
                                     responsive: false,
                                     maintainAspectRatio: false,
                                     scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                        },
+                                        yAxes: [
+                                            {
+                                                id: "y-axis-1",
+                                                type: "linear",
+                                                position: "left",
+                                                ticks: {
+                                                    beginAtZero: true,
+                                                },
+                                                scaleLabel: {
+                                                    display: true,
+                                                    labelString: "Rainfall (mm) / Probability (%)",
+                                                },
+                                            },
+                                        ],
                                     },
                                 },
                             });
 
-                            const resultDiv =
-                                document.getElementById("predictionResult");
+                            const resultDiv = document.getElementById("predictionResult");
                             updateResultDisplay(data, resultDiv); // Function to handle result display
                         })
                         .catch((error) => {
                             console.error("Error fetching data:", error);
-                            document.getElementById(
-                                "predictionResult"
-                            ).textContent = "Error fetching prediction.";
-                            document.getElementById(
-                                "predictionResult"
-                            ).className =
+                            document.getElementById("predictionResult").textContent =
+                                "Error fetching prediction.";
+                            document.getElementById("predictionResult").className =
                                 "mt-4 text-lg font-medium text-red-500";
                         });
                 };
@@ -307,12 +452,14 @@
                             console.error("Error updating result:", error);
                         });
                 } else {
-                    resultDiv.textContent =
-                        "No data available for the selected date.";
+                    resultDiv.textContent = "No data available for the selected date.";
                     resultDiv.className =
                         "mt-4 text-lg font-medium text-gray-500 text-center";
                 }
-            }
+}
+
+
+
         </script>
 
         <script
