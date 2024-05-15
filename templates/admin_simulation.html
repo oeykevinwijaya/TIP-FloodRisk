@@ -63,11 +63,24 @@
                     FAQ Management
                 </a>
                 <a
-                    href="weather_forecast.html"
-                    class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
+                    href="admin_user"
+                    class="flex items-center justify-center px-10 py-5 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700"
                 >
-                    Logout
+                    User Management
                 </a>
+                <div>
+                {% if session.logged_in %}
+                    <a href="{{ url_for('logout') }}"
+                       class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                        Logout
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('login') }}"
+                       class="flex items-center justify-center px-10 py-5 mt-20 text-sm border-t border-b border-gray-300 hover:border-l-4 hover:border-gray-700">
+                        Login
+                    </a>
+                {% endif %}
+            </div>
                 <!--
                 <a
                     href="data_management.html"

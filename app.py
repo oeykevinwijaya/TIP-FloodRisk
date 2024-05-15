@@ -5,19 +5,21 @@ import joblib
 import requests
 import smtplib
 import pandas as pd
-import os
+import json
 
-from flask import Flask, render_template, jsonify, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request, redirect, url_for, session
 from backend.services.dbconnect import insert_notification_preferences
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
 from sentence_transformers import SentenceTransformer, util
+import datetime as dt
 
 # Path to the CSV file
 data_file_path = os.path.join(os.getcwd(), 'backend/data/userdata.csv')
 
 app = Flask(__name__)
+app.secret_key = "your_secret_key"
 model = joblib.load('backend/models/flood_prediction_model.pkl')
 
 @app.route('/predict_realflood', methods=['GET'])
@@ -41,7 +43,6 @@ def predict_realflood():
         return jsonify({'error': str(e)})
 
 
-
 def extract_feature(real_time_data):
     max_rainfall = max([d['max'] for d in real_time_data['rainfall']['data'] if 'max' in d])
     avg_temperature = sum([t['value'] for t in real_time_data['temperature']['data']]) / len(real_time_data['temperature']['data'])
@@ -60,10 +61,11 @@ def extract_feature(real_time_data):
     return feature
 
 
-
 # Feature for historical flood prediction
 @app.route('/admin_simulation.html')
 def show_predict_form():
+    if "username" not in session or session["role"] != "admin":
+        return redirect(url_for("index"))
     return render_template('admin_simulation.html')
 
 @app.route('/updateResult', methods=['POST'])
@@ -123,7 +125,6 @@ def predict_flood(date=None):
         return None, None, None
 
 
-
 @app.route('/predict_flood_range', methods=['GET'])
 def predict_flood_range():
     selected_date = request.args.get('date')
@@ -154,7 +155,6 @@ def predict_flood_range():
         return jsonify(results)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
 
 
 # Route for landing page
@@ -215,6 +215,8 @@ def weatherforecast():
 # Route for weather forecast page
 @app.route("/admin_weather_forecast.html")
 def adminweatherforecast():
+    if "username" not in session or session["role"] != "admin":
+        return redirect(url_for("index"))
     # Path to CSV file for 9-day forecast
     csv_file_path_forecast = os.path.join(os.getcwd(), "backend/data/9dforecast.csv")
 
@@ -497,6 +499,8 @@ def data_management():
 # Route for admin_page_alert.html
 @app.route("/admin_page_alert.html")
 def admin_page_alert():
+    if "username" not in session or session["role"] != "admin":
+        return redirect(url_for("index"))
     # Read data from the CSV file
     data = []
     if os.path.exists(data_file_path):
@@ -706,6 +710,8 @@ def admin_login():
 # Route for admin_file.html
 @app.route("/admin_file", methods=["GET", "POST"])
 def file_manager():
+    if "username" not in session or session["role"] != "admin":
+        return redirect(url_for("index"))
     if request.method == "POST" and "file" in request.files:
         file = request.files["file"]
         if file.filename != "":
@@ -725,14 +731,14 @@ def delete_file():
         os.remove(file_path)
     return redirect(url_for("file_manager"))
 
-
+# For admin_faq.html load faq data from faq.csv
 def load_data():
     if os.path.exists("backend/data/faq.csv"):
         return pd.read_csv("backend/data/faq.csv")
     else:
         return pd.DataFrame(columns=["question", "answer"])
 
-
+# For admin_faq.html save faq data to faq.csv
 def save_data(df):
     df.to_csv("backend/data/faq.csv", index=False)
 
@@ -740,6 +746,8 @@ def save_data(df):
 # Route for admin_faq.html
 @app.route("/admin_faq", methods=["GET"])
 def admin():
+    if "username" not in session or session["role"] != "admin":
+        return redirect(url_for("index"))
     df = load_data()
     return render_template("admin_faq.html", faqs=df.to_dict(orient="records"))
 
@@ -790,6 +798,233 @@ def delete_faq():
         df = df.drop(row_id).reset_index(drop=True)
         save_data(df)
     return redirect(url_for("admin"))
+
+
+# For admin_user.html load users data from user.csv
+def get_user_data():
+    with open("backend/data/user.csv", mode="r") as file:
+        csv_reader = csv.DictReader(file)
+        user_data = [row for row in csv_reader]
+    return user_data
+
+# For admin_user.html get the number of online users
+def get_online_users():
+    user_data = get_user_data()
+    online_users = [
+        user
+        for user in user_data
+        if user["role"] == "user" and user["logged_in"] == "True"
+    ]
+    return len(online_users)
+
+# For admin_user.html get the number of recent registrations
+def get_recent_registrations():
+    now = datetime.now()
+    last_7_days = now - timedelta(days=7)
+    user_data = get_user_data()
+    recent_users = [
+        user
+        for user in user_data
+        if user["role"] == "user"
+        and dt.datetime.strptime(user["registration_date"], "%Y-%m-%d") > last_7_days
+    ]
+    return len(recent_users)
+
+# For admin_user.html get the view data
+def get_view_data():
+    with open("backend/data/views.csv", mode="r") as file:
+        csv_reader = csv.DictReader(file)
+        view_data = [row for row in csv_reader]
+    dates = [row["date"] for row in view_data]
+    views = [int(row["views"]) for row in view_data]
+    return dates, views
+
+# For admin_user.html load contact data from user_contact.csv
+def get_contact_data():
+    with open("backend/data/user_contact.csv", mode="r") as file:
+        csv_reader = csv.DictReader(file)
+        contact_data = [row for row in csv_reader]
+    return contact_data
+
+# For admin_user.html count the number of unprocessed messages
+def count_unprocessed_messages():
+    contact_data = get_contact_data()
+    unprocessed_count = sum(
+        1 for contact in contact_data if contact["Status"] == "Unprocessed"
+    )
+    return unprocessed_count
+
+# Route for admin_user.html
+@app.route("/admin_user")
+def admin_user():
+    if "username" not in session or session["role"] != "admin":
+        return redirect(url_for("index"))
+    user_data = get_user_data()
+    online_users = get_online_users()
+    recent_registrations = get_recent_registrations()
+    dates, views = get_view_data()
+    unprocessed_count = count_unprocessed_messages()
+    return render_template(
+        "admin_user.html",
+        online_users=online_users,
+        recent_registrations=recent_registrations,
+        unprocessed_count=unprocessed_count,
+        user_data=user_data,
+        dates=json.dumps(dates),
+        views=json.dumps(views),
+    )
+
+# Route for admin_user.html / user info
+@app.route("/get_user_data")
+def fetch_user_data():
+    user_data = get_user_data()
+    return jsonify(user_data)
+
+# Route for admin_user.html / online users
+@app.route("/get_online_users_data")
+def fetch_online_users_data():
+    user_data = get_user_data()
+    online_users = [
+        user
+        for user in user_data
+        if user["role"] == "user" and user["logged_in"] == "True"
+    ]
+    return jsonify(online_users)
+
+# Route for admin_user.html / recent registrations
+@app.route("/get_recent_registrations_data")
+def fetch_recent_registrations_data():
+    now = datetime.now()
+    last_7_days = now - timedelta(days=7)
+    user_data = get_user_data()
+    recent_users = [
+        user
+        for user in user_data
+        if user["role"] == "user"
+        and dt.datetime.strptime(user["registration_date"], "%Y-%m-%d") > last_7_days
+    ]
+    return jsonify(recent_users)
+
+# Route for admin_user.html / view data
+@app.route("/get_contact_data")
+def fetch_contact_data():
+    contact_data = get_contact_data()
+    return jsonify(contact_data)
+
+# Route for user_contact.html / view data
+@app.route("/user_contact")
+def user_contact():
+    return render_template("user_contact.html")
+
+# Route for user_contact.html / submit_contact
+@app.route("/submit_contact", methods=["POST"])
+def submit_contact():
+    name = request.form["name"]
+    phone = request.form["phone"]
+    email = request.form["email"]
+    message = request.form["message"]
+    status = "Unprocessed"  # Default status
+
+    # Define the file path
+    file_path = os.path.join("backend", "data", "user_contact.csv")
+
+    # Save the submitted data to a CSV file
+    with open(file_path, mode="a", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow([name, phone, email, message, status])
+
+    return render_template(
+        "user_contact.html", success="Your message has been submitted successfully!"
+    )
+
+# Route for user_contact.html / get_contact_data
+if __name__ == "__main__":
+    # Create the file and add the header row if it doesn't exist
+    file_path = os.path.join("backend", "data", "user_contact.csv")
+    if not os.path.exists(file_path):
+        with open(file_path, mode="w", newline="", encoding="utf-8") as file:
+            writer = csv.writer(file)
+            writer.writerow(["Name", "Phone", "Email", "Message", "Status"])
+
+
+# For login.html load users data from user.csv
+def load_users():
+    users = []
+    with open("backend/data/user.csv", mode="r") as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            users.append(row)
+    return users
+
+
+# For login.html load user status data from user.csv
+def update_user_status(username, status):
+    users = load_users()
+    for user in users:
+        if user["username"] == username:
+            user["logged_in"] = status
+            break
+    with open("backend/data/user.csv", mode="w", newline="") as file:
+        fieldnames = [
+            "id",
+            "username",
+            "password",
+            "role",
+            "logged_in",
+            "email",
+            "registration_date",
+        ]
+        csv_writer = csv.DictWriter(file, fieldnames=fieldnames)
+        csv_writer.writeheader()
+        csv_writer.writerows(users)
+
+
+# Route for login.html
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        if not username:
+            session["error"] = "Please enter username"
+            return redirect(url_for("login"))
+        if not password:
+            session["error"] = "Please enter password"
+            return redirect(url_for("login"))
+
+        users = load_users()
+        for user in users:
+            if user["username"] == username:
+                if user["password"] == password:
+                    session["username"] = username
+                    session["role"] = user["role"]
+                    session["logged_in"] = True
+                    update_user_status(username, "True")
+                    if user["role"] == "admin":
+                        return redirect(url_for("admin_page_alert"))
+                    else:
+                        return redirect(url_for("index"))
+                else:
+                    session["error"] = "Incorrect password"
+                    return redirect(url_for("login"))
+        session["error"] = "Username not registered"
+        return redirect(url_for("login"))
+
+    error = session.pop("error", None)
+    return render_template("login.html", error=error)
+
+
+# Route for logout
+@app.route("/logout")
+def logout():
+    username = session.get("username")
+    if username:
+        update_user_status(username, "False")
+        session.pop("username", None)
+        session.pop("role", None)
+        session.pop("logged_in", None)
+    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":

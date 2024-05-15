@@ -8,6 +8,23 @@
             href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
             rel="stylesheet"
         />
+        <style>
+        #visitChart {
+            height: 33vh; /* Height occupies one-third of the page height */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+       
     </head>
     <body class="font-sans leading-normal tracking-normal bg-white">
         <!-- Menu Button -->
@@ -124,63 +141,132 @@
             <!-- Title-->
             <div class="pb-2 mx-10 overflow-hidden border-b border-gray-700">
                 <div class="flex items-center justify-between p-5 mx-10 mt-8">
-                    <div class="text-xl font-bold">File Management</div>
+                    <div class="text-xl font-bold">User Management</div>
                 </div>
             </div>
             <!-- Table-->
-            <div class="container px-4 py-6 mx-auto">
-                <form method="POST" enctype="multipart/form-data" class="mb-4">
-                    <input
-                        type="file"
-                        name="file"
-                        class="p-2 border border-gray-300 rounded"
-                    />
-                    <button
-                        type="submit"
-                        class="px-4 py-2 font-bold text-white bg-gray-600 rounded hover:bg-gray-800"
-                    >
-                        Upload
-                    </button>
-                </form>
-
-                <table
-                    class="w-full overflow-hidden text-left rounded-lg shadow-md"
-                >
-                    <thead class="text-white bg-gray-500">
-                        <tr>
-                            <th class="px-4 py-2">File Name</th>
-                            <th class="px-4 py-2 text-right">Actions</th>
+            <div class="container mx-auto p-4">
+        <div class="grid grid-cols-3 gap-4 mb-4">
+            <div id="online-users-box" class="bg-blue-500 text-white p-4 rounded-lg cursor-pointer">
+                <h2 class="text-xl font-bold">Online Users</h2>
+                <p class="text-3xl">{{ online_users }}</p>
+            </div>
+            <div id="recent-registrations-box" class="bg-green-500 text-white p-4 rounded-lg cursor-pointer">
+                <h2 class="text-xl font-bold">Registrations in 7 Days</h2>
+                <p class="text-3xl">{{ recent_registrations }}</p>
+            </div>
+            <div id="unprocessed-messages-box" class="bg-red-500 text-white p-4 rounded-lg cursor-pointer">
+                <h2 class="text-xl font-bold">Unprocessed Messages</h2>
+                <p class="text-3xl">{{ unprocessed_count }}</p>
+            </div>
+        </div>
+        <div class="mb-4">
+            <h2 class="text-2xl font-bold mb-2">Website Visit Records</h2>
+            <div class="relative">
+                <canvas id="visitChart"></canvas>
+            </div>
+        </div>
+        <div>
+            <h2 class="text-2xl font-bold mb-2">User Information</h2>
+            <div class="shadow-lg border border-gray-200 rounded-lg">
+                <table id="data-table" class="min-w-full bg-white">
+                    <thead>
+                        <tr id="table-header">
+                            <th class="py-2 px-4 border-b text-center">ID</th>
+                            <th class="py-2 px-4 border-b text-center">Username</th>
+                            <th class="py-2 px-4 border-b text-center">Email</th>
+                            <th class="py-2 px-4 border-b text-center">Registration Date</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {% for file in files %}
-                        <tr class="bg-white border-b">
-                            <td class="px-4 py-2">{{ file }}</td>
-                            <td class="px-4 py-2 text-right">
-                                <form
-                                    action="{{ url_for('delete_file') }}"
-                                    method="post"
-                                >
-                                    <input
-                                        type="hidden"
-                                        name="filename"
-                                        value="{{ file }}"
-                                    />
-                                    <button
-                                        type="submit"
-                                        class="px-2 py-1 mt-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                                    >
-                                        Delete
-                                    </button>
-                                </form>
-                            </td>
+                    <tbody id="table-body">
+                        {% for user in user_data if user.role == 'user' %}
+                        <tr>
+                            <td class="py-2 px-4 border-b text-center">{{ user.id }}</td>
+                            <td class="py-2 px-4 border-b text-center">{{ user.username }}</td>
+                            <td class="py-2 px-4 border-b text-center">{{ user.email }}</td>
+                            <td class="py-2 px-4 border-b text-center">{{ user.registration_date }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
         </main>
 
         <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+        var ctx = document.getElementById('visitChart').getContext('2d');
+        var visitChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ dates | safe }},
+                datasets: [{
+                    label: 'Website Visits',
+                    data: {{ views | safe }},
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRatio: false
+            }
+        });
+
+        document.getElementById('online-users-box').addEventListener('click', function() {
+            fetchData('/get_online_users_data', ['id', 'username', 'email', 'registration_date']);
+        });
+
+        document.getElementById('recent-registrations-box').addEventListener('click', function() {
+            fetchData('/get_recent_registrations_data', ['id', 'username', 'email', 'registration_date']);
+        });
+
+        document.getElementById('unprocessed-messages-box').addEventListener('click', function() {
+            fetchData('/get_contact_data', ['Name', 'Phone', 'Email', 'Message', 'Status']);
+        });
+
+        function fetchData(url, headers) {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => updateTable(data, headers))
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+       function updateTable(data, headers) {
+    const tableHeader = document.getElementById('table-header');
+    const tableBody = document.getElementById('table-body');
+
+    // Clear existing table data
+    tableHeader.innerHTML = '';
+    tableBody.innerHTML = '';
+
+    // Create new table headers
+    const headerRow = document.createElement('tr');
+    headers.forEach(header => {
+        const th = document.createElement('th');
+        th.className = 'py-2 px-4 border-b text-center';
+        th.textContent = header.replace(/_/g, ' ').toUpperCase();
+        headerRow.appendChild(th);
+    });
+
+    // Populate table rows
+    data.forEach(row => {
+        const tr = document.createElement('tr');
+        headers.forEach(header => {
+            const td = document.createElement('td');
+            td.className = 'py-2 px-4 border-b text-center';
+            td.textContent = row[header];
+            tr.appendChild(td);
+        });
+        tableBody.appendChild(tr);
+    });
+
+    // Append the header row to the table body (to display it at the bottom)
+    // tableBody.appendChild(headerRow);
+}
+
+
+    </script>
     </body>
 </html>
