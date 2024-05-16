@@ -44,7 +44,7 @@ id,username,password,role,logged_in,email,registration_date
 43,karenm,karenpass,user,False,karenm@gmail.com,2024-05-08
 44,juliag,juliapass,user,True,juliag@gmail.com,2024-05-09
 45,tomr,tompass,user,True,tomr@gmail.com,2024-05-07
-46,adminjohn,adminpass1,admin,False,adminjohn@gmail.com,2024-05-08
+46,adminjohn,adminpass1,admin,True,adminjohn@gmail.com,2024-05-08
 47,admindave,admin1234,admin,False,admindave@hotmail.com,2024-05-11
 48,adminlisa,lisaadmin,admin,True,adminlisa@yahoo.com,2024-05-13
 49,adminmaria,mariaadmin,admin,False,adminmaria@gmail.com,2024-05-09
