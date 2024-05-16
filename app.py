@@ -547,8 +547,7 @@ def send_notification():
         body += table
 
     # Email sender details
-    sender = "@gmail.com"
-    password = "insert key here"
+    
 
     # Send email to each recipient
     for recipient in recipients:
@@ -586,8 +585,6 @@ def send_alert_amber():
             body = row["body"]
 
     # Email sender details
-    sender = "@gmail.com"
-    password = "insert key here"
 
     # Send email to each recipient
     for recipient in recipients:
@@ -624,8 +621,7 @@ def send_alert_red():
             body = row["body"]
 
     # Email sender details
-    sender = "@gmail.com"
-    password = "insert key here"
+
 
     # Send email to each recipient
     for recipient in recipients:
@@ -662,8 +658,6 @@ def send_alert_black():
             body = row["body"]
 
     # Email sender details
-    sender = "@gmail.com"
-    password = "insert key here"
 
     # Send email to each recipient
     for recipient in recipients:

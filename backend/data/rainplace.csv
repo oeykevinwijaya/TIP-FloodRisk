@@ -2,7 +2,7 @@ id,Place,coordinate,Rainfall (mm),Main
 1,Central & Western District,"22.28499386, 114.15072273",0,False
 2,Eastern District,"22.267434, 114.249063",0,False
 3,Kwai Tsing,"22.344044, 114.100998",0,False
-4,Islands District,"22.308046, 113.918480",0,False
+4,Islands District,"22.308046, 113.918480",30,False
 5,North District,"22.50166, 114.12895",0,False
 6,Sai Kung,"22.38333, 114.26667",20,False
 7,Sha Tin,"22.3771, 114.1974",0,False
